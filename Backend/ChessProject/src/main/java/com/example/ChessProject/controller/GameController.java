@@ -2,7 +2,7 @@ package com.example.ChessProject.controller;
 
 import com.example.ChessProject.exception.ResourceNotFoundException;
 import com.example.ChessProject.Model.Game;
-import com.example.ChessProject.repository.ChessRepository;
+import com.example.ChessProject.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,54 +11,54 @@ import java.util.List;
 
 
 @RestController
-//@RequestMapping("/api")
-
-public class ChessController {
+public class GameController {
 
     @Autowired
-    ChessRepository chessRepository;
+    GameRepository gameRepository;
 
-    // Get All Notes
-    @GetMapping("/game")
+    // Get All Games
+    @ResponseBody
+    @GetMapping("/games")
     public List<Game> getAllGames() {
-        return chessRepository.findAll();
+        return gameRepository.findAll();
     }
 
-    // Create a new Note
+    // Create a new Game
+    @ResponseBody
     @PostMapping("/games")
     public Game createGame(@Valid @RequestBody Game game) {
-        return chessRepository.save(game);
+        return gameRepository.save(game);
     }
 
-    // Get a Single Note
+    // Get a Single Game
+    @ResponseBody
     @GetMapping("/games/{id}")
     public Game getGameById(@PathVariable(value = "id") int gameId) {
-        return chessRepository.findById(gameId)
+        return gameRepository.findById(gameId)
                 .orElseThrow(() -> new ResourceNotFoundException("Game", "id", gameId));
     }
 
-    // Update a Note
+    // Update a Game
+    @ResponseBody
     @PutMapping("/games/{id}")
     public Game updateGame(@PathVariable(value = "id") int gameId,
                            @Valid @RequestBody Game gameDetails) {
 
-        Game game = chessRepository.findById(gameId)
+        Game game = gameRepository.findById(gameId)
                 .orElseThrow(() -> new ResourceNotFoundException("Game", "id", gameId));
 
-//        game.setTitle(gameDetails.getTitle());
-//        game.setContent(gameDetails.getContent());
-
-        Game updatedGame = chessRepository.save(game);
+        Game updatedGame = gameRepository.save(game);
         return updatedGame;
     }
 
-    // Delete a Note
+    // Delete a Game
+    @ResponseBody
     @DeleteMapping("/games/{id}")
     public ResponseEntity<?> deleteGame(@PathVariable(value = "id") int gameId) {
-        Game game = chessRepository.findById(gameId)
+        Game game = gameRepository.findById(gameId)
                 .orElseThrow(() -> new ResourceNotFoundException("Note", "id", gameId));
 
-        chessRepository.delete(game);
+        gameRepository.delete(game);
 
         return ResponseEntity.ok().build();
     }
