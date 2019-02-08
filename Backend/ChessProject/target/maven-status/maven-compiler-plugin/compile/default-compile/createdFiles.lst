@@ -1,0 +1,5 @@
+com\example\ChessProject\exception\ResourceNotFoundException.class
+com\example\ChessProject\ChessProjectApplication.class
+com\example\ChessProject\Model\Game.class
+com\example\ChessProject\repository\ChessRepository.class
+com\example\ChessProject\controller\ChessController.class
