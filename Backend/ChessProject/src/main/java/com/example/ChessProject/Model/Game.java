@@ -1,24 +1,15 @@
 package com.example.ChessProject.Model;
-
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-//import sun.util.resources.Bundles;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "ChessGame")
-@EntityListeners(AuditingEntityListener.class)
+
 public class Game implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    @NotBlank
     private String player1;
-
-    @NotBlank
     private String player2;
 
     public Game() {

@@ -1,26 +1,43 @@
 package com.example.ChessProject.Model.Board;
 
+import com.example.ChessProject.Model.piece.Piece;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.ArrayList;
 
 @Entity
-@Table(name = "Board")
 public class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private ArrayList<Tile> boardPosition = new ArrayList<>();
+
+    @OneToMany
+    private List<Piece> piecelist = new ArrayList<>();
+
+    public Board(){}
+
+    public Board(int id) {
+        this.id = id;
+    }
+
+    public Board(int id, List<Piece> boardPosition) {
+        this.id = id;
+        this.piecelist = boardPosition;
+    }
+
+    public List<Piece> getBoardPosition() {
+        return piecelist;
+    }
+
+    public void setBoardPosition(List<Piece> boardPosition) {
+        this.piecelist = boardPosition;
+    }
 
     public int getId() {
         return id;
     }
 
-    public ArrayList<Tile> getBoardPosition() {
-        return boardPosition;
-    }
 
-    public void setBoardPosition(ArrayList boardPosition) {
-        this.boardPosition = boardPosition;
-    }
 }
