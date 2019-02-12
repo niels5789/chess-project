@@ -2,9 +2,6 @@ com\example\ChessProject\exception\ResourceNotFoundException.class
 com\example\ChessProject\controller\GameController.class
 com\example\ChessProject\ChessProjectApplication.class
 com\example\ChessProject\Model\Game.class
-com\example\ChessProject\Model\piece\Piece.class
-com\example\ChessProject\Model\piece\Color.class
 com\example\ChessProject\Model\Board\Board.class
-com\example\ChessProject\repository\PieceRepository.class
 com\example\ChessProject\repository\GameRepository.class
 com\example\ChessProject\repository\BoardRepository.class
