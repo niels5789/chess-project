@@ -23,9 +23,6 @@ public class BoardController {
         return boardRepository.findAll();
     }
 
-
-
-
     @ResponseBody
     @PutMapping("/board/{idvan}/{idnaar}")
     public List<Tile> changeBoard(@PathVariable(value = "idvan") int idvan, @PathVariable(value = "idnaar") int idnaar) {
