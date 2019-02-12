@@ -1,12 +1,12 @@
 
 export class Piece {
 
-  id: Number;
-  name: String;
-  color: Color;
+  id: number;
+  name: string;
+  color: number;
 
 
-  constructor(id: Number, name: String, color: Color) {
+  constructor(id: number, name: string, color: number) {
     this.id = id;
     this.name = name;
     this.color = color;
