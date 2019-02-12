@@ -34,6 +34,34 @@ public class BoardController {
 //    }
 
     @ResponseBody
+    @PutMapping("/board/{idvan}/{idnaar}")
+    public List<Piece> changeBoard(@PathVariable(value = "idvan") int idvan, @PathVariable(value = "idnaar") int idnaar) {
+        List<Piece> piecelist = pieceRepository.findAll();
+
+        //Omslachtig manier van data veranderen. Kan makkelijker
+        String newName = piecelist.get(idvan).getName();
+        int newColor = piecelist.get(idnaar).getColor();
+        piecelist.get(idvan).setName("");
+        piecelist.get(idvan).setColor(3);
+        piecelist.get(idnaar).setName(newName);
+        piecelist.get(idnaar).setColor(newColor);
+        for(Piece piece : piecelist) {
+            pieceRepository.save(piece);
+        }
+        return pieceRepository.findAll();
+    }
+    @ResponseBody
+    @GetMapping("/resetBoard")
+    public List<Piece> resetBoard() {
+        Piece p = new Piece();
+        List<Piece> piecelist = p.startList();
+        for (Piece piece : piecelist) {
+            pieceRepository.save(piece);
+        }
+        return pieceRepository.findAll();
+}
+
+    @ResponseBody
     @GetMapping("/newboard")
     public List<Piece> updateBoard() {
         if (!pieceRepository.existsById(1)) {

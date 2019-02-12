@@ -1,3 +1,4 @@
 enum Color {
-  BLACK, WHITE
+  BLACK = 0,
+  WHITE = 1
 }
