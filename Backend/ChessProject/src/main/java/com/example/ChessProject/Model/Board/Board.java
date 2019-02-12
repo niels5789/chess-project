@@ -1,6 +1,6 @@
 package com.example.ChessProject.Model.Board;
 
-import com.example.ChessProject.Model.piece.Piece;
+import com.example.ChessProject.Model.Tile.Tile;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,7 +14,7 @@ public class Board {
     private int id;
 
     @OneToMany
-    private List<Piece> piecelist = new ArrayList<>();
+    private List<Tile> tileList = new ArrayList<>();
 
     public Board(){}
 
@@ -22,22 +22,21 @@ public class Board {
         this.id = id;
     }
 
-    public Board(int id, List<Piece> boardPosition) {
+    public Board(int id, List<Tile> boardPosition) {
         this.id = id;
-        this.piecelist = boardPosition;
+        this.tileList = boardPosition;
     }
 
-    public List<Piece> getBoardPosition() {
-        return piecelist;
+    public List<Tile> getBoardPosition() {
+        return tileList;
     }
 
-    public void setBoardPosition(List<Piece> boardPosition) {
-        this.piecelist = boardPosition;
+    public void setBoardPosition(List<Tile> boardPosition) {
+        this.tileList = boardPosition;
     }
 
     public int getId() {
         return id;
     }
-
 
 }
