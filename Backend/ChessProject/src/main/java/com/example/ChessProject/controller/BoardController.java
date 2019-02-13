@@ -12,10 +12,6 @@ import java.util.List;
 @RestController
 public class BoardController {
 
-//    test
-//    test2
-//    test3
-
     @Autowired
     BoardRepository boardRepository;
     @Autowired
@@ -23,8 +19,8 @@ public class BoardController {
 
     @ResponseBody
     @GetMapping("/boards")
-    public List<Board> getAllBoards() {
-        return boardRepository.findAll();
+    public List<Tile> getAllBoards() {
+        return tileRepository.findAll();
     }
 
     @ResponseBody
@@ -35,8 +31,6 @@ public class BoardController {
         int x1 = -1, y1 = -1, x2 = -1, y2 = -1;
         boolean validMove = false;
 
-
-
         // get coordinates
         x1 = getX(idvan, Tilelist);
         y1 = getY(idvan, Tilelist);
@@ -44,7 +38,6 @@ public class BoardController {
         y2 = getY(idnaar, Tilelist);
 
 
-//sdfsdfsdf
         // switch op piece type
         switch (Piece){
             case "Pawn": validMove = validPawnMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
@@ -55,25 +48,8 @@ public class BoardController {
             case "King": ; break;
             default: break;
         }
-        // isValidMove test
-            // tile id -> coordinate
-        // if true make move; else do nothing/give message
 
-
-
-//        if(Piece.equals(validMove)){
-
-                String newName = Tilelist.get(idvan).getName();
-                int newColor = Tilelist.get(idnaar).getColor();
-                Tilelist.get(idvan).setName("");
-                Tilelist.get(idvan).setColor(3);
-                Tilelist.get(idnaar).setName(newName);
-                Tilelist.get(idnaar).setColor(newColor);
-                for(Tile tile : Tilelist) {
-                    tileRepository.save(tile);
-                }
-
-//        }
+//        
 
         return tileRepository.findAll();
     }
@@ -90,13 +66,11 @@ public class BoardController {
         boolean valid = false;
         int color = list.get(idvan).getColor();
 
-
         if(color == 0) {
             if (y1 == y2 && x1 + 1 == x2) {
                 valid = true;
             }
         }
-
         return valid;
     }
 
@@ -110,25 +84,5 @@ public class BoardController {
             tileRepository.save(tile);
         }
         return tileRepository.findAll();
-}
-
-    @ResponseBody
-    @GetMapping("/newboard")
-    public List<Tile> updateBoard() {
-        if (!tileRepository.existsById(1)) {
-        Tile p = new Tile();
-        List<Tile> tileList = p.startList();
-        for (Tile tile : tileList) {
-            tileRepository.save(tile);
-        }}
-
-        List<Tile> aanpassing = tileRepository.findAll();
-
-        aanpassing.get(1).setName("Paard");
-        for(Tile tile : aanpassing ) {
-            tileRepository.save(tile);
-        }
-        return tileRepository.findAll();
     }
-
 }
