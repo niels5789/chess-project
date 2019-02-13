@@ -32,7 +32,7 @@ public class BoardController {
         String Piece = Tilelist.get(idvan).getName();
         int x1 = -1, y1 = -1, x2 = -1, y2 = -1;
         boolean validMove = false;
-        System.out.println("In eerste");
+
         // get coordinates
         x1 = getX(idvan, Tilelist);
         y1 = getY(idvan, Tilelist);
@@ -51,17 +51,7 @@ public class BoardController {
             default: break;
         }
 
-        if(validMove == true) {
-            String newName = Tilelist.get(idvan).getName();
-            int newColor = Tilelist.get(idvan).getColor();
-            Tilelist.get(idvan).setName("");
-            Tilelist.get(idnaar).setName(newName);
-            Tilelist.get(idnaar).setColor(newColor);
-            for(Tile tile : Tilelist){
-                tileRepository.save(tile);
-            }
-
-        }
+//        
 
         return tileRepository.findAll();
     }
@@ -75,9 +65,9 @@ public class BoardController {
     }
 
     private boolean validPawnMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> list) {
-        boolean valid = true;
+        boolean valid = false;
         int color = list.get(idvan).getColor();
-        System.out.println("in validPawnmove");
+
         if(color == 0) {
             if (y1 == y2 && x1 + 1 == x2) {
                 valid = true;

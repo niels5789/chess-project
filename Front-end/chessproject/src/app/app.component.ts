@@ -42,32 +42,32 @@ export class AppComponent implements OnInit {
       id--;
       if (this.tilelist[id].color === 1) {
         switch (this.tilelist[id].name) {
-          case 'Bishop':
+          case 'Loper':
             return '&#9821;';
-          case 'Rook':
+          case 'Toren':
             return '&#9820;';
-          case 'Knight':
+          case 'Paard':
             return '&#9822;';
-          case 'Queen':
+          case 'Koningin':
             return '&#9818;';
-          case 'King':
+          case 'Koning':
             return '&#9819;';
-          case 'Pawn':
+          case 'Pion':
             return '&#9823;';
         }
       } else if (this.tilelist[id].color === 0) {
         switch (this.tilelist[id].name) {
-          case 'Rook':
+          case 'Toren':
             return '&#9814;';
-          case 'Knight':
+          case 'Paard':
             return '&#9816;';
-          case 'Bishop':
+            case 'Loper':
             return '&#9815;';
-          case 'Queen':
+          case 'Koningin':
             return '&#9813';
-          case 'King':
+          case 'Koning':
             return '&#9812;';
-          case 'Pawn':
+          case 'Pion':
             return '&#9817;';
         }
       }
@@ -76,7 +76,7 @@ export class AppComponent implements OnInit {
     onclick (idclick: number) {
       --idclick;
         if(this.clickName === null) {
-          this.oldClickid = --idclick;
+          // this.oldClickid = --idclick;
           this.oldClickid = this.tilelist[idclick].id;
           this.clickName = this.tilelist[idclick].name;
           this.clickcolor = this.tilelist[idclick].color;
