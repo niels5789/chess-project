@@ -41,7 +41,7 @@ public class BoardController {
         y2 = getY(idnaar, Tilelist);
 
 
-
+//sdfsdfsdf
         // switch op piece type
         switch (Piece){
             case "Pawn": validMove = validPawnMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
