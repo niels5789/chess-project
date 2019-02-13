@@ -3,18 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a7d7f0d9-6b40-4bb0-9f2a-06bf8a127b9c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ChessProject/Model/Tile/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ChessProject/Model/Tile/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ChessProject/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ChessProject/controller/BoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ChessProject/Model/Tile/Tile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/ChessProject/Model/Tile/Tile.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/ChessProject/controller/BoardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/ChessProject/controller/BoardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ChessProject/controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/ChessProject/controller/GameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ChessProject/controller/PlayerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/ChessProject/controller/PlayerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Front-end/chessproject/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Front-end/chessproject/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Front-end/chessproject/src/app/board-service.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Front-end/chessproject/src/app/board-service.service.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/ChessProject/controller/BoardController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="50" column="10" selection-start-line="50" selection-start-column="10" selection-end-line="50" selection-end-column="10" />
+            <state relative-caret-position="108">
+              <caret line="41" column="23" lean-forward="true" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#708#709#0" expanded="true" />
@@ -122,11 +113,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/ChessProject/Model/Tile/Tile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="822">
-              <caret line="80" selection-start-line="80" selection-end-line="80" />
+            <state relative-caret-position="68">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#372#373#0" expanded="true" />
@@ -187,9 +178,9 @@
         <option value="$PROJECT_DIR$/src/main/java/com/example/ChessProject/Model/Player/Player.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/ChessProject/repository/PlayerRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/ChessProject/controller/PlayerController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/ChessProject/Model/Tile/Tile.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/ChessProject/controller/BoardController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/ChessProject/Model/Tile/Tile.java" />
       </list>
     </option>
   </component>
@@ -377,9 +368,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14925373" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14925373" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -393,7 +383,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32765958" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49924356" visible="true" weight="0.27843988" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49924356" visible="true" weight="0.27843988" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50075644" side_tool="true" weight="0.38134205" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32907802" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32765958" />
@@ -596,8 +586,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/ChessProject/Model/Tile/Tile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="822">
-          <caret line="80" selection-start-line="80" selection-end-line="80" />
+        <state relative-caret-position="68">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#372#373#0" expanded="true" />
@@ -615,8 +605,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/ChessProject/controller/BoardController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="50" column="10" selection-start-line="50" selection-start-column="10" selection-end-line="50" selection-end-column="10" />
+        <state relative-caret-position="108">
+          <caret line="41" column="23" lean-forward="true" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#708#709#0" expanded="true" />
