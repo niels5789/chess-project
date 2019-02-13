@@ -79,14 +79,10 @@ public class Tile {
             list.add(new Tile(x, "Pion", 0,x-8 ,2));
         }
 
-
-//        for(int y = 17; y < 49; y++) {
-//            list.add(new Tile(y));
-//        }
-
+        int t = 17;
         for (int row = 3; row < 7 ; row++){
             for(int col = 1; col < 9; col++){
-                int t = 17;
+
                 list.add(new Tile(t++, null, 0, col, row));
             }
         }

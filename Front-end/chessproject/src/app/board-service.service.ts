@@ -13,7 +13,7 @@ private tileURL = 'http://localhost:8080/';
 
 
   findAll(): Observable<Tile[]> {
-    return this.http.get<any>('http://localhost:8080/newboard').pipe(
+    return this.http.get<any>('http://localhost:8080/boards').pipe(
       catchError(this.handleError<Tile>(`findAll`))
     );
   }
