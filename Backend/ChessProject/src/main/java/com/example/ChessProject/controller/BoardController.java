@@ -27,11 +27,37 @@ public class BoardController {
     @PutMapping("/board/{idvan}/{idnaar}")
     public List<Tile> changeBoard(@PathVariable(value = "idvan") int idvan, @PathVariable(value = "idnaar") int idnaar) {
         List<Tile> Tilelist = tileRepository.findAll();
-
         String Piece = Tilelist.get(idvan).getName();
-        if(Piece == "Koning"){
-            if(idnaar == idvan + 1 || idnaar == idvan - 1 || idnaar == idvan + 7 || idnaar == idvan + 8 || idnaar == idvan + 9 || idnaar == idvan - 7 || idnaar == idvan - 8 || idnaar == idvan -9 ){
-                //Omslachtig manier van data veranderen. Kan makkelijker
+        int x1 = -1, y1 = -1, x2 = -1, y2 = -1;
+        boolean validMove = false;
+
+
+        // get coordinates
+        x1 = getX(idvan, Tilelist);
+        y1 = getY(idvan, Tilelist);
+        x2 = getX(idnaar, Tilelist);
+        y2 = getY(idnaar, Tilelist);
+
+
+
+        // switch op piece type
+        switch (Piece){
+            case "Pawn": validMove = validPawnMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
+            case "Rook": ; break;
+            case "Knight": ; break;
+            case "Bishop": ; break;
+            case "Queen": ; break;
+            case "King": ; break;
+            default: break;
+        }
+        // isValidMove test
+            // tile id -> coordinate
+        // if true make move; else do nothing/give message
+
+
+
+        if(Piece.equals(validMove)){
+
                 String newName = Tilelist.get(idvan).getName();
                 int newColor = Tilelist.get(idnaar).getColor();
                 Tilelist.get(idvan).setName("");
@@ -41,13 +67,45 @@ public class BoardController {
                 for(Tile tile : Tilelist) {
                     tileRepository.save(tile);
                 }
+
+        }
+
+        return tileRepository.findAll();
+    }
+
+    private int getX(int id, List<Tile> list) {
+        return list.get(id).getxCo();
+    }
+
+    private int getY(int id, List<Tile> list) {
+        return list.get(id).getyCo();
+    }
+
+    private boolean validPawnMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> list) {
+        boolean valid = false;
+        int color = list.get(idvan).getColor();
+
+
+        if(color == 0) {
+            if (y1 == y2 && x1 + 1 == x2) {
+                valid = true;
             }
         }
 
-
-        return tileRepository.findAll();
-
+        return valid;
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
     @ResponseBody
     @GetMapping("/resetBoard")
