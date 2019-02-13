@@ -65,18 +65,18 @@ public class Tile {
     public List<Tile> startList() {
         List<Tile> list = new ArrayList<>();
 
-        list.add(new Tile(1, "Tower", 0 ,1 ,1));
-        list.add(new Tile(2, "Knight", 0, 2, 1));
-        list.add(new Tile(3, "Bishop", 0, 3,1));
-        list.add(new Tile(4, "King", 0,4,1));
-        list.add(new Tile(5, "Queen", 0,5,1));
-        list.add(new Tile(6, "Bishop", 0,6,1));
-        list.add(new Tile(7, "Knight", 0,7,1));
-        list.add(new Tile(8, "Tower", 0,8,1));
+        list.add(new Tile(1, "Toren", 0 ,1 ,1));
+        list.add(new Tile(2, "Paard", 0, 2, 1));
+        list.add(new Tile(3, "Loper", 0, 3,1));
+        list.add(new Tile(4, "Koning", 0,4,1));
+        list.add(new Tile(5, "Koningin", 0,5,1));
+        list.add(new Tile(6, "Loper", 0,6,1));
+        list.add(new Tile(7, "Paard", 0,7,1));
+        list.add(new Tile(8, "Toren", 0,8,1));
 
         for(int x = 9; x <17; x++)
         {
-            list.add(new Tile(x, "Pawn", 0,x-8 ,2));
+            list.add(new Tile(x, "Pion", 0,x-8 ,2));
         }
 
         int t = 17;
@@ -88,16 +88,16 @@ public class Tile {
         }
 
         for(int z = 49; z < 57; z++) {
-            list.add(new Tile(z, "Pawn", 1,z-48,7));
+            list.add(new Tile(z, "Pion", 1,z-48,7));
         }
-        list.add(new Tile(57, "Tower", 1,1,8));
-        list.add(new Tile(58, "Knight", 1,2,8));
-        list.add(new Tile(59, "Bishop", 1,3,8));
-        list.add(new Tile(60, "King", 1,4,8));
-        list.add(new Tile(61, "Queen", 1,5,8));
-        list.add(new Tile(62, "Bishop", 1,6,8));
-        list.add(new Tile(63, "Knight", 1,7,8));
-        list.add(new Tile(64, "Tower", 1,8,8));
+        list.add(new Tile(57, "Toren", 1,1,8));
+        list.add(new Tile(58, "Paard", 1,2,8));
+        list.add(new Tile(59, "Loper", 1,3,8));
+        list.add(new Tile(60, "Koning", 1,4,8));
+        list.add(new Tile(61, "Koningin", 1,5,8));
+        list.add(new Tile(62, "Loper", 1,6,8));
+        list.add(new Tile(63, "Paard", 1,7,8));
+        list.add(new Tile(64, "Toren", 1,8,8));
 
         return list;
     }
