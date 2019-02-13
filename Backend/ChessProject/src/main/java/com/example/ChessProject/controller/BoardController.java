@@ -13,6 +13,7 @@ import java.util.List;
 public class BoardController {
 
 //    test
+//    test2
 
     @Autowired
     BoardRepository boardRepository;
