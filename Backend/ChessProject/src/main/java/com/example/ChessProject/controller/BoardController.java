@@ -12,6 +12,8 @@ import java.util.List;
 @RestController
 public class BoardController {
 
+//    test
+
     @Autowired
     BoardRepository boardRepository;
     @Autowired
