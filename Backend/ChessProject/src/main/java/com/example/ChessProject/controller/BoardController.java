@@ -31,14 +31,11 @@ public class BoardController {
         int x1 = -1, y1 = -1, x2 = -1, y2 = -1;
         boolean validMove = false;
 
-
         // get coordinates
         x1 = getX(idvan, Tilelist);
         y1 = getY(idvan, Tilelist);
         x2 = getX(idnaar, Tilelist);
         y2 = getY(idnaar, Tilelist);
-
-
 
         // switch op piece type
         switch (Piece){
@@ -50,11 +47,10 @@ public class BoardController {
             case "King": ; break;
             default: break;
         }
+
         // isValidMove test
             // tile id -> coordinate
         // if true make move; else do nothing/give message
-
-
 
         if(Piece.equals(validMove)){
 
@@ -67,7 +63,6 @@ public class BoardController {
                 for(Tile tile : Tilelist) {
                     tileRepository.save(tile);
                 }
-
         }
 
         return tileRepository.findAll();
@@ -85,11 +80,15 @@ public class BoardController {
         boolean valid = false;
         int color = list.get(idvan).getColor();
 
-
+        //White pawn checks
         if(color == 0) {
             if (y1 == y2 && x1 + 1 == x2) {
                 valid = true;
             }
+        }
+        //Black pawn checks
+        else if(y1 == y2 && x1 - 1 == x2){
+            valid = true;
         }
 
         return valid;

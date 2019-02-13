@@ -29,14 +29,13 @@ public class PlayerController {
     public Player checkPlayer(@PathVariable ("username") String username, @PathVariable ("password") String password){
         List<Player> playerList = playerRepository.findAll();
         int id = 0;
-        for (Player player:playerList){
-            if(player.getPlayerName().equals(username)&&player.getPassword().equals(password)){
+
+        for (Player player: playerList){
+            if(player.getPlayerName().equals(username) && player.getPassword().equals(password)){
                 id = player.getId();
             }
         }
 
-        return playerList.get(id);
+        return playerList.get(id-1);
     }
-
-
 }
