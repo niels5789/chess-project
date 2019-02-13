@@ -56,7 +56,7 @@ public class BoardController {
 
 
 
-        if(Piece.equals(validMove)){
+//        if(Piece.equals(validMove)){
 
                 String newName = Tilelist.get(idvan).getName();
                 int newColor = Tilelist.get(idnaar).getColor();
@@ -68,7 +68,7 @@ public class BoardController {
                     tileRepository.save(tile);
                 }
 
-        }
+//        }
 
         return tileRepository.findAll();
     }
