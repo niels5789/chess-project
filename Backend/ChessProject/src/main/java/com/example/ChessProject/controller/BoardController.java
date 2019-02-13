@@ -37,9 +37,13 @@ public class BoardController {
         x2 = getX(idnaar, Tilelist);
         y2 = getY(idnaar, Tilelist);
 
+        System.out.println("in /changeboard");
+
+        System.out.println("piece is: "+ Piece);
         // switch op piece type
         switch (Piece){
-            case "Pawn": validMove = validPawnMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
+            case "Pawn":
+                System.out.println("in pawn switch"); validMove = validPawnMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
             case "Rook": ; break;
             case "Knight": ; break;
             case "Bishop": ; break;
@@ -48,7 +52,16 @@ public class BoardController {
             default: break;
         }
 
-//        
+        if(validMove){
+            System.out.println("in validMove");
+            String name = Tilelist.get(idvan).getName();
+            int color = Tilelist.get(idvan).getColor();
+
+            Tilelist.get(idnaar).setName(name);
+            Tilelist.get(idnaar).setColor(color);
+
+            Tilelist.get(idvan).setName("");
+        }
 
         return tileRepository.findAll();
     }
