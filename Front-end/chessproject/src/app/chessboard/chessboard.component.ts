@@ -54,10 +54,9 @@ export class ChessboardComponent implements OnInit {
     }
 
   }
-  onclick (idclick: number)
-{
+  onclick(idclick: number) {
     --idclick;
-    if(this.clickName === null) {
+    if (this.clickName === null) {
       // this.oldClickid = --idclick;
       this.oldClickid = this.tilelist[idclick].id;
       this.clickName = this.tilelist[idclick].name;
