@@ -32,9 +32,9 @@ export class ChessboardComponent implements OnInit {
         case 'Knight':
           return '&#9822;';
         case 'Queen':
-          return '&#9818;';
-        case 'King':
           return '&#9819;';
+        case 'King':
+          return '&#9818;';
         case 'Pawn':
           return '&#9823;';
       }
@@ -56,10 +56,12 @@ export class ChessboardComponent implements OnInit {
     }
 
   }
+
   onclick (idclick: number) {
     idclick--;
     this.idclick = idclick;
     if (this.clickName === null) {
+
       this.oldClickid = this.tilelist[idclick].id;
       this.clickName = this.tilelist[idclick].name;
       this.clickcolor = this.tilelist[idclick].color;
