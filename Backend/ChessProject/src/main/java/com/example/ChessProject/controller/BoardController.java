@@ -163,7 +163,7 @@ public class BoardController {
             } else if(y2 < y1) {
                 distance = y1 - y2;
                 for (int i = 1; i < distance; i++) {
-                    if (!tilelist.get(idvan - (i * 8).getName().equals("")) {
+                    if (!tilelist.get(idvan - (i * 8)).getName().equals("")) {
                         pathIsFree = false;
                         break;
                     }
