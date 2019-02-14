@@ -65,14 +65,14 @@ public class Tile {
     public List<Tile> startList() {
         List<Tile> list = new ArrayList<>();
 
-        list.add(new Tile(1, "Tower", 0 ,1 ,1));
+        list.add(new Tile(1, "Rook", 0 ,1 ,1));
         list.add(new Tile(2, "Knight", 0, 2, 1));
         list.add(new Tile(3, "Bishop", 0, 3,1));
         list.add(new Tile(4, "King", 0,4,1));
         list.add(new Tile(5, "Queen", 0,5,1));
         list.add(new Tile(6, "Bishop", 0,6,1));
         list.add(new Tile(7, "Knight", 0,7,1));
-        list.add(new Tile(8, "Tower", 0,8,1));
+        list.add(new Tile(8, "Rook", 0,8,1));
 
         for(int x = 9; x <17; x++)
         {
@@ -90,14 +90,14 @@ public class Tile {
         for(int z = 49; z < 57; z++) {
             list.add(new Tile(z, "Pawn", 1,z-48,7));
         }
-        list.add(new Tile(57, "Tower", 1,1,8));
+        list.add(new Tile(57, "Rook", 1,1,8));
         list.add(new Tile(58, "Knight", 1,2,8));
         list.add(new Tile(59, "Bishop", 1,3,8));
         list.add(new Tile(60, "King", 1,4,8));
         list.add(new Tile(61, "Queen", 1,5,8));
         list.add(new Tile(62, "Bishop", 1,6,8));
         list.add(new Tile(63, "Knight", 1,7,8));
-        list.add(new Tile(64, "Tower", 1,8,8));
+        list.add(new Tile(64, "Rook", 1,8,8));
 
         return list;
     }

@@ -75,11 +75,10 @@ public class BoardController {
         boolean valid = false;
         int color = list.get(idvan).getColor();
 
-        if(color == 0) {
-            if (y1 == y2 && x1 + 1 == x2) {
-                valid = true;
-            }
+        if((color == 0 && (y1 == y2 && x1 + 1 == x2))||(color == 1 && (y1 == y2 && x1 - 1 == x2))) {
+            valid = true;
         }
+
         return valid;
     }
 
