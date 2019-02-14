@@ -42,8 +42,8 @@ public class BoardController {
 //      check if the move is legal
         switch (Piece){
             case "Pawn": validMove = validPawnMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
-            case "Rook": ; break;
-            case "Knight": ; break;
+            case "Rook": validMove = validRookMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
+            case "Knight": validMove = validKnightMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
             case "Bishop": ; break;
             case "Queen": ; break;
             case "King": ; break;
@@ -58,9 +58,46 @@ public class BoardController {
             Tilelist.get(idnaar).setColor(tempColor);
 
             Tilelist.get(idvan).setName("");
+
+            for (Tile tile: Tilelist){tileRepository.save(tile);}
         }
 
         return tileRepository.findAll();
+    }
+
+    private boolean validKnightMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> tilelist) {
+        boolean valid = false;
+
+            if (((x2 == x1 + 1) && ((y2 == y1 + 2) || (y2 == y1 - 2))) ||
+                    ((x2 == x1 + 2) && ((y2 == y1 + 1) || (y2 == y1 - 1))) ||
+                            ((x2 == x1 - 1) && ((y2 == y1 + 2) || (y2 == y1 - 2))) ||
+                                    ((x2 == x1 - 2) && ((y2 == y1 + 1) || (y2 == y1 - 1))))
+            {
+                valid = true;
+            }
+
+        return valid;
+    }
+
+    private boolean validRookMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> tilelist) {
+        boolean valid = false;
+
+        if( x1 == x2 || y1 == y2){
+            valid = true;
+        }
+
+        return valid;
+    }
+
+    private boolean validPawnMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> list) {
+        boolean valid = false;
+        int color = list.get(idvan).getColor();
+
+        if((color == 0 && (x1 == x2 && y1 + 1 == y2))||(color == 1 && (x1 == x2 && y1 - 1 == y2))) {
+            valid = true;
+        }
+
+        return valid;
     }
 
     private int getX(int id, List<Tile> list) {
@@ -71,17 +108,7 @@ public class BoardController {
         return list.get(id).getyCo();
     }
 
-    private boolean validPawnMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> list) {
-        boolean valid = false;
-        int color = list.get(idvan).getColor();
 
-        if(color == 0) {
-            if (y1 == y2 && x1 + 1 == x2) {
-                valid = true;
-            }
-        }
-        return valid;
-    }
 
 //Dit is mijn aangepaste code
     @ResponseBody
