@@ -30,9 +30,9 @@ export class ChessboardComponent implements OnInit {
         case 'Knight':
           return '&#9822;';
         case 'Queen':
-          return '&#9818;';
-        case 'King':
           return '&#9819;';
+        case 'King':
+          return '&#9818;';
         case 'Pawn':
           return '&#9823;';
       }

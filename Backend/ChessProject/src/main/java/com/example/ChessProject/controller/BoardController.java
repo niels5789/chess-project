@@ -45,8 +45,8 @@ public class BoardController {
             case "Rook": validMove = validRookMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
             case "Knight": validMove = validKnightMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
             case "Bishop": validMove = validBishopMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
-            case "Queen": ; break;
-            case "King": ; break;
+            case "Queen": validMove = validQueenMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
+            case "King": validMove = validKingMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
             default: break;
         }
 
@@ -64,6 +64,26 @@ public class BoardController {
         }
 
         return tileRepository.findAll();
+    }
+
+    private boolean validKingMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> tilelist) {
+        boolean valid = false;
+
+        if ((((x2-x1)*(x2-x1) <= 1 ) && ((y2-y1)*(y2-y1) <= 1))){
+            valid = true;
+        }
+
+        return valid;
+    }
+
+    private boolean validQueenMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> tilelist) {
+        boolean valid = false;
+
+        if((x1 == x2 || (y1 == y2)) || ((x2 - x1)*(x2 - x1)==(y2 - y1)*(y2 - y1))){
+            valid = true;
+        }
+
+        return valid;
     }
 
     private boolean validBishopMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> tilelist) {
