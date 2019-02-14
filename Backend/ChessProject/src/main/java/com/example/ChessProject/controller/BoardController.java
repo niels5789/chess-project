@@ -1,6 +1,5 @@
 package com.example.ChessProject.controller;
 
-import com.example.ChessProject.Model.Board.Board;
 import com.example.ChessProject.Model.Tile.Tile;
 import com.example.ChessProject.repository.BoardRepository;
 import com.example.ChessProject.repository.TileRepository;
@@ -29,7 +28,9 @@ public class BoardController {
         List<Tile> Tilelist = tileRepository.findAll();
         String Piece = Tilelist.get(idvan).getName();
         int x1 = -1, y1 = -1, x2 = -1, y2 = -1;
-        boolean validMove = false;
+
+//        This value should be set to false if done testing
+        boolean validMove = true;
 
         // get coordinates
         x1 = getX(idvan, Tilelist);
@@ -38,7 +39,7 @@ public class BoardController {
         y2 = getY(idnaar, Tilelist);
 
 
-        // switch op piece type
+//      check if the move is legal
         switch (Piece){
             case "Pawn": validMove = validPawnMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
             case "Rook": ; break;
@@ -49,7 +50,15 @@ public class BoardController {
             default: break;
         }
 
-//        
+        if (validMove) {
+            String tempName = Tilelist.get(idvan).getName();
+            int tempColor = Tilelist.get(idvan).getColor();
+
+            Tilelist.get(idnaar).setName(tempName);
+            Tilelist.get(idnaar).setColor(tempColor);
+
+            Tilelist.get(idvan).setName("");
+        }
 
         return tileRepository.findAll();
     }
