@@ -44,7 +44,7 @@ public class BoardController {
             case "Pawn": validMove = validPawnMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
             case "Rook": validMove = validRookMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
             case "Knight": validMove = validKnightMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
-            case "Bishop": ; break;
+            case "Bishop": validMove = validBishopMove(x1, y1, x2, y2, idvan, idnaar, Tilelist); break;
             case "Queen": ; break;
             case "King": ; break;
             default: break;
@@ -63,6 +63,16 @@ public class BoardController {
         }
 
         return tileRepository.findAll();
+    }
+
+    private boolean validBishopMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> tilelist) {
+        boolean valid = false;
+
+        if((x2 - x1)*(x2 - x1)==(y2 - y1)*(y2 - y1)){
+            valid = true;
+        }
+
+        return valid;
     }
 
     private boolean validKnightMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> tilelist) {
