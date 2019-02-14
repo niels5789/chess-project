@@ -83,7 +83,7 @@ public class BoardController {
         return valid;
     }
 
-
+//Dit is mijn aangepaste code
     @ResponseBody
     @GetMapping("/resetBoard")
     public List<Tile> resetBoard() {
