@@ -1,0 +1,8 @@
+<div>
+  <div class="chessboard">
+    <button (click)="onclick(tile.id)" *ngFor="let tile of tilelist" [innerHTML]="getPicture(tile.id)" class="black"></button>
+  </div>
+  <div>
+    <a href="http://localhost:8080/resetBoard" target="_blank">ResetBoard</a>
+  </div>
+</div>

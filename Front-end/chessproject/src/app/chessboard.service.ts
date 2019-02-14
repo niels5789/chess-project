@@ -3,11 +3,11 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import {Tile} from '../Tile';
-import {buildPath} from 'selenium-webdriver/http';
+
 
 @Injectable()
-export class BoardServiceService {
-private tileURL = 'http://localhost:8080/';
+export class ChessBoardService {
+  private tileURL = 'http://localhost:8080/';
   constructor(private http: HttpClient) {
   }
 
@@ -22,7 +22,7 @@ private tileURL = 'http://localhost:8080/';
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json'})
     };
-        return this.http.put(`${this.tileURL}/board/${id1}/${id2}`, httpOptions).pipe();
+    return this.http.put(`${this.tileURL}/board/${id1}/${id2}`, httpOptions).pipe();
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
