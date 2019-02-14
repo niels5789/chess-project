@@ -102,11 +102,38 @@ public class BoardController {
 
     private boolean validBishopMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> tilelist) {
         boolean valid = false;
+        boolean pathIsFree = true;
+        int distance = 0;
 
         if((x2 - x1)*(x2 - x1)==(y2 - y1)*(y2 - y1)){
+
+            if ( x2 > x1 && y2 > y1){
+                distance = x2 - x1;
+
+                for(int i = 1; i < distance ; i++){
+                    if(!tilelist.get(idvan + (9 * i)).equals("")){pathIsFree = false; break;}
+                }
+
+            } else
+            if ( x2 < x1 && y2 > y1){
+                distance = x1 - x2;
+
+                for(int i = 1; i < distance ; i++){
+                    if(!tilelist.get(idvan + (7 * i)).equals("")){pathIsFree = false; break;}
+                }
+
+            }
+
+
+
+
+
+
             valid = true;
         }
 
+
+        if (!pathIsFree){valid = false;}
         return valid;
     }
 
