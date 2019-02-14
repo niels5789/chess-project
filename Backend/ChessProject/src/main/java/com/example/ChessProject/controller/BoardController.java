@@ -58,8 +58,14 @@ public class BoardController {
             Tilelist.get(idnaar).setColor(tempColor);
 
             Tilelist.get(idvan).setName("");
+<<<<<<< Updated upstream
 
             for (Tile tile: Tilelist){tileRepository.save(tile);}
+=======
+            for (Tile tile: Tilelist) {
+                tileRepository.save(tile);
+            }
+>>>>>>> Stashed changes
         }
 
         return tileRepository.findAll();
