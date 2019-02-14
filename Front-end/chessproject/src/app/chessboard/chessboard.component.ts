@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Tile} from '../../Tile';
 import {ChessBoardService} from '../chessboard.service';
+import {$} from 'protractor';
 
 @Component({
   selector: 'app-chessboard',
@@ -13,6 +14,7 @@ export class ChessboardComponent implements OnInit {
   private oldClickid: number = null;
   private clickName: string = null;
   private clickcolor: number = null;
+  private idclick: number;
 
   constructor(private chessBoardService: ChessBoardService) {  }
 
@@ -54,29 +56,33 @@ export class ChessboardComponent implements OnInit {
     }
 
   }
-  onclick (idclick: number)
-{
-    --idclick;
-    if(this.clickName === null) {
-      // this.oldClickid = --idclick;
+  onclick (idclick: number) {
+    idclick--;
+    this.idclick = idclick;
+    if (this.clickName === null) {
       this.oldClickid = this.tilelist[idclick].id;
       this.clickName = this.tilelist[idclick].name;
       this.clickcolor = this.tilelist[idclick].color;
-    } else {
-      // this.tilelist[idclick].name = this.clickName;
-      // this.tilelist[idclick].color = this.clickcolor;
-      this.oldClickid -= 1;
 
+
+    } else {
+      this.oldClickid -= 1;
       this.chessBoardService.saveTile(this.oldClickid, idclick).subscribe();
-      // this.tilelist[this.oldClickid].name = null;
-      // this.tilelist[this.oldClickid].color = null;
+      this.chessBoardService.findAll().subscribe(
+        tilelist => {
+          this.tilelist = tilelist;
+        },
+        err => {
+          console.log(err);
+        }
+      );
+      document.getElementById('button' + this.oldClickid).innerHTML = '';
+      document.getElementById('button' + this.idclick).innerHTML = this.getPicture(this.oldClickid);
       this.clickName = null;
       this.oldClickid = null;
-      this.clickcolor = null;
-      window.location.reload();
     }
-
   }
+
 
   getCurrentPosition() {
     this.chessBoardService.findAll().subscribe(
