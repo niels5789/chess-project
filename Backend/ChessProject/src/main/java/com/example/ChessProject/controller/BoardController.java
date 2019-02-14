@@ -13,7 +13,7 @@ import java.util.List;
 public class BoardController {
 
 //    test
-
+//sdfsdf
     @Autowired
     BoardRepository boardRepository;
     @Autowired
