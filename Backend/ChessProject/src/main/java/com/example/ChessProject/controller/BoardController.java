@@ -23,8 +23,6 @@ public class BoardController {
         return tileRepository.findAll();
     }
 
-    // Dit is verandering van niels
-
     @ResponseBody
     @PutMapping("/board/{idvan}/{idnaar}")
     public List<Tile> changeBoard(@PathVariable(value = "idvan") int idvan, @PathVariable(value = "idnaar") int idnaar) {
