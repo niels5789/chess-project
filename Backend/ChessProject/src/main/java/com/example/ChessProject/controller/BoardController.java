@@ -110,27 +110,58 @@ public class BoardController {
             if ( x2 > x1 && y2 > y1){
                 distance = x2 - x1;
 
+                System.out.println("In 1: " + "x1 = " + x1 + ", x2 = " + x2 + ", y1 = " + y1 + ", y2 = " +  y2);
                 for(int i = 1; i < distance ; i++){
-                    if(!tilelist.get(idvan + (9 * i)).equals("")){pathIsFree = false; break;}
+                    System.out.println("in loop, i = " + i);
+                    if(!tilelist.get(idvan + (9 * i)).getName().equals("")){
+                        pathIsFree = false;
+                        break;
+                    }
                 }
 
             } else
             if ( x2 < x1 && y2 > y1){
                 distance = x1 - x2;
 
+                System.out.println("In 2: " + "x1 = " + x1 + ", x2 = " + x2 + ", y1 = " + y1 + ", y2 = " +  y2);
                 for(int i = 1; i < distance ; i++){
-                    if(!tilelist.get(idvan + (7 * i)).equals("")){pathIsFree = false; break;}
+                    System.out.println("in loop, i = " + i);
+                    if(!tilelist.get(idvan + (7 * i)).getName().equals("")){
+                        pathIsFree = false;
+                        break;
+                    }
+                }
+            } else
+
+            if ( x2 > x1 && y2 < y1){
+                distance = x2 - x1;
+
+                System.out.println("In 3: " + "x1 = " + x1 + ", x2 = " + x2 + ", y1 = " + y1 + ", y2 = " +  y2);
+                for(int i = 1; i < distance ; i++){
+                    System.out.println("in loop, i = " + i);
+                    if(!tilelist.get(idvan - (7 * i)).getName().equals("")){
+                        pathIsFree = false;
+                        break;
+                    }
                 }
 
+            } else
+            if ( x2 < x1 && y2 < y1){
+                distance = x1 - x2;
+
+                System.out.println("In 4: " + "x1 = " + x1 + ", x2 = " + x2 + ", y1 = " + y1 + ", y2 = " +  y2);
+                for(int i = 1; i < distance ; i++){
+                    System.out.println("in loop, i = " + i);
+                    if(!tilelist.get(idvan - (9 * i)).getName().equals("")){
+                        pathIsFree = false;
+                        break;
+                    }
+                }
             }
-
-
-
-
-
 
             valid = true;
         }
+
 
 
         if (!pathIsFree){valid = false;}
