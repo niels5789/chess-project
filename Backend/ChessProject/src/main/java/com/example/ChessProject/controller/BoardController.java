@@ -12,8 +12,6 @@ import java.util.List;
 @RestController
 public class BoardController {
 
-//    test
-//sdfsdf
     @Autowired
     BoardRepository boardRepository;
     @Autowired
@@ -24,6 +22,8 @@ public class BoardController {
     public List<Tile> getAllBoards() {
         return tileRepository.findAll();
     }
+
+    // Dit is verandering van niels
 
     @ResponseBody
     @PutMapping("/board/{idvan}/{idnaar}")
