@@ -18,11 +18,11 @@ export class ChessBoardService {
     );
   }
 
-  saveTile(id1: number, id2: number) {
+  saveTile(id1: number, id2: number): Observable<Tile[]> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json'})
     };
-    return this.http.put(`${this.tileURL}/board/${id1}/${id2}`, httpOptions).pipe();
+    return this.http.put<any>(`${this.tileURL}/board/${id1}/${id2}`, httpOptions);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
