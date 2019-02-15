@@ -64,10 +64,12 @@ export class ChessboardComponent implements OnInit {
       idclick--;
       this.oldClickid = this.tilelist[idclick].id;
       this.aanDeBeurt++;
-      document.getElementById('button' + this.oldClickid).innerHTML = this.getPicture(this.oldClickid);
+      // document.getElementById('button' + this.oldClickid).innerHTML = this.getPicture(this.oldClickid);
     } else if (this.aanDeBeurt === 1) {
       this.aanDeBeurt = 0;
-      this.chessBoardService.saveTile(--this.oldClickid, --idclick).subscribe(
+      this.oldClickid--;
+      --idclick;
+      this.chessBoardService.saveTile(this.oldClickid, idclick).subscribe(
           tilelist => {
             this.tilelist = tilelist;
           },
@@ -76,18 +78,12 @@ export class ChessboardComponent implements OnInit {
           }
       );
 
+      // document.getElementById('button' + idclick).innerHTML = this.getPicture(this.tilelist[idclick].id);
+      // document.getElementById('button' + this.oldClickid).innerHTML = this.getPicture(this.oldClickid);
 
 
-      this.setInnerHTML(idclick);
-      this.ngOnInit();
 
     }
-  }
-
-
-  setInnerHTML(idclick: number) {
-    document.getElementById('button' + idclick).innerHTML = this.getPicture(this.tilelist[idclick].id);
-    document.getElementById('button' + this.oldClickid).innerHTML = this.getPicture(this.oldClickid);
   }
 
   getCurrentPosition() {
