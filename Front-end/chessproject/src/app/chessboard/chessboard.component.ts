@@ -74,7 +74,6 @@ export class ChessboardComponent implements OnInit {
       this.clickcolor = null;
       window.location.reload();
     }
-
   }
 
   getCurrentPosition() {
