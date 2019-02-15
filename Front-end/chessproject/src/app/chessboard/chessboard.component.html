@@ -1,10 +1,12 @@
   <div class="chessboard">
-    <button  [id]="'button' + tile.id" (click)="onclick(tile.id)" *ngFor="let tile of tilelist" [innerHTML]="getPicture(tile.id)" class="black"></button>
+    <button  [id]="'button' + tile.id" (click)="onclick(tile.id)"
+             *ngFor="let tile of tilelist" [innerHTML]="getPicture(tile.id)" class="black"></button>
   </div>
   <div>
     <a href="http://localhost:8080/resetBoard" target="_blank">ResetBoard</a>
   </div>
 
+  {{tilelist[0].name}}
 
   <!--<div  class="chessboard">-->
     <!--<button  id="button1"(click)="onclick(1)"  [innerHTML]="getPicture(1)" class="black"></button>-->

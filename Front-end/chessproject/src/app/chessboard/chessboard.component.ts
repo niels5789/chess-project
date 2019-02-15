@@ -11,16 +11,16 @@ import {$} from 'protractor';
 })
 export class ChessboardComponent implements OnInit {
   tilelist: Tile[];
-  private oldClickid: number = null;
-  private clickName: string = null;
-  private clickcolor: number = null;
-  private idclick: number;
+  private oldClickid: number;
+  private aanDeBeurt: number = 0;
 
-  constructor(private chessBoardService: ChessBoardService) {  }
+  constructor(private chessBoardService: ChessBoardService) {
+  }
 
   ngOnInit() {
     this.getCurrentPosition();
   }
+
   getPicture(id: number) {
     id--;
     if (this.tilelist[id].color === 1) {
@@ -54,37 +54,41 @@ export class ChessboardComponent implements OnInit {
           return '&#9817;';
       }
     }
+    return '';
 
   }
 
-  onclick (idclick: number) {
-    idclick--;
-    this.idclick = idclick;
-    if (this.clickName === null) {
+  onclick(idclick: number) {
 
+    if (this.aanDeBeurt === 0) {
+      idclick--;
       this.oldClickid = this.tilelist[idclick].id;
-      this.clickName = this.tilelist[idclick].name;
-      this.clickcolor = this.tilelist[idclick].color;
-
-
-    } else {
-      this.oldClickid -= 1;
-      this.chessBoardService.saveTile(this.oldClickid, idclick).subscribe();
-      this.chessBoardService.findAll().subscribe(
-        tilelist => {
-          this.tilelist = tilelist;
-        },
-        err => {
-          console.log(err);
-        }
+      this.aanDeBeurt++;
+      document.getElementById('button' + this.oldClickid).innerHTML = this.getPicture(this.oldClickid);
+    } else if (this.aanDeBeurt === 1) {
+      this.aanDeBeurt = 0;
+      this.chessBoardService.saveTile(--this.oldClickid, --idclick).subscribe(
+          tilelist => {
+            this.tilelist = tilelist;
+          },
+          err => {
+            console.log(err);
+          }
       );
-      document.getElementById('button' + this.oldClickid).innerHTML = '';
-      document.getElementById('button' + this.idclick).innerHTML = this.getPicture(this.oldClickid);
-      this.clickName = null;
-      this.oldClickid = null;
+
+
+
+      this.setInnerHTML(idclick);
+      this.ngOnInit();
+
     }
   }
 
+
+  setInnerHTML(idclick: number) {
+    document.getElementById('button' + idclick).innerHTML = this.getPicture(this.tilelist[idclick].id);
+    document.getElementById('button' + this.oldClickid).innerHTML = this.getPicture(this.oldClickid);
+  }
 
   getCurrentPosition() {
     this.chessBoardService.findAll().subscribe(
@@ -97,3 +101,5 @@ export class ChessboardComponent implements OnInit {
     );
   }
 }
+
+
