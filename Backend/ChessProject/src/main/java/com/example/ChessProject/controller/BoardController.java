@@ -92,11 +92,107 @@ public class BoardController {
 
     private boolean validQueenMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> tilelist) {
         boolean valid = false;
+        boolean pathIsFree = true;
+        int distance = 0;
 
-        if((x1 == x2 || (y1 == y2)) || ((x2 - x1)*(x2 - x1)==(y2 - y1)*(y2 - y1))){
+//        if((x1 == x2 || (y1 == y2)) || ((x2 - x1)*(x2 - x1)==(y2 - y1)*(y2 - y1))){
+//            valid = true;
+//        }
+
+        if((x2 - x1)*(x2 - x1)==(y2 - y1)*(y2 - y1)){
+
+            if ( x2 > x1 && y2 > y1){
+                distance = x2 - x1;
+
+                for(int i = 1; i < distance ; i++){
+                    if(!tilelist.get(idvan + (9 * i)).getName().equals("")){
+                        pathIsFree = false;
+                        break;
+                    }
+                }
+
+            } else
+            if ( x2 < x1 && y2 > y1){
+                distance = x1 - x2;
+
+                for(int i = 1; i < distance ; i++){
+                    if(!tilelist.get(idvan + (7 * i)).getName().equals("")){
+                        pathIsFree = false;
+                        break;
+                    }
+                }
+            } else
+
+            if ( x2 > x1 && y2 < y1){
+                distance = x2 - x1;
+
+                for(int i = 1; i < distance ; i++){
+                    if(!tilelist.get(idvan - (7 * i)).getName().equals("")){
+                        pathIsFree = false;
+                        break;
+                    }
+                }
+
+            } else
+            if ( x2 < x1 && y2 < y1){
+                distance = x1 - x2;
+
+                for(int i = 1; i < distance ; i++){
+                    if(!tilelist.get(idvan - (9 * i)).getName().equals("")){
+                        pathIsFree = false;
+                        break;
+                    }
+                }
+            }
+
             valid = true;
         }
 
+        if(y1 == y2){
+            if(x2 > x1) {
+                distance = x2 - x1;
+                for (int i = 1; i < distance; i++) {
+                    if (!tilelist.get(idvan + i).getName().equals("")) {
+                        pathIsFree = false;
+                        break;
+                    }
+                }
+            } else if(x2 < x1) {
+                distance = x1 - x2;
+                for (int i = 1; i < distance; i++) {
+                    if (!tilelist.get(idvan - i).getName().equals("")) {
+                        pathIsFree = false;
+                        break;
+                    }
+                }
+            }
+
+            valid = true;
+        }
+
+        if( x1 == x2){
+            if(y2 > y1) {
+                distance = y2 - y1;
+                for (int i = 1; i < distance; i++) {
+                    if (!tilelist.get(idvan + (i * 8)).getName().equals("")) {
+                        pathIsFree = false;
+                        break;
+                    }
+                }
+            } else if(y2 < y1) {
+                distance = y1 - y2;
+                for (int i = 1; i < distance; i++) {
+                    if (!tilelist.get(idvan - (i * 8)).getName().equals("")) {
+                        pathIsFree = false;
+                        break;
+                    }
+                }
+            }
+
+            valid = true;
+        }
+
+        if (!pathIsFree){valid = false;}
         return valid;
     }
 
@@ -111,7 +207,10 @@ public class BoardController {
                 distance = x2 - x1;
 
                 for(int i = 1; i < distance ; i++){
-                    if(!tilelist.get(idvan + (9 * i)).equals("")){pathIsFree = false; break;}
+                    if(!tilelist.get(idvan + (9 * i)).getName().equals("")){
+                        pathIsFree = false;
+                        break;
+                    }
                 }
 
             } else
@@ -119,18 +218,38 @@ public class BoardController {
                 distance = x1 - x2;
 
                 for(int i = 1; i < distance ; i++){
-                    if(!tilelist.get(idvan + (7 * i)).equals("")){pathIsFree = false; break;}
+                    if(!tilelist.get(idvan + (7 * i)).getName().equals("")){
+                        pathIsFree = false;
+                        break;
+                    }
+                }
+            } else
+
+            if ( x2 > x1 && y2 < y1){
+                distance = x2 - x1;
+
+                for(int i = 1; i < distance ; i++){
+                    if(!tilelist.get(idvan - (7 * i)).getName().equals("")){
+                        pathIsFree = false;
+                        break;
+                    }
                 }
 
+            } else
+            if ( x2 < x1 && y2 < y1){
+                distance = x1 - x2;
+
+                for(int i = 1; i < distance ; i++){
+                    if(!tilelist.get(idvan - (9 * i)).getName().equals("")){
+                        pathIsFree = false;
+                        break;
+                    }
+                }
             }
-
-
-
-
-
 
             valid = true;
         }
+
 
 
         if (!pathIsFree){valid = false;}
@@ -217,14 +336,17 @@ public class BoardController {
             }
 
             // double step move
-            if ((color == 0 && (x1 == x2 && y1 + 2 == y2 && y1 == 2)) || (color == 1 && (x1 == x2 && y1 - 2 == y2 && y1 == 7))) {
+            if ((color == 0 && (x1 == x2 && y1 + 2 == y2 && y1 == 2)) && tilelist.get(idvan + 8).getName().equals("")) {
+                valid = true;
+            } else if ((color == 1 && (x1 == x2 && y1 - 2 == y2 && y1 == 7)) && tilelist.get(idvan - 8).getName().equals("")){
+                System.out.println("in de methode");
                 valid = true;
             }
+
         } else {
             if (color == 0 && ((y2 == y1 + 1)&&( x2 == x1 - 1|| x2 == x1 + 1 )) || color == 1 && ((y2 == y1 - 1) && ( x2 == x1 - 1|| x2 == x1 + 1 ))){
                 valid = true;
             }
-
         }
 
         return valid;
