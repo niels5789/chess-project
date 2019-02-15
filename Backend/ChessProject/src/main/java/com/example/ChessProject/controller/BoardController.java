@@ -6,6 +6,7 @@ import com.example.ChessProject.repository.TileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -21,6 +22,14 @@ public class BoardController {
     public List<Tile> getAllBoards() {
         return tileRepository.findAll();
     }
+
+    @ResponseBody
+    @GetMapping("/colors")
+    public List<Tile>  getColorList(){
+        return tileRepository.findByColorAndNameNot(0,"");
+    }
+
+
 
     @ResponseBody
     @PutMapping("/board/{idvan}/{idnaar}")
@@ -39,6 +48,7 @@ public class BoardController {
             y1 = getY(idvan, Tilelist);
             x2 = getX(idnaar, Tilelist);
             y2 = getY(idnaar, Tilelist);
+
 
             switch (Piece) {
                 case "Pawn":
@@ -93,11 +103,7 @@ public class BoardController {
     private boolean validQueenMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> tilelist) {
         boolean valid = false;
         boolean pathIsFree = true;
-        int distance = 0;
-
-//        if((x1 == x2 || (y1 == y2)) || ((x2 - x1)*(x2 - x1)==(y2 - y1)*(y2 - y1))){
-//            valid = true;
-//        }
+        int distance;
 
         if((x2 - x1)*(x2 - x1)==(y2 - y1)*(y2 - y1)){
 
@@ -273,7 +279,7 @@ public class BoardController {
     private boolean validRookMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> tilelist) {
         boolean valid = false;
         boolean pathIsFree = true;
-        int distance = 0;
+        int distance;
 
         if(y1 == y2){
             if(x2 > x1) {
@@ -339,7 +345,6 @@ public class BoardController {
             if ((color == 0 && (x1 == x2 && y1 + 2 == y2 && y1 == 2)) && tilelist.get(idvan + 8).getName().equals("")) {
                 valid = true;
             } else if ((color == 1 && (x1 == x2 && y1 - 2 == y2 && y1 == 7)) && tilelist.get(idvan - 8).getName().equals("")){
-                System.out.println("in de methode");
                 valid = true;
             }
 
