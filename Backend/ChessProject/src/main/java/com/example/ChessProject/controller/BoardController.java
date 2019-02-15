@@ -338,7 +338,7 @@ public class BoardController {
             // double step move
             if ((color == 0 && (x1 == x2 && y1 + 2 == y2 && y1 == 2)) && tilelist.get(idvan + 8).getName().equals("")) {
                 valid = true;
-            } else if (color == 1 && (x1 == x2 && y1 - 2 == y2 && y1 == 7) && tilelist.get(idvan + 8).getName().equals("")){
+            } else if ((color == 1 && (x1 == x2 && y1 - 2 == y2 && y1 == 7)) && tilelist.get(idvan - 8).getName().equals("")){
                 System.out.println("in de methode");
                 valid = true;
             }
