@@ -1,12 +1,28 @@
+<div class="LoggedIn"> You are now playing as:   {{player.playerName}}</div>
+<div class="column">
+  <table border="1">
+    <tr>
+      <th style="font-weight: bold"> Inlognaam: </th>
+      <th> Playernaam:  </th>
+    </tr>
+    <tr>
+      <th style="font-weight: normal"> {{player.username}}</th>
+      <th><input placeholder="{{player.playerName}}" value="{{player.playerName}}" #playername /> </th>
+    </tr>
+  </table>
+  <div><button (click)="changePlayerName(playername.value)">Change settings</button> </div>
+</div>
+<div class="column">
   <div class="chessboard">
     <button  [id]="'button' + tile.id" (click)="onclick(tile.id)"
              *ngFor="let tile of tilelist" [innerHTML]="getPicture(tile.id)" class="black"></button>
   </div>
-  <div>
-    <a href="http://localhost:8080/resetBoard" target="_blank">ResetBoard</a>
+  <div class="button">
+    <button (click)="resetBoard()">ResetBoard</button>
   </div>
+</div>
 
-  {{tilelist[0].name}}
+
 
   <!--<div  class="chessboard">-->
     <!--<button  id="button1"(click)="onclick(1)"  [innerHTML]="getPicture(1)" class="black"></button>-->

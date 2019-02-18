@@ -1,0 +1,24 @@
+<h1>Meld je hier aan voor ChessOnline</h1>
+<div class="container">
+<form [formGroup]="userForm" (ngSubmit)="savePlayer($event)">
+  <div class="row">
+  <div class="col-25">
+    <label> Username:</label>
+  </div>
+  <div class="col-75">
+    <input formControlName="username" type="text">
+  </div>
+  </div>
+  <div class="row">
+  <div class="col-25">
+    <label> Password: </label>
+  </div>
+  <div class="col-75">
+    <input formControlName="password" type="password">
+  </div>
+  </div>
+  <div class="row">
+    <input (submit)="$event" type="submit"/>
+  </div>
+</form>
+</div>

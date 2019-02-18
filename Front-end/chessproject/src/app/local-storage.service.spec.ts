@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import {ChessBoardService} from './chessboard.service';
 
+import { LocalStorageService } from './local-storage.service';
 
-describe('ChessboardService', () => {
+describe('LocalStorageService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ChessBoardService = TestBed.get(ChessBoardService);
+    const service: LocalStorageService = TestBed.get(LocalStorageService);
     expect(service).toBeTruthy();
   });
 });

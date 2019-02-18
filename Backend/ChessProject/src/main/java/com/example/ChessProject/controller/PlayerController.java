@@ -5,13 +5,10 @@ import com.example.ChessProject.Model.Player.Player;
 import com.example.ChessProject.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
-
-import javax.validation.Valid;
-import javax.validation.constraints.Null;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@CrossOrigin("localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class PlayerController {
 
@@ -19,24 +16,54 @@ public class PlayerController {
     private PlayerRepository playerRepository;
 
     @ResponseBody
+    @GetMapping("/getallplayers")
+    public List<Player> listPlayers () {
+        return playerRepository.findAll();
+    }
+    @ResponseBody
+    @PostMapping("/changeplayername")
+    public Player addPlayerName (@RequestBody Player player) {
+        Player play = playerRepository.findByUsername(player.getUsername());
+        play.setPlayerName(player.getPlayerName());
+        playerRepository.save(play);
+
+        System.out.println(play.getUsername() + " " + play.getPlayerName());
+        return play;
+
+
+    }
+    @ResponseBody
+    @PostMapping("/authenticate")
+    public Player authenticatePlayer(@RequestBody Player player) {
+        String playernaam = player.getUsername();
+        String playerwachtwoord = player.getPassword();
+        if (playerRepository.findByUsernameAndPassword(playernaam, playerwachtwoord) != null) {
+            System.out.println(playernaam + " " + playerwachtwoord );
+            return playerRepository.findByUsernameAndPassword(playernaam, playerwachtwoord);
+        } else {
+            return new Player();
+        }
+    }
+
+    @ResponseBody
     @PostMapping("/addplayer")
-    public Player addPlayer(@RequestBody Player player){
+    public Player addPlayer(@RequestBody Player player) {
         return playerRepository.save(player);
     }
 
     @ResponseBody
-    @GetMapping("/checkplayer/{username}/{password}")
-    public Player checkPlayer(@PathVariable ("username") String username, @PathVariable ("password") String password){
-        List<Player> playerList = playerRepository.findAll();
-        int id = 0;
-        for (Player player:playerList){
-            if(player.getPlayerName().equals(username)&&player.getPassword().equals(password)){
-                id = player.getId();
-            }
-        }
+    @PutMapping("/checkplayer/{username}/{password}")
+    public Player checkPlayer(@PathVariable("username") String username,
+                              @PathVariable("password") String password) {
+        Player player = new Player(username, password);
+        if (playerRepository.findByUsername(username) == null) {
+            playerRepository.save(player);
+            return player;
 
-        return playerList.get(id);
+        } else {
+//            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+
+               }
+        return player = new Player();
     }
-
-
 }

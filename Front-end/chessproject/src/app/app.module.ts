@@ -6,19 +6,27 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ChessboardComponent } from './chessboard/chessboard.component';
 import { LoginComponent } from './login/login.component';
+import { UserFormComponent } from './user-form/user-form.component';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {LocalStorageService} from './local-storage.service';
+import {StorageServiceModule} from 'ngx-webstorage-service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChessboardComponent,
-    LoginComponent
+    LoginComponent,
+    UserFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    StorageServiceModule
   ],
-  providers: [],
+  providers: [LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,15 +1,20 @@
 .chessboard {
-  width: 640px;
-  height: 640px;
+  width: 480px;
+  height: 480px;
   margin: 20px;
   border: 25px solid #333;
 }
+.column {
+  float: left;
+  width: 30%;
+  margin: 50px;
+}
 .black {
   float: left;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   background-color: #999;
-  font-size:50px;
+  font-size:35px;
   text-align:center;
   display: table-cell;
   vertical-align:middle;
@@ -18,13 +23,17 @@
 }
 .white {
   float: left;
-  width: 80px;
-  height: 80px;
-  background-color: #fff;
-  font-size:50px;
+  width: 60px;
+  height: 60px;
+  background-color: #999;
+  font-size:40px;
   text-align:center;
   display: table-cell;
   vertical-align:middle;
-
-
+}
+.LoggedIn {
+  text-align: center;
+  background-color: red;
+  color: white;
+  font-size: 40px;
 }

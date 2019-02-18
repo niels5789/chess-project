@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Tile} from '../../Tile';
 import {ChessBoardService} from '../chessboard.service';
 import {$} from 'protractor';
+import {Player} from '../../Player';
+import {LocalStorageService} from '../local-storage.service';
+import {LoginService} from '../login.service';
 
 @Component({
   selector: 'app-chessboard',
@@ -13,12 +16,14 @@ export class ChessboardComponent implements OnInit {
   tilelist: Tile[];
   private oldClickid: number;
   private aanDeBeurt: number = 0;
+  player: Player;
 
-  constructor(private chessBoardService: ChessBoardService) {
+  constructor(private chessBoardService: ChessBoardService, private loginService: LoginService, private storage: LocalStorageService) {
   }
 
   ngOnInit() {
     this.getCurrentPosition();
+    this.player = this.storage.getStoredUser();
   }
 
   getPicture(id: number) {
@@ -60,34 +65,53 @@ export class ChessboardComponent implements OnInit {
 
   onclick(idclick: number) {
 
-    if (this.aanDeBeurt === 0) {
-      idclick--;
-      this.oldClickid = this.tilelist[idclick].id;
-      this.aanDeBeurt++;
-      // document.getElementById('button' + this.oldClickid).innerHTML = this.getPicture(this.oldClickid);
-    } else if (this.aanDeBeurt === 1) {
-      this.aanDeBeurt = 0;
-      this.oldClickid--;
-      --idclick;
-      this.chessBoardService.saveTile(this.oldClickid, idclick).subscribe(
+
+      if (this.aanDeBeurt === 0) {
+        idclick--;
+        this.oldClickid = this.tilelist[idclick].id;
+        this.aanDeBeurt++;
+      } else if (this.aanDeBeurt === 1) {
+        this.aanDeBeurt = 0;
+        this.oldClickid--;
+        --idclick;
+        this.chessBoardService.saveTile(this.oldClickid, idclick).subscribe(
           tilelist => {
             this.tilelist = tilelist;
           },
           err => {
             console.log(err);
           }
-      );
-
-      // document.getElementById('button' + idclick).innerHTML = this.getPicture(this.tilelist[idclick].id);
-      // document.getElementById('button' + this.oldClickid).innerHTML = this.getPicture(this.oldClickid);
+        );
 
 
-
-    }
+      }
   }
 
   getCurrentPosition() {
     this.chessBoardService.findAll().subscribe(
+      tilelist => {
+        this.tilelist = tilelist;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  changePlayerName(playername: string) {
+
+
+    this.loginService.savePlayerName(this.storage.getStoredUser().username, playername).subscribe(
+      result => {
+        this.player = result;
+        this.storage.storeUser(this.player);
+      }
+    );
+
+  }
+
+  resetBoard() {
+    this.chessBoardService.resetBoard().subscribe(
       tilelist => {
         this.tilelist = tilelist;
       },
