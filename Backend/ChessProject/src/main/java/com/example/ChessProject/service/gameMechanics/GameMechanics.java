@@ -37,6 +37,8 @@ public class GameMechanics {
 
     private boolean selfCheck(int idvan, int idnaar, List<Tile> tileList) {
         List<Tile> newList = new ArrayList<>();
+        List<Tile> newOpponentList = new ArrayList<>();
+        int idKing = -1;
 
         for(Tile tile: tileList){
             newList.add(tile.clone());
@@ -51,17 +53,32 @@ public class GameMechanics {
         newList.get(idvan).setName("");
 
 //        get colors
-        int playerColor = tileRepository.getOne(idvan+1).getColor();
+        int playerColor = newList.get(idvan).getColor();
         int opponentColor = playerColor == 1 ? 0 : 1;
 
 //        create list of tiles from opposite color
-        List<Tile> opponentPieceList = tileRepository.findByColorAndNameNot(opponentColor, "");
+//        List<Tile> opponentPieceList = tileRepository.findByColorAndNameNotAndIdNot(opponentColor, "", idnaar);
+
+        for(int i = 0; i < tileList.size(); i++){
+//            make tile list of enemy pieces
+            if(!tileList.get(i).getName().equals("") && tileList.get(i).getColor() == opponentColor){
+                newOpponentList.add(tileList.get(i));
+            }
+
+//            find player king id
+            if(tileList.get(i).getName().equals("King") && tileList.get(i).getColor() == playerColor){
+                idKing = i;
+            }
+        }
+
 
 //        get tile id of king
-        int idKing =(tileRepository.findByColorAndName(playerColor, "King").getId())-1;
+//        int idKing =(tileRepository.findByColorAndName(playerColor, "King").getId())-1;
+
+
 
 //        for all opponents tiles check for legal move to king tile
-        for(Tile tile: opponentPieceList){
+        for(Tile tile: newOpponentList){
 
                 if (isValidMove((tile.getId()-1), idKing, newList)) {
                     System.out.println("Check, player color = " + playerColor + ", opponent color = " + opponentColor + ", player king tile " + (idKing));return true;}

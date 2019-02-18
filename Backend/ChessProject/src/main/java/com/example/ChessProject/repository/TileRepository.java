@@ -15,6 +15,8 @@ public interface TileRepository extends JpaRepository<Tile, Integer> {
 
     List<Tile> findByColorAndNameNot(int color, String name);
 
+    List<Tile> findByColorAndNameNotAndIdNot(int color, String name, int id);
+
     Tile findByColorAndName(int color, String name);
 
 }
