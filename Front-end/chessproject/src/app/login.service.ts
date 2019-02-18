@@ -5,21 +5,19 @@ import {Player} from '../Player';
 import {catchError} from 'rxjs/operators';
 import {Tile} from '../Tile';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class LoginService {
-  private tileURL = 'http://localhost:8080/';
- listplayers: Player[];
+  private tileURL = 'http://localhost:8080';
+ // listplayers: Player[];
 
   constructor(private http: HttpClient) { }
 
-  saveTile(username: string, password: string): Observable<Player[]> {
+  savePlayer(username: string, password: string): Observable<Player[]> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.put<any>(`${this.tileURL}/checkplayer/${username}/${password}`, httpOptions).pipe();
+    return this.http.put<any>(`${this.tileURL}/checkplayer/${username}/${password}`, httpOptions);
 
   }
   private handleError<T>(operation = 'operation', result?: T) {

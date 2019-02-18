@@ -7,8 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ChessboardComponent } from './chessboard/chessboard.component';
 import { LoginComponent } from './login/login.component';
 import { UserFormComponent } from './user-form/user-form.component';
-import {Form, FormGroup} from '@angular/forms';
-
+import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,8 @@ import {Form, FormGroup} from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

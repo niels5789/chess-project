@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@CrossOrigin("localhost:4200")
+@CrossOrigin("http://localhost:4200")
 @RestController
 public class PlayerController {
 
@@ -21,6 +21,9 @@ public class PlayerController {
         return playerRepository.findAll();
     }
 
+//    @ResponseBody
+//    @GetMapping("/m")
+
     @ResponseBody
     @PostMapping("/addplayer")
     public Player addPlayer(@RequestBody Player player) {
@@ -28,16 +31,16 @@ public class PlayerController {
     }
 
     @ResponseBody
-    @GetMapping("/checkplayer/{username}/{password}")
+    @PutMapping("/checkplayer/{username}/{password}")
     public Player checkPlayer(@PathVariable("username") String username,
-                              @PathVariable("password") String password,
-                              HttpServletResponse response) {
+                              @PathVariable("password") String password) {
         Player player = new Player(username, password);
         if (playerRepository.findByUsername(username) == null) {
             playerRepository.save(player);
+            return player;
 
         } else {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+//            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 
                }
         return player = new Player();
