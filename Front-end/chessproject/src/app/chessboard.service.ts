@@ -17,6 +17,9 @@ export class ChessBoardService {
       catchError(this.handleError<Tile>(`findAll`))
     );
   }
+  resetBoard(): Observable<Tile[]> {
+    return this.http.get<any>(`${this.tileURL}/resetboard`);
+  }
 
   saveTile(id1: number, id2: number): Observable<Tile[]> {
     const httpOptions = {
