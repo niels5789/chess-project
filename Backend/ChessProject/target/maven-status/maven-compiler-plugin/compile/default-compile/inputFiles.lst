@@ -1,6 +1,7 @@
 C:\Users\niels\projects\diepindeshit\Backend\ChessProject\src\main\java\com\example\ChessProject\repository\GameRepository.java
 C:\Users\niels\projects\diepindeshit\Backend\ChessProject\src\main\java\com\example\ChessProject\controller\PlayerController.java
 C:\Users\niels\projects\diepindeshit\Backend\ChessProject\src\main\java\com\example\ChessProject\Model\Tile\Tile.java
+C:\Users\niels\projects\diepindeshit\Backend\ChessProject\src\main\java\com\example\ChessProject\service\gameMechanics\GameMechanics.java
 C:\Users\niels\projects\diepindeshit\Backend\ChessProject\src\main\java\com\example\ChessProject\controller\BoardController.java
 C:\Users\niels\projects\diepindeshit\Backend\ChessProject\src\main\java\com\example\ChessProject\Model\Board\Board.java
 C:\Users\niels\projects\diepindeshit\Backend\ChessProject\src\main\java\com\example\ChessProject\repository\PlayerRepository.java

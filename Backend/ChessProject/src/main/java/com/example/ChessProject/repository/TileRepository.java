@@ -13,8 +13,8 @@ import java.util.List;
 @Repository
 public interface TileRepository extends JpaRepository<Tile, Integer> {
 
+    List<Tile> findByColorAndNameNot(int color, String name);
 
-    List<Tile> findByColorAndNameNot(Integer color, String name);
-
+    Tile findByColorAndName(int color, String name);
 
 }
