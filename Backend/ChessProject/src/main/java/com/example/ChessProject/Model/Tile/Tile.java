@@ -101,4 +101,8 @@ public class Tile {
 
         return list;
     }
+
+    public Tile clone(){
+        return new Tile(this.id, this.name, this.color, this.xCo, this.yCo);
+    }
 }
