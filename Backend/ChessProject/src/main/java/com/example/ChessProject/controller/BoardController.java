@@ -361,7 +361,7 @@ public class BoardController {
     }
 
     @ResponseBody
-    @GetMapping("/resetBoard")
+    @GetMapping("/resetboard")
     public List<Tile> resetBoard() {
         Tile p = new Tile();
         List<Tile> tileList = p.startList();

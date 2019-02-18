@@ -1,28 +1,19 @@
-<!--<table>-->
-  <!--<tr>-->
-    <!--<th>-->
-      <!--<div> Gebruikernaam:  </div>-->
-    <!--</th>-->
-    <!--<div>-->
-      <!--<input id="username" type="text" name="tekstvak" value="" />-->
-    <!--</div>-->
-  <!--</tr>-->
+<div class="singinbox" [hidden]="loggedInCorrect || loggedInIncorrect">
+  <form class="form-signin" style="" xmlns="http://www.w3.org/1999/html">
+    <br>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="text" id="inputEmail" class="form-control" placeholder="Gebruikersnaam" required autofocus #username>
 
-  <!--<tr>-->
-    <!--<th>-->
-      <!--<div> Wachtwoord:  </div>-->
-    <!--</th>-->
-    <!--<div>-->
-      <!--<input id="password" type="text" name="tekstvak" value="" />-->
-    <!--</div>-->
-     <!--<th>-->
-        <!--<button id="inlogbutton" (click)="$event">Login</button>-->
-     <!--</th>-->
-  <!--</tr>-->
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="text" id="inputPassword" class="form-control" placeholder="Wachtwoord" required #password>
 
-
-<!--</table>-->
-
-
-
-
+    <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="validateUser(username.value, password.value)">Login bij  </button>
+    <button class="btn btn-lg btn-primary btn-block" routerLink="aanmelden" type="submit">Registeren</button>
+  </form>
+</div>
+<div [hidden]="!loggedInCorrect">
+  <button class="btn btn-lg btn-primary btn-block" type="submit" routerLink="chessboard"> Continue </button>
+</div>
+<div [hidden]="!loggedInIncorrect">
+  <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="resetFlags()"> Incorrect login go back </button>
+</div>
