@@ -60,30 +60,26 @@ export class ChessboardComponent implements OnInit {
 
   onclick(idclick: number) {
 
-    if (this.aanDeBeurt === 0) {
-      idclick--;
-      this.oldClickid = this.tilelist[idclick].id;
-      this.aanDeBeurt++;
-      // document.getElementById('button' + this.oldClickid).innerHTML = this.getPicture(this.oldClickid);
-    } else if (this.aanDeBeurt === 1) {
-      this.aanDeBeurt = 0;
-      this.oldClickid--;
-      --idclick;
-      this.chessBoardService.saveTile(this.oldClickid, idclick).subscribe(
+
+      if (this.aanDeBeurt === 0) {
+        idclick--;
+        this.oldClickid = this.tilelist[idclick].id;
+        this.aanDeBeurt++;
+      } else if (this.aanDeBeurt === 1) {
+        this.aanDeBeurt = 0;
+        this.oldClickid--;
+        --idclick;
+        this.chessBoardService.saveTile(this.oldClickid, idclick).subscribe(
           tilelist => {
             this.tilelist = tilelist;
           },
           err => {
             console.log(err);
           }
-      );
-
-      // document.getElementById('button' + idclick).innerHTML = this.getPicture(this.tilelist[idclick].id);
-      // document.getElementById('button' + this.oldClickid).innerHTML = this.getPicture(this.oldClickid);
+        );
 
 
-
-    }
+      }
   }
 
   getCurrentPosition() {
