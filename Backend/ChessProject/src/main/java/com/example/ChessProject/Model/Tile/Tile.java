@@ -1,4 +1,6 @@
 package com.example.ChessProject.Model.Tile;
+import com.example.ChessProject.Model.Game.Game;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -13,8 +15,6 @@ public class Tile {
     private int color;
     private int xCo;
     private int yCo;
-
-
 
     public Tile(){}
 

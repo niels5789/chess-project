@@ -1,7 +1,6 @@
 package com.example.ChessProject.controller;
 
 import com.example.ChessProject.Model.Tile.Tile;
-import com.example.ChessProject.repository.BoardRepository;
 import com.example.ChessProject.repository.TileRepository;
 import com.example.ChessProject.service.gameMechanics.GameMechanics;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,6 @@ public class BoardController {
 
     @Autowired
     GameMechanics gm;
-    @Autowired
-    BoardRepository boardRepository;
     @Autowired
     TileRepository tileRepository;
 

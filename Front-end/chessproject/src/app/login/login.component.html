@@ -2,10 +2,10 @@
   <form class="form-signin" style="" xmlns="http://www.w3.org/1999/html">
     <br>
     <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="text" id="inputEmail" class="form-control" placeholder="Gebruikersnaam" required autofocus #username>
+    <input type="email" id="inputEmail" class="form-control" placeholder="Gebruikersnaam" required autofocus #username>
 
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="text" id="inputPassword" class="form-control" placeholder="Wachtwoord" required #password>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Wachtwoord" required #password>
 
     <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="validateUser(username.value, password.value)">Login bij  </button>
     <button class="btn btn-lg btn-primary btn-block" routerLink="aanmelden" type="submit">Registeren</button>
