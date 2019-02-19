@@ -17,12 +17,11 @@ public class GameController {
     GameRepository gameRepository;
     @Autowired
     PlayerRepository playerRepository;
-    @ResponseBody
-    @PutMapping("/newGame")
-    public List<Tile> newGame(@RequestBody Player player) {
-
-        List<>
-
-    }
+//    @ResponseBody
+//    @PutMapping("/newGame")
+//    public List<Tile> newGame(@RequestBody Player player) {
+//        return new Lis
+//
+//    }
 
 }

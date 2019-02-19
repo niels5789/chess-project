@@ -83,7 +83,7 @@ public class Tile {
         for (int row = 3; row < 7 ; row++){
             for(int col = 1; col < 9; col++){
 
-                list.add(new Tile(t++, "", 0, col, row));
+                list.add(new Tile(t++, "", 3, col, row));
             }
         }
 
@@ -100,5 +100,9 @@ public class Tile {
         list.add(new Tile(64, "Rook", 1,8,8));
 
         return list;
+    }
+
+    public Tile clone(){
+        return new Tile(this.id, this.name, this.color, this.xCo, this.yCo);
     }
 }

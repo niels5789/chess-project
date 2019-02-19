@@ -17,10 +17,23 @@
     <button  [id]="'button' + tile.id" (click)="onclick(tile.id)"
              *ngFor="let tile of tilelist" [innerHTML]="getPicture(tile.id)" class="black"></button>
   </div>
+
   <div class="button">
     <button (click)="resetBoard()">ResetBoard</button>
   </div>
+
+<div>
+  <div>
+    <select id="promotion" name="promotion" #promotion>
+    <option value="Queen">Queen</option>
+    <option value="Bischop">Bischop</option>
+    <option value="Rook">Rook</option>
+    <option value="Knight">Knight</option>
+    </select>
+    <button (click)="getPromotion(promotion.value)">getPromotion</button>
+  </div>
 </div>
+
 
 
 

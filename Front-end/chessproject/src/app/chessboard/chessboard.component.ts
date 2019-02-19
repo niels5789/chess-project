@@ -122,6 +122,17 @@ export class ChessboardComponent implements OnInit {
       }
     );
   }
+
+  getPromotion(promotion: string) {
+    this.chessBoardService.piecePromotion(promotion).subscribe(
+      tilelist => {
+        this.tilelist = tilelist;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
 }
 
 

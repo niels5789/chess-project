@@ -4,7 +4,6 @@ import {Observable, of} from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import {Tile} from '../Tile';
 
-
 @Injectable()
 export class ChessBoardService {
   private tileURL = 'http://localhost:8080/';
@@ -26,6 +25,13 @@ export class ChessBoardService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json'})
     };
     return this.http.put<any>(`${this.tileURL}/board/${id1}/${id2}`, httpOptions);
+  }
+
+  piecePromotion(promotion: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+    };
+    return this.http.get<any>(`${this.tileURL}promotion/${promotion}`, httpOptions);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
