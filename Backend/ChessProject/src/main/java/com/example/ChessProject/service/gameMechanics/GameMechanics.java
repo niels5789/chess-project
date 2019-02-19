@@ -45,8 +45,6 @@ public class GameMechanics {
             newList.add(tile.clone());
         }
 
-
-        System.out.println("Old board position");
 //        get colors
         int playerColor = newList.get(idvan).getColor();
         int opponentColor = playerColor == 1 ? 0 : 1;
@@ -54,12 +52,10 @@ public class GameMechanics {
         for(int i = 0; i < newList.size(); i++) {
             if (newList.get(i).getName().equals("King") && newList.get(i).getColor() == playerColor) {
                 idKing = i;
-                System.out.println("king id = " + i);
                 break;
             }
         }
 
-        System.out.println("Making move");
 //        make move
         String tempName = newList.get(idvan).getName();
         int tempColor = newList.get(idvan).getColor();
@@ -81,24 +77,12 @@ public class GameMechanics {
                 newOpponentList.add(newList.get(i));
             }
         }
-        System.out.println("New board position");
 
         for(int i = 0; i < newList.size(); i++) {
-
-            if(i == 0)System.out.println("In de for loop");
-            System.out.println("naam: " + newList.get(i).getName());
-            System.out.println("color: " + newList.get(i).getColor());
-            System.out.println("id: " + newList.get(i).getId());
-            System.out.println(newList.get(i).getName().equals("King"));
-            System.out.println(tileList.get(i).getColor() == playerColor);
 
 //            find player king id
             if(newList.get(i).getName().equals("King") && newList.get(i).getColor() == playerColor){
                 idKing = i;
-
-                System.out.println("Hij komt in de if statement");
-
-                System.out.println("king id = " + i);
                 break;
             }
         }
@@ -109,7 +93,7 @@ public class GameMechanics {
 //        for all opponents tiles check for legal move to king tile
         for(Tile tile: newOpponentList){
                 if (isValidMove((tile.getId()-1), idKing, newList)) {
-                    System.out.println("Check, player color = " + playerColor + ", opponent color = " + opponentColor + ", player king tile " + (idKing) + ", check by piece on tile: " + tile.getId());return true;}
+                   return true;}
         }
 
         return false;
@@ -142,8 +126,6 @@ public class GameMechanics {
 
             String Piece = tileList.get(idvan).getName();
 
-//            System.out.println("tilelist id = " + idvan + ", idnaar : " + idnaar);
-//            System.out.println("Moving " + tileList.get(idvan).getName());
 
             switch (Piece) {
                 case "Pawn":
