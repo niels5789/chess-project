@@ -14,7 +14,7 @@ public class GameMechanics {
     @Autowired
     TileRepository tileRepository;
 
-    int x1 , y1, x2, y2;
+    int x1, y1, x2, y2;
     boolean validMove = false;
 
     public GameMechanics() {
@@ -93,7 +93,7 @@ public class GameMechanics {
             System.out.println(tileList.get(i).getColor() == playerColor);
 
 //            find player king id
-            if(newList.get(i).getName().equals("King") && tileList.get(i).getColor() == playerColor){
+            if(newList.get(i).getName().equals("King") && newList.get(i).getColor() == playerColor){
                 idKing = i;
 
                 System.out.println("Hij komt in de if statement");
