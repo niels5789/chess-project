@@ -28,7 +28,6 @@ public class BoardController {
     @ResponseBody
     @PutMapping("/board/{idvan}/{idnaar}")
     public List<Tile> changeBoard(@PathVariable(value = "idvan") int idvan, @PathVariable(value = "idnaar") int idnaar) {
-        System.out.println(idvan + " en " + idnaar);
         return gm.makeMoveIfLegal(idvan, idnaar);
     }
 
