@@ -5,6 +5,7 @@ import {$} from 'protractor';
 import {Player} from '../../Player';
 import {LocalStorageService} from '../local-storage.service';
 import {LoginService} from '../login.service';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-chessboard',
@@ -24,6 +25,7 @@ export class ChessboardComponent implements OnInit {
   ngOnInit() {
     this.getCurrentPosition();
     this.player = this.storage.getStoredUser();
+
   }
 
   getPicture(id: number) {
@@ -112,6 +114,17 @@ export class ChessboardComponent implements OnInit {
 
   resetBoard() {
     this.chessBoardService.resetBoard().subscribe(
+      tilelist => {
+        this.tilelist = tilelist;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  getPromotion(promotion: string) {
+    this.chessBoardService.piecePromotion(promotion).subscribe(
       tilelist => {
         this.tilelist = tilelist;
       },

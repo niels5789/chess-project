@@ -17,7 +17,7 @@ export class UserFormComponent implements OnInit {
   }
 
   public userForm = this.fb.group({
-    username: ['', ],
+    username: ['', Validators.email],
     password: ['', ]
   });
 

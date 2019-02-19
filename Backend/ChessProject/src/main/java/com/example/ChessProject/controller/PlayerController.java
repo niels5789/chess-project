@@ -38,7 +38,7 @@ public class PlayerController {
         String playernaam = player.getUsername();
         String playerwachtwoord = player.getPassword();
         if (playerRepository.findByUsernameAndPassword(playernaam, playerwachtwoord) != null) {
-            System.out.println(playernaam + " " + playerwachtwoord );
+            System.out.println(playernaam + " is inglogd met het volgende wachtwoord " + playerwachtwoord );
             return playerRepository.findByUsernameAndPassword(playernaam, playerwachtwoord);
         } else {
             return new Player();
