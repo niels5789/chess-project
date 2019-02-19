@@ -10,4 +10,5 @@ com\example\ChessProject\controller\PlayerController.class
 com\example\ChessProject\Model\Player\Player.class
 com\example\ChessProject\repository\PlayerRepository.class
 com\example\ChessProject\controller\BoardController.class
+com\example\ChessProject\Model\Game\Game.class
 com\example\ChessProject\repository\GameRepository.class
