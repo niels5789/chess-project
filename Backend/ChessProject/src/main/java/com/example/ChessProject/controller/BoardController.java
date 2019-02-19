@@ -41,4 +41,10 @@ public class BoardController {
         }
         return tileRepository.findAll();
     }
+
+    @ResponseBody
+    @GetMapping("/promotion/{piece}")
+    public List<Tile> promote(@PathVariable(value = "piece") String piece){
+        return gm.promotePawn(piece);
+    }
 }

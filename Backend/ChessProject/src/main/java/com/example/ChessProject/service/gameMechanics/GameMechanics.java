@@ -426,4 +426,24 @@ public class GameMechanics {
     private int getY(int id, List<Tile> list) {
         return list.get(id).getyCo();
     }
+
+    public List<Tile> promotePawn(String piece) {
+        List<Tile> promoteList = tileRepository.findAll();
+
+        for( int i = 0; i < 8; i++){
+            if(promoteList.get(i).getName().equals("Pawn")){
+                promoteList.get(i).setName(piece);
+                tileRepository.save(promoteList.get(i));
+            }
+        }
+
+        for( int i = 56; i < 64; i++){
+            if(promoteList.get(i).getName().equals("Pawn")){
+                promoteList.get(i).setName(piece);
+                tileRepository.save(promoteList.get(i));
+            }
+        }
+
+        return tileRepository.findAll();
+    }
 }
