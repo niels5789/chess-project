@@ -1,7 +1,6 @@
 package com.example.ChessProject.controller;
 
 import com.example.ChessProject.Model.Tile.Tile;
-import com.example.ChessProject.repository.BoardRepository;
 import com.example.ChessProject.repository.TileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +10,6 @@ import java.util.List;
 @RestController
 public class BoardController {
 
-    @Autowired
-    BoardRepository boardRepository;
     @Autowired
     TileRepository tileRepository;
 

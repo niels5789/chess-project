@@ -1,9 +1,14 @@
 package com.example.ChessProject.Model.Player;
 
+import com.example.ChessProject.Model.Game.Game;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Player {
@@ -18,6 +23,9 @@ public class Player {
     String password;
 
     String playerName;
+
+    @ManyToMany
+    private List<Game> games = new ArrayList<>();
 
     public Player() {
     }
@@ -59,5 +67,13 @@ public class Player {
 
     public String getPlayerName() {
         return playerName;
+    }
+
+    public List<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Game> games) {
+        this.games = games;
     }
 }

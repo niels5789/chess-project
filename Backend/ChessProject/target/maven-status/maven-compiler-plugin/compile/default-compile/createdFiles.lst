@@ -1,13 +1,2 @@
-com\example\ChessProject\ChessProjectApplication.class
-com\example\ChessProject\repository\TileRepository.class
-com\example\ChessProject\Model\Tile\Tile.class
-com\example\ChessProject\exception\ResourceNotFoundException.class
-com\example\ChessProject\controller\GameController.class
-com\example\ChessProject\controller\PlayerController.class
-com\example\ChessProject\Model\Game.class
-com\example\ChessProject\Model\Player\Player.class
-com\example\ChessProject\repository\PlayerRepository.class
-com\example\ChessProject\controller\BoardController.class
-com\example\ChessProject\Model\Board\Board.class
-com\example\ChessProject\repository\GameRepository.class
-com\example\ChessProject\repository\BoardRepository.class
+com\example\ChessProject\Model\Game\Game_History.class
+com\example\ChessProject\repository\GameHistoryRepository.class

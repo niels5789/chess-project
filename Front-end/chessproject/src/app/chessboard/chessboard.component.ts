@@ -5,6 +5,7 @@ import {$} from 'protractor';
 import {Player} from '../../Player';
 import {LocalStorageService} from '../local-storage.service';
 import {LoginService} from '../login.service';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-chessboard',
@@ -24,6 +25,7 @@ export class ChessboardComponent implements OnInit {
   ngOnInit() {
     this.getCurrentPosition();
     this.player = this.storage.getStoredUser();
+
   }
 
   getPicture(id: number) {
