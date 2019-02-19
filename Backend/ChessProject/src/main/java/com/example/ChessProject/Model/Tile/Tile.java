@@ -83,7 +83,7 @@ public class Tile {
         for (int row = 3; row < 7 ; row++){
             for(int col = 1; col < 9; col++){
 
-                list.add(new Tile(t++, "", 0, col, row));
+                list.add(new Tile(t++, "", 3, col, row));
             }
         }
 

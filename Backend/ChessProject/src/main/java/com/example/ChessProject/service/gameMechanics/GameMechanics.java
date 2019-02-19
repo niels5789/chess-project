@@ -14,7 +14,7 @@ public class GameMechanics {
     @Autowired
     TileRepository tileRepository;
 
-    int x1 , y1, x2, y2;
+    int x1, y1, x2, y2;
     boolean validMove = false;
 
     public GameMechanics() {
@@ -40,10 +40,27 @@ public class GameMechanics {
         List<Tile> newOpponentList = new ArrayList<>();
         int idKing = -1;
 
+//        create clone list
         for(Tile tile: tileList){
             newList.add(tile.clone());
         }
 
+
+        System.out.println("Old board position");
+//        get colors
+        int playerColor = newList.get(idvan).getColor();
+        int opponentColor = playerColor == 1 ? 0 : 1;
+
+        for(int i = 0; i < newList.size(); i++) {
+            if (newList.get(i).getName().equals("King") && newList.get(i).getColor() == playerColor) {
+                idKing = i;
+                System.out.println("king id = " + i);
+                break;
+            }
+        }
+
+        System.out.println("Making move");
+//        make move
         String tempName = newList.get(idvan).getName();
         int tempColor = newList.get(idvan).getColor();
 
@@ -52,36 +69,47 @@ public class GameMechanics {
 
         newList.get(idvan).setName("");
 
-//        get colors
-        int playerColor = newList.get(idvan).getColor();
-        int opponentColor = playerColor == 1 ? 0 : 1;
 
 //        create list of tiles from opposite color
 //        List<Tile> opponentPieceList = tileRepository.findByColorAndNameNotAndIdNot(opponentColor, "", idnaar);
 
-        for(int i = 0; i < tileList.size(); i++){
-//            make tile list of enemy pieces
-            if(!tileList.get(i).getName().equals("") && tileList.get(i).getColor() == opponentColor){
-                newOpponentList.add(tileList.get(i));
-            }
 
-//            find player king id
-            if(tileList.get(i).getName().equals("King") && tileList.get(i).getColor() == playerColor){
-                idKing = i;
+
+        for(int i = 0; i < newList.size(); i++) {
+//            make tile list of enemy pieces
+            if (!newList.get(i).getName().equals("") && newList.get(i).getColor() == opponentColor) {
+                newOpponentList.add(newList.get(i));
             }
         }
+        System.out.println("New board position");
 
+        for(int i = 0; i < newList.size(); i++) {
+
+            if(i == 0)System.out.println("In de for loop");
+            System.out.println("naam: " + newList.get(i).getName());
+            System.out.println("color: " + newList.get(i).getColor());
+            System.out.println("id: " + newList.get(i).getId());
+            System.out.println(newList.get(i).getName().equals("King"));
+            System.out.println(tileList.get(i).getColor() == playerColor);
+
+//            find player king id
+            if(newList.get(i).getName().equals("King") && newList.get(i).getColor() == playerColor){
+                idKing = i;
+
+                System.out.println("Hij komt in de if statement");
+
+                System.out.println("king id = " + i);
+                break;
+            }
+        }
 
 //        get tile id of king
 //        int idKing =(tileRepository.findByColorAndName(playerColor, "King").getId())-1;
 
-
-
 //        for all opponents tiles check for legal move to king tile
         for(Tile tile: newOpponentList){
-
                 if (isValidMove((tile.getId()-1), idKing, newList)) {
-                    System.out.println("Check, player color = " + playerColor + ", opponent color = " + opponentColor + ", player king tile " + (idKing));return true;}
+                    System.out.println("Check, player color = " + playerColor + ", opponent color = " + opponentColor + ", player king tile " + (idKing) + ", check by piece on tile: " + tile.getId());return true;}
         }
 
         return false;
@@ -114,8 +142,8 @@ public class GameMechanics {
 
             String Piece = tileList.get(idvan).getName();
 
-            System.out.println("tilelist id = " + idvan + ", idnaar : " + idnaar);
-            System.out.println("Moving " + tileList.get(idvan).getName());
+//            System.out.println("tilelist id = " + idvan + ", idnaar : " + idnaar);
+//            System.out.println("Moving " + tileList.get(idvan).getName());
 
             switch (Piece) {
                 case "Pawn":
