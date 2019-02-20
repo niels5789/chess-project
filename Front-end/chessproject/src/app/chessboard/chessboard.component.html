@@ -14,9 +14,13 @@
 </div>
 <div class="column">
   <div class="chessboard">
-    <button  [id]="'button' + tile.id" (click)="onclick(tile.id)"
-             *ngFor="let tile of tilelist" [innerHTML]="getPicture(tile.id)" class="black"></button>
+    <button [id]="'button' + tile.id" (click)="onclick(tile.id)"
+            *ngFor="let tile of tilelist" [innerHTML]="getPicture(tile.id)" ngClass="{{colorPicker()}}">
+    </button>
   </div>
+</div>
+
+  <div [innerHTML]="errorMessage" class="alert alert-warning" role="alert"></div>
 
   <div class="button">
     <button (click)="resetBoard()">ResetBoard</button>
@@ -26,18 +30,10 @@
   <div>
     <select id="promotion" name="promotion" #promotion>
     <option value="Queen">Queen</option>
-    <option value="Bischop">Bischop</option>
+    <option value="Bishop">Bishop</option>
     <option value="Rook">Rook</option>
     <option value="Knight">Knight</option>
     </select>
     <button (click)="getPromotion(promotion.value)">getPromotion</button>
   </div>
 </div>
-
-
-
-
-  <!--<div  class="chessboard">-->
-    <!--<button  id="button1"(click)="onclick(1)"  [innerHTML]="getPicture(1)" class="black"></button>-->
-    <!--<button  id="button2" (click)="onclick(2)"  [innerHTML]="getPicture(2)" class="black"></button>-->
-  <!--</div>-->

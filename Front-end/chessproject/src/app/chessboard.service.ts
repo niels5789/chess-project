@@ -24,7 +24,9 @@ export class ChessBoardService {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json'})
     };
-    return this.http.put<any>(`${this.tileURL}/board/${id1}/${id2}`, httpOptions);
+    return this.http.put<any>(`${this.tileURL}/board/${id1}/${id2}`, httpOptions)/*.pipe(
+      catchError(this.handleError<Tile>(`saveTile`))/!*
+    )*!/*/;
   }
 
   piecePromotion(promotion: string) {
