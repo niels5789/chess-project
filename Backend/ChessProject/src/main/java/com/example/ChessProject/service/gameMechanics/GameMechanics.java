@@ -1,6 +1,7 @@
 package com.example.ChessProject.service.gameMechanics;
 
 import com.example.ChessProject.Model.Tile.Tile;
+import com.example.ChessProject.controller.BoardController;
 import com.example.ChessProject.repository.TileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,15 @@ public class GameMechanics {
 
     int x1, y1, x2, y2;
     boolean validMove = false;
+    private int turnCounter = 1;
+
+    public int getTurnCounter() {
+        return turnCounter;
+    }
+
+    public void setTurnCounter(int turnCounter) {
+        this.turnCounter = turnCounter;
+    }
 
     public GameMechanics() {
     }
@@ -108,6 +118,9 @@ public class GameMechanics {
         tileList.get(idnaar).setColor(tempColor);
 
         tileList.get(idvan).setName("");
+        tileList.get(idvan).setColor(3);
+
+        turnCounter++;
 
         for (Tile tile: tileList){tileRepository.save(tile);}
     }

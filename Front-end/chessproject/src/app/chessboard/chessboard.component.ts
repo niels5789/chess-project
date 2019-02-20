@@ -20,7 +20,7 @@ export class ChessboardComponent implements OnInit {
   player: Player;
   errorMessage = '';
   private color = 'white';
-  private counter = 0;
+  private tileCounter = 0;
 
 
   constructor(private chessBoardService: ChessBoardService, private loginService: LoginService, private storage: LocalStorageService) {
@@ -70,6 +70,7 @@ export class ChessboardComponent implements OnInit {
   }
 
   onclick(thisClick: number) {
+    this.errorMessage = '';
     if (this.firstClick === -11) {
       this.firstClick = thisClick - 1;
     } else if (this.secondClick === -22 ) {
@@ -82,14 +83,16 @@ export class ChessboardComponent implements OnInit {
               tilelist => {
                 this.tilelist = tilelist;
                 this.errorMessage = '';
+                this.firstClick = -11;
+                this.secondClick = -22;
               },
               err => {
+                this.firstClick = -11;
+                this.secondClick = -22;
                 this.errorMessage = 'Invalid move';
                 console.log(err);
               }
         );
-        this.firstClick = -11;
-        this.secondClick = -22;
       }
     }
   }
@@ -142,14 +145,14 @@ export class ChessboardComponent implements OnInit {
 
   colorPicker() {
 
-    if (this.counter % 8 !== 0) {
+    if (this.tileCounter % 8 !== 0) {
       if (this.color === 'white') {
         this.color = 'black';
       } else {
         this.color = 'white';
       }
     }
-    this.counter++;
+    this.tileCounter++;
 
     return this.color;
   }

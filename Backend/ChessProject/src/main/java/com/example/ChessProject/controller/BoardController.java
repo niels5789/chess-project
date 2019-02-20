@@ -12,12 +12,13 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class BoardController {
-    int turnCounter = 1;
+//    public static int turnCounter = 1;
 
     @Autowired
     GameMechanics gm;
     @Autowired
     TileRepository tileRepository;
+
 
     @ResponseBody
     @GetMapping("/boards")
@@ -30,9 +31,9 @@ public class BoardController {
     public ResponseEntity<List<Tile>> changeBoard(@PathVariable(value = "idvan") int idvan, @PathVariable(value = "idnaar") int idnaar) throws Exception {
         List<Tile> tempList = tileRepository.findAll();
 
-        if( !tempList.get(idvan).getName().equals("") && tempList.get(idvan).getColor() != turnCounter % 2) {
+        if( !tempList.get(idvan).getName().equals("") && tempList.get(idvan).getColor() != gm.getTurnCounter() % 2 && tempList.get(idvan).getColor() != tempList.get(idnaar).getColor() && idvan != idnaar){
             tempList = gm.makeMoveIfLegal(idvan, idnaar);
-            turnCounter++;
+
         } else {
             return ResponseEntity.badRequest().build();
         }
@@ -43,7 +44,7 @@ public class BoardController {
     @ResponseBody
     @GetMapping("/resetboard")
     public List<Tile> resetBoard() {
-        turnCounter = 1;
+        gm.setTurnCounter(1);
         Tile p = new Tile();
         List<Tile> tileList = p.startList();
         for (Tile tile : tileList) {
