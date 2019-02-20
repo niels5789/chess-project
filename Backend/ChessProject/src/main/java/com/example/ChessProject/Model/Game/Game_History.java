@@ -14,13 +14,9 @@ public class Game_History {
     int whichMove;
     String boardPosition;
 
-    @ManyToOne
-    private Game game;
-
     public Game_History(int id, int whichMove, Game game) {
         this.id = id;
         this.whichMove = whichMove;
-        this.game = game;
     }
 
     public int getId() {
@@ -35,11 +31,4 @@ public class Game_History {
         this.whichMove = whichMove;
     }
 
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
 }

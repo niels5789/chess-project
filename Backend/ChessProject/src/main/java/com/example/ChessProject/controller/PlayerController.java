@@ -4,6 +4,7 @@ package com.example.ChessProject.controller;
 import com.example.ChessProject.Model.Player.Player;
 import com.example.ChessProject.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -26,11 +27,8 @@ public class PlayerController {
         Player play = playerRepository.findByUsername(player.getUsername());
         play.setPlayerName(player.getPlayerName());
         playerRepository.save(play);
-
         System.out.println(play.getUsername() + " " + play.getPlayerName());
         return play;
-
-
     }
     @ResponseBody
     @PostMapping("/authenticate")
@@ -44,6 +42,12 @@ public class PlayerController {
             return new Player();
         }
     }
+    @ResponseBody
+    @GetMapping("/getplayer/{username}")
+    public Player getPlayer (@RequestBody @Param("username") String username) {
+        return playerRepository.findByUsername(username);
+    }
+
 
     @ResponseBody
     @PostMapping("/addplayer")
