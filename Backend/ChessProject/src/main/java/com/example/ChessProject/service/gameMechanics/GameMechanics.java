@@ -38,7 +38,7 @@ public class GameMechanics {
     private boolean selfCheck(int idvan, int idnaar, List<Tile> tileList) {
         List<Tile> newList = new ArrayList<>();
         List<Tile> newOpponentList = new ArrayList<>();
-        int idKing = -1;
+        int idKing = -11;
 
 //        create clone list
         for(Tile tile: tileList){
