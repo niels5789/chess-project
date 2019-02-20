@@ -22,6 +22,12 @@ public class Tile {
         this.id = id;
     }
 
+    public Tile(int id, String name, int color) {
+        this.id = id;
+        this.name = name;
+        this.color = color;
+    }
+
     public Tile(int id, String name, int color, int xCo, int yCo) {
         this.id = id;
         this.name = name;

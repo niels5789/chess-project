@@ -6,6 +6,8 @@ import {Player} from '../../Player';
 import {LocalStorageService} from '../local-storage.service';
 import {LoginService} from '../login.service';
 import {RouterLink} from '@angular/router';
+import {Message} from '@angular/compiler/src/i18n/i18n_ast';
+import {MessageBundle} from '@angular/compiler';
 
 @Component({
   selector: 'app-chessboard',
