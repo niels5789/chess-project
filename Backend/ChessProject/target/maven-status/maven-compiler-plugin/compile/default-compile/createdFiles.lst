@@ -1,8 +1,10 @@
+com\example\ChessProject\Model\Player\PlayerGame.class
 com\example\ChessProject\Model\Player\PlayerGameID.class
 com\example\ChessProject\ChessProjectApplication.class
 com\example\ChessProject\Model\Game\Game_History.class
 com\example\ChessProject\repository\TileRepository.class
 com\example\ChessProject\repository\GameHistoryRepository.class
+com\example\ChessProject\repository\PlayergameRepository.class
 com\example\ChessProject\Model\Tile\Tile.class
 com\example\ChessProject\exception\ResourceNotFoundException.class
 com\example\ChessProject\Model\Player\PlayerGamePK$EmployerDeliveryAgentPK.class

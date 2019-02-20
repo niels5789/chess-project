@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.example.ChessProject.ChessProjectApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.337 s - in com.example.ChessProject.ChessProjectApplicationTests

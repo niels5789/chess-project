@@ -1,6 +1,7 @@
 package com.example.ChessProject.service.gameMechanics;
 
 import com.example.ChessProject.Model.Tile.Tile;
+import com.example.ChessProject.controller.BoardController;
 import com.example.ChessProject.repository.TileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,15 @@ public class GameMechanics {
 
     int x1, y1, x2, y2;
     boolean validMove = false;
+    private int turnCounter = 1;
+
+    public int getTurnCounter() {
+        return turnCounter;
+    }
+
+    public void setTurnCounter(int turnCounter) {
+        this.turnCounter = turnCounter;
+    }
 
     public GameMechanics() {
     }
@@ -38,7 +48,7 @@ public class GameMechanics {
     private boolean selfCheck(int idvan, int idnaar, List<Tile> tileList) {
         List<Tile> newList = new ArrayList<>();
         List<Tile> newOpponentList = new ArrayList<>();
-        int idKing = -1;
+        int idKing = -11;
 
 //        create clone list
         for(Tile tile: tileList){
@@ -108,6 +118,9 @@ public class GameMechanics {
         tileList.get(idnaar).setColor(tempColor);
 
         tileList.get(idvan).setName("");
+        tileList.get(idvan).setColor(3);
+
+        turnCounter++;
 
         for (Tile tile: tileList){tileRepository.save(tile);}
     }
@@ -425,5 +438,25 @@ public class GameMechanics {
 
     private int getY(int id, List<Tile> list) {
         return list.get(id).getyCo();
+    }
+
+    public List<Tile> promotePawn(String piece) {
+        List<Tile> promoteList = tileRepository.findAll();
+
+        for( int i = 0; i < 8; i++){
+            if(promoteList.get(i).getName().equals("Pawn")){
+                promoteList.get(i).setName(piece);
+                tileRepository.save(promoteList.get(i));
+            }
+        }
+
+        for( int i = 56; i < 64; i++){
+            if(promoteList.get(i).getName().equals("Pawn")){
+                promoteList.get(i).setName(piece);
+                tileRepository.save(promoteList.get(i));
+            }
+        }
+
+        return tileRepository.findAll();
     }
 }
