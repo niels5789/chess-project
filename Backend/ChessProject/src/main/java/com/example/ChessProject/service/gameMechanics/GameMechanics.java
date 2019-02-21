@@ -2,9 +2,9 @@ package com.example.ChessProject.service.gameMechanics;
 
 import com.example.ChessProject.Model.Game.Game;
 import com.example.ChessProject.Model.Tile.Tile;
-import com.example.ChessProject.controller.BoardController;
 import com.example.ChessProject.controller.GameController;
 import com.example.ChessProject.repository.GameRepository;
+
 import com.example.ChessProject.repository.TileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +22,6 @@ public class GameMechanics {
     @Autowired
     GameRepository gameRepository;
 
-    int x1, y1, x2, y2;
-    boolean validMove = false;
     private int turnCounter = 1;
 
     public int getTurnCounter() {
@@ -39,6 +37,8 @@ public class GameMechanics {
 
     public List<Tile> makeMoveIfLegal(int idvan, int idnaar, int gameid, List<Tile> tileList){
 //        List<Tile> tileList = tileRepository.findAll();
+
+        boolean validMove = false;
 
 //      check if the move is legal
         validMove = isValidMove(idvan, idnaar, tileList);
@@ -83,11 +83,6 @@ public class GameMechanics {
         newList.get(idvan).setName("");
 
 
-//        create list of tiles from opposite color
-//        List<Tile> opponentPieceList = tileRepository.findByColorAndNameNotAndIdNot(opponentColor, "", idnaar);
-
-
-
         for(int i = 0; i < newList.size(); i++) {
 //            make tile list of enemy pieces
             if (!newList.get(i).getName().equals("") && newList.get(i).getColor() == opponentColor) {
@@ -103,9 +98,6 @@ public class GameMechanics {
                 break;
             }
         }
-
-//        get tile id of king
-//        int idKing =(tileRepository.findByColorAndName(playerColor, "King").getId())-1;
 
 //        for all opponents tiles check for legal move to king tile
         for(Tile tile: newOpponentList){
@@ -137,6 +129,9 @@ public class GameMechanics {
     }
 
     private boolean isValidMove(int idvan, int idnaar, List<Tile> tileList) {
+
+        int x1, y1, x2, y2;
+
         boolean validMove = false;
 
         if( idvan != idnaar && (tileList.get(idvan).getColor() != tileList.get(idnaar).getColor() || tileList.get(idnaar).getName().equals(""))) {
@@ -176,12 +171,93 @@ public class GameMechanics {
         return validMove;
     }
 
-    private boolean validKingMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> tilelist) {
+    private boolean validKingMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> tileList) {
         boolean valid = false;
+
+        Tile king = tileList.get(idvan);
 
         if ((((x2-x1)*(x2-x1) <= 1 ) && ((y2-y1)*(y2-y1) <= 1))){
             valid = true;
-        }
+        } else if (king.getColor() == 0 && tileList.get(0).getName().equals("Rook") && tileList.get(1).getName().equals("") && tileList.get(2).getName().equals("") && idnaar == 1){
+
+            for (int i = 1 ; i < 4 ; i++) {
+                if (selfCheck(3, i, tileList)) {
+                    valid = false;
+                    break;
+                } else {
+                    valid = true;
+                }
+            }
+
+            if(valid) {
+                tileList.get(2).setName("Rook");
+                tileList.get(2).setColor(0);
+
+                tileList.get(0).setName("");
+                tileList.get(0).setColor(3);
+            }
+
+        } else if(king.getColor() == 0 && tileList.get(7).getName().equals("Rook") && tileList.get(4).getName().equals("") && tileList.get(5).getName().equals("") && tileList.get(6).getName().equals("") && idnaar == 5){
+
+
+
+            for (int i = 3 ; i < 6 ; i++) {
+                if (selfCheck(3, i, tileList)) {
+                    valid = false;
+                    break;
+                } else {
+                    valid = true;
+                }
+            }
+
+            if(valid){
+                tileList.get(4).setName("Rook");
+                tileList.get(4).setColor(0);
+
+                tileList.get(7).setName("");
+                tileList.get(7).setColor(3);
+            }
+
+        } else if (king.getColor() == 1 && tileList.get(56).getName().equals("Rook") && tileList.get(57).getName().equals("") && tileList.get(58).getName().equals("") && idnaar == 57){
+
+            for (int i = 57 ; i < 60 ; i++) {
+                if (selfCheck(59, i, tileList)) {
+                    valid = false;
+                    break;
+                } else {
+                    valid = true;
+                }
+
+            }
+
+            if(valid){
+                tileList.get(58).setName("Rook");
+                tileList.get(58).setColor(1);
+
+                tileList.get(56).setName("");
+                tileList.get(56).setColor(3);
+            }
+
+    } else if(king.getColor() == 1 && tileList.get(63).getName().equals("Rook") && tileList.get(62).getName().equals("") && tileList.get(61).getName().equals("") && tileList.get(60).getName().equals("") && idnaar == 61){
+
+            for (int i = 59 ; i < 62 ; i++) {
+                if (selfCheck(59, i, tileList)) {
+                    valid = false;
+                    break;
+                } else {
+                    valid = true;
+                }
+            }
+
+            if(valid){
+                tileList.get(60).setName("Rook");
+                tileList.get(60).setColor(1);
+
+                tileList.get(63).setName("");
+                tileList.get(63).setColor(3);
+            }
+
+    }
 
         return valid;
     }
@@ -434,21 +510,16 @@ public class GameMechanics {
                 valid = true;
             }
 
-        } else {
+//            if (color == 0 && (x2 == x1 -1 || x2 == x1 + 1)&& y2 == y1 + 2) {}
+
+        } else { // taking enemy piece
             if (color == 0 && ((y2 == y1 + 1)&&( x2 == x1 - 1|| x2 == x1 + 1 )) || color == 1 && ((y2 == y1 - 1) && ( x2 == x1 - 1|| x2 == x1 + 1 ))){
                 valid = true;
             }
         }
 
+
         return valid;
-    }
-
-    private int getX(int id, List<Tile> list) {
-        return list.get(id).getxCo();
-    }
-
-    private int getY(int id, List<Tile> list) {
-        return list.get(id).getyCo();
     }
 
     public List<Tile> promotePawn(String piece) {
@@ -470,4 +541,13 @@ public class GameMechanics {
 
         return tileRepository.findAll();
     }
+
+    private int getX(int id, List<Tile> list) {
+        return list.get(id).getxCo();
+    }
+
+    private int getY(int id, List<Tile> list) {
+        return list.get(id).getyCo();
+    }
+
 }
