@@ -499,11 +499,14 @@ public class GameMechanics {
                 valid = true;
             }
 
-        } else {
+//            if (color == 0 && (x2 == x1 -1 || x2 == x1 + 1)&& y2 == y1 + 2) {}
+
+        } else { // taking enemy piece
             if (color == 0 && ((y2 == y1 + 1)&&( x2 == x1 - 1|| x2 == x1 + 1 )) || color == 1 && ((y2 == y1 - 1) && ( x2 == x1 - 1|| x2 == x1 + 1 ))){
                 valid = true;
             }
         }
+
 
         return valid;
     }
