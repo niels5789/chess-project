@@ -22,18 +22,18 @@
 
   <div [innerHTML]="errorMessage" class="alert alert-warning" role="alert"></div>
 
-  <div class="button">
-    <button (click)="resetBoard()">ResetBoard</button>
+  <div >
+    <button class="btn btn-lg btn-primary" (click)="resetBoard()">Start new spelletje!</button>
   </div>
 
 <div>
-  <div [hidden]="">
+  <div  [hidden]="">
     <select id="promotion" name="promotion" #promotion>
     <option value="Queen">Queen</option>
     <option value="Bishop">Bishop</option>
     <option value="Rook">Rook</option>
     <option value="Knight">Knight</option>
     </select>
-    <button (click)="getPromotion(promotion.value)">getPromotion</button>
+    <button class="btn btn-lg btn-primary"(click)="getPromotion(promotion.value)">getPromotion</button>
   </div>
 </div>

@@ -8,7 +8,9 @@ import com.example.ChessProject.repository.GameRepository;
 import com.example.ChessProject.repository.PlayerRepository;
 import com.example.ChessProject.repository.PlayergameRepository;
 import com.example.ChessProject.repository.TileRepository;
+import com.example.ChessProject.service.gameMechanics.GameMechanics;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class GameController {
 
@@ -28,6 +30,8 @@ public class GameController {
     TileRepository tileRepository;
     @Autowired
     PlayergameRepository playergameRepository;
+    @Autowired
+    GameMechanics gm;
 
 //    @ResponseBody
 //    @GetMapping("/allgamesplayer")
@@ -35,6 +39,22 @@ public class GameController {
 //        Set<Game> gamelist = gameRepository.findListByUsername(player.getId());
 //        return gamelist;
 //    }
+@ResponseBody
+@PutMapping("/game/{idvan}/{idnaar}")
+public ResponseEntity<List<Tile>> changeBoard( @RequestBody Player player, @PathVariable(value = "idvan") int idvan, @PathVariable(value = "idnaar") int idnaar) throws Exception {
+
+    Game g = gameRepository.findLastGamePlayer(player.getId());
+    List<Tile> tempList = changeStringIntoList(g.getCurrentBoardPosition());
+    if( !tempList.get(idvan).getName().equals("") && tempList.get(idvan).getColor() != gm.getTurnCounter() % 2 && tempList.get(idvan).getColor() != tempList.get(idnaar).getColor() && idvan != idnaar){
+        tempList = gm.makeMoveIfLegal(idvan, idnaar, g.getId(), tempList);
+
+    } else {
+        return ResponseEntity.badRequest().build();
+    }
+    tempList = returnLastGame(player);
+    return ResponseEntity.ok(tempList);
+}
+
 
     @ResponseBody
     @GetMapping("/getallgames")
@@ -61,8 +81,18 @@ public class GameController {
         playergameRepository.save(pg);
         return pg;
     }
-
     @ResponseBody
+    @PostMapping("/getnewgame")
+    public List<Tile> getNewGame(@RequestBody Player player) {
+        Player pl = playerRepository.findByUsername(player.getUsername());
+        Tile t = new Tile();
+        String a = changeTilelistIntoString(t.startList());
+        Game g = gameRepository.save(new Game(a, 0, false));
+        PlayerGame pg = new PlayerGame(pl, g);
+        playergameRepository.save(pg);
+        return changeStringIntoList(g.getCurrentBoardPosition());
+
+    }    @ResponseBody
     @GetMapping("/returnlastgame")
     public List<Tile> returnLastGame(@RequestBody Player player) {
         Game g = gameRepository.findLastGamePlayer(player.getId());

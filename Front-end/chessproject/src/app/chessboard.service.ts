@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import {Tile} from '../Tile';
+import {Player} from '../Player';
+import {any} from 'codelyzer/util/function';
 
 @Injectable()
 export class ChessBoardService {
@@ -16,15 +18,18 @@ export class ChessBoardService {
       catchError(this.handleError<Tile>(`findAll`))
     );
   }
-  resetBoard(): Observable<Tile[]> {
-    return this.http.get<any>(`${this.tileURL}/resetboard`);
-  }
 
-  saveTile(id1: number, id2: number): Observable<Tile[]> {
+
+  returnNewBoard(player: Player): Observable<Tile[]> {
+    return this.http.post<any>(`${this.tileURL}/getnewgame`, player);
+}
+
+
+  saveTile(player: Player, id1: number, id2: number): Observable<Tile[]> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json'})
     };
-    return this.http.put<any>(`${this.tileURL}/board/${id1}/${id2}`, httpOptions)/*.pipe(
+    return this.http.put<any>(`${this.tileURL}/game/${id1}/${id2}`, player, httpOptions)/*.pipe(
       catchError(this.handleError<Tile>(`saveTile`))/!*
     )*!/*/;
   }

@@ -32,7 +32,7 @@ public class BoardController {
         List<Tile> tempList = tileRepository.findAll();
 
         if( !tempList.get(idvan).getName().equals("") && tempList.get(idvan).getColor() != gm.getTurnCounter() % 2 && tempList.get(idvan).getColor() != tempList.get(idnaar).getColor() && idvan != idnaar){
-            tempList = gm.makeMoveIfLegal(idvan, idnaar);
+            tempList = gm.makeMoveIfLegal(idvan, idnaar, -42, tempList);
 
         } else {
             return ResponseEntity.badRequest().build();

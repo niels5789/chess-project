@@ -1,6 +1,10 @@
 package com.example.ChessProject.service.gameMechanics;
 
+import com.example.ChessProject.Model.Game.Game;
 import com.example.ChessProject.Model.Tile.Tile;
+import com.example.ChessProject.controller.GameController;
+import com.example.ChessProject.repository.GameRepository;
+
 import com.example.ChessProject.repository.TileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +16,11 @@ import java.util.List;
 public class GameMechanics {
 
     @Autowired
-    private TileRepository tileRepository;
-
+    TileRepository tileRepository;
+    @Autowired
+    GameController gameController;
+    @Autowired
+    GameRepository gameRepository;
 
     private int turnCounter = 1;
 
@@ -28,8 +35,8 @@ public class GameMechanics {
     public GameMechanics() {
     }
 
-    public List<Tile> makeMoveIfLegal(int idvan, int idnaar){
-        List<Tile> tileList = tileRepository.findAll();
+    public List<Tile> makeMoveIfLegal(int idvan, int idnaar, int gameid, List<Tile> tileList){
+//        List<Tile> tileList = tileRepository.findAll();
 
         boolean validMove = false;
 
@@ -40,7 +47,7 @@ public class GameMechanics {
         boolean putSelfInCheck = selfCheck(idvan, idnaar, tileList);
 
 //      make the move
-        if (validMove && !putSelfInCheck) {makeMove(idvan, idnaar, tileList);}
+        if (validMove && !putSelfInCheck) {makeMove(idvan, idnaar, tileList, gameid);}
 
         return tileRepository.findAll();
     }
@@ -101,7 +108,7 @@ public class GameMechanics {
         return false;
     }
 
-    private void makeMove(int idvan, int idnaar, List<Tile> tileList) {
+    private void makeMove(int idvan, int idnaar, List<Tile> tileList, int gameid) {
 
         String tempName = tileList.get(idvan).getName();
         int tempColor = tileList.get(idvan).getColor();
@@ -114,7 +121,11 @@ public class GameMechanics {
 
         turnCounter++;
 
-        for (Tile tile: tileList){tileRepository.save(tile);}
+//        String databaseString = gameController.changeTilelistIntoString(tileList);
+        Game g =  gameRepository.findById(gameid).get();
+        g.setCurrentBoardPosition(gameController.changeTilelistIntoString(tileList));
+        gameRepository.save(g);
+//        for (Tile tile: tileList){tileRepository.save(tile);}
     }
 
     private boolean isValidMove(int idvan, int idnaar, List<Tile> tileList) {
