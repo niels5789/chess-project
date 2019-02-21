@@ -81,7 +81,7 @@ export class ChessboardComponent implements OnInit {
         this.secondClick = -22;
       } else {
         this.secondClick = thisClick - 1;
-        this.chessBoardService.saveTile(this.firstClick, this.secondClick).subscribe(
+        this.chessBoardService.saveTile(this.storage.getStoredUser(), this.firstClick, this.secondClick).subscribe(
               tilelist => {
                 this.tilelist = tilelist;
                 this.errorMessage = '';
@@ -124,7 +124,7 @@ export class ChessboardComponent implements OnInit {
   }
 
   resetBoard() {
-    this.chessBoardService.resetBoard().subscribe(
+    this.chessBoardService.returnNewBoard(this.storage.getStoredUser()).subscribe(
       tilelist => {
         this.tilelist = tilelist;
       },
