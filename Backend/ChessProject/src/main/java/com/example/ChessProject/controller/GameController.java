@@ -137,12 +137,10 @@ public class GameController {
         for (int x = 0; x < strb.length(); x++) {
             Character nextCharFake = strb.charAt(x);
             String nextStringReal = nextCharFake.toString();
-            System.out.println("Dit is x: " + x);
             if (nextStringReal.equals("|")) {
                 tilelist.get(y).setName(nameVariabele);
                 tilelist.get(y).setColor(colorVariabele);
                 y++;
-                System.out.println("Dit is y: " + y);
                 continue;
             }
             int z = y + 1;
@@ -190,7 +188,6 @@ public class GameController {
                 continue;
             }
         }
-        System.out.println("Dit is het einde");
         return tilelist;
     }
 }
