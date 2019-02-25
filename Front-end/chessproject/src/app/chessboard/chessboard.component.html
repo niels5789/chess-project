@@ -10,7 +10,13 @@
       <th><input placeholder="{{player.playerName}}" value="{{player.playerName}}" #playername /> </th>
     </tr>
   </table>
-  <div><button (click)="changePlayerName(playername.value)">Change settings</button> </div>
+  <div><button class="btn" (click)="changePlayerName(playername.value)">Change settings</button> </div>
+  <br>
+  <br>
+  <br>
+  <div>
+    <button class="btn" routerLink="">Ga terug naar de inlogpagina</button>
+  </div>
 </div>
 <div class="column">
   <div class="chessboard">
@@ -20,20 +26,31 @@
   </div>
 </div>
 
-  <div [innerHTML]="errorMessage" class="alert alert-warning" role="alert"></div>
-
+  <div [innerHTML]="errorMessage" style="width: 10%; height: 10%; float: right;" class="alert alert-warning" role="alert"></div>
+<br>
   <div >
-    <button class="btn btn-lg btn-primary" (click)="resetBoard()">Start new spelletje!</button>
+    <button class="btn" (click)="resetBoard()">Start new spelletje!</button>
   </div>
 
+<br>
+<br>
+<br>
 <div>
   <div  [hidden]="">
-    <select id="promotion" name="promotion" #promotion>
+    <select class="form-control" style="width: 10%" id="promotion" name="promotion" #promotion>
     <option value="Queen">Queen</option>
     <option value="Bishop">Bishop</option>
     <option value="Rook">Rook</option>
     <option value="Knight">Knight</option>
     </select>
-    <button class="btn btn-lg btn-primary"(click)="getPromotion(promotion.value)">getPromotion</button>
+    <button class="btn" style="width: 10%;" (click)="getPromotion(promotion.value)">getPromotion</button>
   </div>
 </div>
+<br>
+<br>
+<br>
+<div>
+  <button class="btn" routerLink="/gamedetails">Ga naar gameDetails</button>
+</div>
+
+

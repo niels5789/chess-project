@@ -11,6 +11,8 @@ import {Player} from '../../Player';
 })
 export class UserFormComponent implements OnInit {
 
+  errorMessage = '';
+  error: string;
 
 
   constructor(public fb: FormBuilder, private loginService: LoginService) {
@@ -28,7 +30,17 @@ export class UserFormComponent implements OnInit {
     const username = this.userForm.controls[`username`].value;
     const password = this.userForm.controls[`password`].value;
 
-    this.loginService.savePlayer(username, password).subscribe();
+    this.errorMessage = '';
+
+    this.loginService.savePlayer(username, password).subscribe(
+      test => {
+        this.errorMessage = 'Uw account is aangemaakt';
+      },
+
+      err => {
+        this.errorMessage = 'Het is helaas niet gelukt om een account aan te maken. Probeer het nog eens';
+      }
+    );
 
   }
 }

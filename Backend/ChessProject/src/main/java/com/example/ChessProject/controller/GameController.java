@@ -2,21 +2,16 @@ package com.example.ChessProject.controller;
 
 import com.example.ChessProject.Model.Game.Game;
 import com.example.ChessProject.Model.Player.Player;
-import com.example.ChessProject.Model.Player.PlayerGame;
 import com.example.ChessProject.Model.Tile.Tile;
 import com.example.ChessProject.repository.GameRepository;
 import com.example.ChessProject.repository.PlayerRepository;
-import com.example.ChessProject.repository.PlayergameRepository;
 import com.example.ChessProject.repository.TileRepository;
 import com.example.ChessProject.service.gameMechanics.GameMechanics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -29,19 +24,18 @@ public class GameController {
     @Autowired
     TileRepository tileRepository;
     @Autowired
-    PlayergameRepository playergameRepository;
-    @Autowired
     GameMechanics gm;
 
-//    @ResponseBody
-//    @GetMapping("/allgamesplayer")
-//    public Set<Game> allGamesPlayer(@RequestBody Player player) {
-//        Set<Game> gamelist = gameRepository.findListByUsername(player.getId());
-//        return gamelist;
-//    }
-@ResponseBody
-@PutMapping("/game/{idvan}/{idnaar}")
-public ResponseEntity<List<Tile>> changeBoard( @RequestBody Player player, @PathVariable(value = "idvan") int idvan, @PathVariable(value = "idnaar") int idnaar) throws Exception {
+
+    @ResponseBody
+    @PostMapping("/getgamesplayer")
+    public List<Game> getGamesPlayer(@RequestBody Player player) {
+        return gameRepository.findLastFiveGames(player.getId());
+    }
+
+    @ResponseBody
+    @PutMapping("/game/{idvan}/{idnaar}")
+    public ResponseEntity<List<Tile>> changeBoard( @RequestBody Player player, @PathVariable(value = "idvan") int idvan, @PathVariable(value = "idnaar") int idnaar) throws Exception {
 
     Game g = gameRepository.findLastGamePlayer(player.getId());
     List<Tile> tempList = changeStringIntoList(g.getCurrentBoardPosition());
@@ -61,39 +55,25 @@ public ResponseEntity<List<Tile>> changeBoard( @RequestBody Player player, @Path
     public List<Game> allgames() {
         return gameRepository.findAll();
     }
-
     @ResponseBody
-    @GetMapping("/allplayergames")
-    public Game allPlayerGames(@RequestBody Game game) {
-        Game gma = gameRepository.getOne(1);
-        return gma;
+    @GetMapping("/getallgamesplayer")
+    public List<Game> getAllGamesPlayer(@RequestBody Player player) {
+        return gameRepository.findByPlayer(player);
     }
 
 
-    @ResponseBody
-    @PostMapping("/startnewgame")
-    public PlayerGame startNewGame(@RequestBody Player player) {
-        Player pl = playerRepository.findByUsername(player.getUsername());
-        Tile t = new Tile();
-        String a = changeTilelistIntoString(t.startList());
-        Game g = gameRepository.save(new Game(a, 0, false));
-        PlayerGame pg = new PlayerGame(pl, g);
-        playergameRepository.save(pg);
-        return pg;
-    }
     @ResponseBody
     @PostMapping("/getnewgame")
     public List<Tile> getNewGame(@RequestBody Player player) {
         Player pl = playerRepository.findByUsername(player.getUsername());
         Tile t = new Tile();
         String a = changeTilelistIntoString(t.startList());
-        Game g = gameRepository.save(new Game(a, 0, false));
-        PlayerGame pg = new PlayerGame(pl, g);
-        playergameRepository.save(pg);
+        Game g = gameRepository.save(new Game(0, false, a, player));
         return changeStringIntoList(g.getCurrentBoardPosition());
 
-    }    @ResponseBody
-    @GetMapping("/returnlastgame")
+    }
+    @ResponseBody
+    @PostMapping("/returnlastgame")
     public List<Tile> returnLastGame(@RequestBody Player player) {
         Game g = gameRepository.findLastGamePlayer(player.getId());
         List<Tile> list = changeStringIntoList(g.getCurrentBoardPosition());
@@ -107,6 +87,13 @@ public ResponseEntity<List<Tile>> changeBoard( @RequestBody Player player, @Path
         String a = changeTilelistIntoString(currentPosition);
 
         return changeStringIntoList(a);
+    }
+    @ResponseBody
+    @PutMapping("/stringintotilelist/{gameid}")
+    public List<Tile> stringIntoTileList(@PathVariable("gameid") Integer gameid) {
+        Game g = gameRepository.findById(gameid).get();
+        List<Tile> returnlist = changeStringIntoList(g.getCurrentBoardPosition());
+        return returnlist;
     }
 
     public String changeTilelistIntoString(List<Tile> tilelist) {

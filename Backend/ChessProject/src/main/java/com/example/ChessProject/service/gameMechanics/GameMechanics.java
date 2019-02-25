@@ -1,7 +1,9 @@
 package com.example.ChessProject.service.gameMechanics;
 
 import com.example.ChessProject.Model.Game.Game;
+import com.example.ChessProject.Model.Player.Player;
 import com.example.ChessProject.Model.Tile.Tile;
+import com.example.ChessProject.controller.BoardController;
 import com.example.ChessProject.controller.GameController;
 import com.example.ChessProject.repository.GameRepository;
 
@@ -21,6 +23,8 @@ public class GameMechanics {
     GameController gameController;
     @Autowired
     GameRepository gameRepository;
+    @Autowired
+    GameController getGameController;
 
     private int turnCounter = 1;
 
@@ -522,24 +526,35 @@ public class GameMechanics {
         return valid;
     }
 
-    public List<Tile> promotePawn(String piece) {
-        List<Tile> promoteList = tileRepository.findAll();
+    public List<Tile> promotePawn(Integer gameid, String piece) {
+        Game g = gameRepository.findById(gameid).get();
+        List<Tile> promoteList = gameController.changeStringIntoList(g.getCurrentBoardPosition());
 
         for( int i = 0; i < 8; i++){
             if(promoteList.get(i).getName().equals("Pawn")){
                 promoteList.get(i).setName(piece);
-                tileRepository.save(promoteList.get(i));
+                int count = g.getMoveCount();
+                count++;
+                g.setMoveCount(count);
+                String str = gameController.changeTilelistIntoString(promoteList);
+                g.setCurrentBoardPosition(str);
+                gameRepository.save(g);
             }
         }
 
         for( int i = 56; i < 64; i++){
             if(promoteList.get(i).getName().equals("Pawn")){
                 promoteList.get(i).setName(piece);
-                tileRepository.save(promoteList.get(i));
+                int count = g.getMoveCount();
+                count++;
+                g.setMoveCount(count);
+                String str = gameController.changeTilelistIntoString(promoteList);
+                g.setCurrentBoardPosition(str);
+                gameRepository.save(g);
             }
         }
 
-        return tileRepository.findAll();
+        return promoteList;
     }
 
     private int getX(int id, List<Tile> list) {

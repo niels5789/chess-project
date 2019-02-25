@@ -13,8 +13,8 @@ export class ChessBoardService {
   }
 
 
-  findAll(): Observable<Tile[]> {
-    return this.http.get<any>('http://localhost:8080/boards').pipe(
+  findAll(player: Player): Observable<Tile[]> {
+    return this.http.post<any>('http://localhost:8080/returnlastgame', player).pipe(
       catchError(this.handleError<Tile>(`findAll`))
     );
   }
@@ -34,11 +34,11 @@ export class ChessBoardService {
     )*!/*/;
   }
 
-  piecePromotion(promotion: string) {
+  piecePromotion(player: Player, promotion: string) {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json'})
     };
-    return this.http.get<any>(`${this.tileURL}promotion/${promotion}`, httpOptions);
+    return this.http.post<any>(`${this.tileURL}promotion/${promotion}`, player, httpOptions);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
