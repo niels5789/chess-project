@@ -63,6 +63,7 @@ public class PlayerController {
         Player player = new Player(username, password);
         if (playerRepository.findByUsername(username) == null) {
             playerRepository.save(player);
+
             return ResponseEntity.ok(player);
 
         }

@@ -1,8 +1,10 @@
 package com.example.ChessProject.controller;
 
 import com.example.ChessProject.Model.Game.Game;
+import com.example.ChessProject.Model.Game.GameHistory;
 import com.example.ChessProject.Model.Player.Player;
 import com.example.ChessProject.Model.Tile.Tile;
+import com.example.ChessProject.repository.GameHistoryRepository;
 import com.example.ChessProject.repository.GameRepository;
 import com.example.ChessProject.repository.PlayerRepository;
 import com.example.ChessProject.repository.TileRepository;
@@ -23,6 +25,8 @@ public class GameController {
     PlayerRepository playerRepository;
     @Autowired
     TileRepository tileRepository;
+    @Autowired
+    GameHistoryRepository gameHistoryRepository;
     @Autowired
     GameMechanics gm;
 
@@ -64,12 +68,13 @@ public class GameController {
 
     @ResponseBody
     @PostMapping("/getnewgame")
-    public List<Tile> getNewGame(@RequestBody Player player) {
+    public Game getNewGame(@RequestBody Player player) {
         Player pl = playerRepository.findByUsername(player.getUsername());
         Tile t = new Tile();
         String a = changeTilelistIntoString(t.startList());
         Game g = gameRepository.save(new Game(0, false, a, player));
-        return changeStringIntoList(g.getCurrentBoardPosition());
+        gameHistoryRepository.save(new GameHistory(0, a,"New Board", "New Board", "New Board",  g));
+        return g;
 
     }
     @ResponseBody
@@ -78,6 +83,12 @@ public class GameController {
         Game g = gameRepository.findLastGamePlayer(player.getId());
         List<Tile> list = changeStringIntoList(g.getCurrentBoardPosition());
         return list;
+    }
+
+    @ResponseBody
+    @PostMapping("/getlastgameplayer")
+    public Game getLastGamePlayer(@RequestBody Player player) {
+        return gameRepository.findLastGamePlayer(player.getId());
     }
 
     @ResponseBody

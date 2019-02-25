@@ -1,10 +1,12 @@
 package com.example.ChessProject.service.gameMechanics;
 
 import com.example.ChessProject.Model.Game.Game;
+import com.example.ChessProject.Model.Game.GameHistory;
 import com.example.ChessProject.Model.Player.Player;
 import com.example.ChessProject.Model.Tile.Tile;
 import com.example.ChessProject.controller.BoardController;
 import com.example.ChessProject.controller.GameController;
+import com.example.ChessProject.repository.GameHistoryRepository;
 import com.example.ChessProject.repository.GameRepository;
 
 import com.example.ChessProject.repository.TileRepository;
@@ -23,6 +25,8 @@ public class GameMechanics {
     GameController gameController;
     @Autowired
     GameRepository gameRepository;
+    @Autowired
+    GameHistoryRepository gameHistoryRepository;
     @Autowired
     GameController getGameController;
 
@@ -113,6 +117,40 @@ public class GameMechanics {
     }
 
     private void makeMove(int idvan, int idnaar, List<Tile> tileList, int gameid) {
+        String xVan= "";
+        switch(tileList.get(idvan).getxCo()) {
+            case 1:{xVan = "A"; break;}
+            case 2: {xVan = "B"; break;}
+            case 3: {xVan = "C"; break;}
+            case 4: {xVan = "D"; break;}
+            case 5: {xVan = "E"; break;}
+            case 6: {xVan = "F"; break;}
+            case 7: {xVan = "G"; break;}
+            case 8: {xVan = "H"; break;}
+        }
+        String xNaar= "";
+        switch(tileList.get(idnaar).getxCo()) {
+            case 1:{xNaar = "A"; break;}
+            case 2: {xNaar = "B"; break;}
+            case 3: {xNaar = "C"; break;}
+            case 4: {xNaar = "D"; break;}
+            case 5: {xNaar = "E"; break;}
+            case 6: {xNaar = "F"; break;}
+            case 7: {xNaar = "G"; break;}
+            case 8: {xNaar = "H"; break;}
+        }
+
+
+        String van = xVan + "" + tileList.get(idvan).getyCo();
+        String naar = xNaar + "" + tileList.get(idnaar).getyCo();
+        String color = "EMPTY";
+
+        if(tileList.get(idvan).getColor() == 0) {
+            color = "WHITE";
+        } else if(tileList.get(idvan).getColor() == 1) {
+            color = "BLACK";
+        }
+
 
         String tempName = tileList.get(idvan).getName();
         int tempColor = tileList.get(idvan).getColor();
@@ -128,8 +166,10 @@ public class GameMechanics {
 //        String databaseString = gameController.changeTilelistIntoString(tileList);
         Game g =  gameRepository.findById(gameid).get();
         g.setCurrentBoardPosition(gameController.changeTilelistIntoString(tileList));
+        int count = g.getMoveCount();
+        g.setMoveCount(++count);
         gameRepository.save(g);
-//        for (Tile tile: tileList){tileRepository.save(tile);}
+        gameHistoryRepository.save(new GameHistory(count,  g.getCurrentBoardPosition(), color, van, naar, g));
     }
 
     private boolean isValidMove(int idvan, int idnaar, List<Tile> tileList) {
