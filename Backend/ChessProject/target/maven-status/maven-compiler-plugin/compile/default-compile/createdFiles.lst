@@ -1,5 +1,8 @@
 com\example\ChessProject\ChessProjectApplication.class
 com\example\ChessProject\repository\TileRepository.class
+com\example\ChessProject\Model\Game\GameHistory.class
+com\example\ChessProject\repository\GameHistoryRepository.class
+com\example\ChessProject\controller\GameHistoryController.class
 com\example\ChessProject\Model\Tile\Tile.class
 com\example\ChessProject\exception\ResourceNotFoundException.class
 com\example\ChessProject\controller\GameController.class

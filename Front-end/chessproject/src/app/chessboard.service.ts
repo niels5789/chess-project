@@ -5,6 +5,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 import {Tile} from '../Tile';
 import {Player} from '../Player';
 import {any} from 'codelyzer/util/function';
+import {Game} from '../Game';
+import {GameHistory} from '../GameHistory';
 
 @Injectable()
 export class ChessBoardService {
@@ -20,7 +22,7 @@ export class ChessBoardService {
   }
 
 
-  returnNewBoard(player: Player): Observable<Tile[]> {
+  returnNewBoard(player: Player): Observable<Game> {
     return this.http.post<any>(`${this.tileURL}/getnewgame`, player);
 }
 
@@ -49,5 +51,16 @@ export class ChessBoardService {
   }
 
 
-
+  getLastGame(player: Player): Observable<Game> {
+      return this.http.post<any>(`${this.tileURL}/getlastgameplayer`, player);
+  }
+  getTileListGame(gameid: number): Observable<Tile[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+    };
+    return this.http.put<any>(`http://localhost:8080/stringintotilelist/${gameid}`, httpOptions);
+  }
+  getHistoryList(game: Game): Observable<GameHistory[]> {
+    return this.http.post<any>(`http://localhost:8080/getgamehistorylist`, game);
+  }
 }

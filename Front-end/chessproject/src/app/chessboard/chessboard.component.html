@@ -17,8 +17,44 @@
   <div>
     <button class="btn" routerLink="">Ga terug naar de inlogpagina</button>
   </div>
+  <table class="table">
+    <tr>
+      <th>
+        Hoeveelste zet:
+      </th>
+      <th>
+      van plek:
+      </th>
+      <th>
+      naar plek:
+      </th>
+      <th>
+        Door:
+      </th>
+    </tr>
+    <tr *ngFor="let gamehistory of gamehistorylist">
+      <th>
+        {{gamehistory.countPlace}}
+      </th>
+      <th>
+        {{gamehistory.van}}
+      </th>
+      <th>
+        {{gamehistory.naar}}
+      </th>
+      <th>
+        {{gamehistory.vanColor}}
+      </th>
+    </tr>
+
+
+  </table>
+
 </div>
 <div class="column">
+  <div>
+    <h3 style="text-align: center;">U speelt nu het potje: {{lastgame.id}}</h3>
+  </div>
   <div class="chessboard">
     <button [id]="'button' + tile.id" (click)="onclick(tile.id)"
             *ngFor="let tile of tilelist" [innerHTML]="getPicture(tile.id)" ngClass="{{colorPicker()}}">

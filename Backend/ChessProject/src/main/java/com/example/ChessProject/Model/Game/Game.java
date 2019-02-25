@@ -24,6 +24,8 @@ public class Game implements Serializable {
     @JoinColumn(name = "player_id")
     private Player player;
 
+
+
     public Game() {
     }
 
