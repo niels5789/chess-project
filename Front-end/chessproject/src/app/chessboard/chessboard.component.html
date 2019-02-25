@@ -1,56 +1,67 @@
 <div class="LoggedIn"> You are now playing as:   {{player.playerName}}</div>
-<div class="column">
-  <table border="1">
-    <tr>
-      <th style="font-weight: bold"> Inlognaam: </th>
-      <th> Playernaam:  </th>
-    </tr>
-    <tr>
-      <th style="font-weight: normal"> {{player.username}}</th>
-      <th><input placeholder="{{player.playerName}}" value="{{player.playerName}}" #playername /> </th>
-    </tr>
-  </table>
-  <div><button class="btn" (click)="changePlayerName(playername.value)">Change settings</button> </div>
-  <br>
-  <br>
-  <br>
-  <div>
-    <button class="btn" routerLink="">Ga terug naar de inlogpagina</button>
-  </div>
-</div>
-<div class="column">
-  <div class="chessboard">
-    <button [id]="'button' + tile.id" (click)="onclick(tile.id)"
-            *ngFor="let tile of tilelist" [innerHTML]="getPicture(tile.id)" ngClass="{{colorPicker()}}">
-    </button>
-  </div>
-</div>
 
-  <div [innerHTML]="errorMessage" style="width: 10%; height: 10%; float: right;" class="alert alert-warning" role="alert"></div>
-<br>
-  <div >
-    <button class="btn" (click)="resetBoard()">Start new spelletje!</button>
-  </div>
+<table class="table table-dark">
+  <tr>
+    <th style="font-weight: bold"> Inlognaam: {{player.username}}</th>
 
-<br>
-<br>
-<br>
-<div>
-  <div  [hidden]="">
-    <select class="form-control" style="width: 10%" id="promotion" name="promotion" #promotion>
-    <option value="Queen">Queen</option>
-    <option value="Bishop">Bishop</option>
-    <option value="Rook">Rook</option>
-    <option value="Knight">Knight</option>
-    </select>
-    <button class="btn" style="width: 10%;" (click)="getPromotion(promotion.value)">getPromotion</button>
-  </div>
-</div>
-<br>
-<br>
-<br>
-<div>
-  <button class="btn" routerLink="/gamedetails">Ga naar gameDetails</button>
-</div>
+    <th>
+      <div class="button-box col-xs-12">
+        <input  placeholder="{{player.playerName}}" value="{{player.playerName}}" #playername />
+        <button class="btn btn-secondary"  (click)="changePlayerName(playername.value)">Set name</button>
+      </div>
+    </th>
+  </tr>
 
 
+
+
+</table>
+
+<div class="container">
+
+  <div class="row">
+
+
+    <div class="col-xs-4">
+
+      <br>
+      <br>
+
+      <div >
+        <button class="btn btn-primary btn-block" (click)="resetBoard()">Start new spelletje!</button>
+      </div>
+
+      <div>
+        <button class="btn btn-primary btn-block" routerLink="/gamedetails">Ga naar gameDetails</button>
+      </div>
+
+      <div>
+        <button class="btn btn-primary btn-block" routerLink="">Ga terug naar de inlogpagina</button>
+      </div>
+
+      <div>
+        <div [hidden]="">
+          <button class="btn btn-secondary btn-block" (click)="getPromotion(promotion.value)">getPromotion</button>
+          <label for="promotion"></label><select class="form-control btn-block" id="promotion" name="promotion" #promotion>
+          <option value="Queen">Queen</option>
+          <option value="Bishop">Bishop</option>
+          <option value="Rook">Rook</option>
+          <option value="Knight">Knight</option>
+        </select>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <div class="col-xs-8">
+      <div class="chessboard">
+        <button [id]="'button' + tile.id" (click)="onclick(tile.id)"
+                *ngFor="let tile of tilelist" [innerHTML]="getPicture(tile.id)" ngClass="{{colorPicker()}}">
+        </button>
+        <div [innerHTML]="errorMessage" style="width: 30%; float: bottom;" class="alert alert-warning" role="alert"></div>
+      </div>
+    </div>
+  </div>
+</div>
