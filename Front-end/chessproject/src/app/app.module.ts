@@ -10,13 +10,15 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LocalStorageService} from './local-storage.service';
 import {StorageServiceModule} from 'ngx-webstorage-service';
+import { GamedetailsComponent } from './gamedetails/gamedetails.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChessboardComponent,
     LoginComponent,
-    UserFormComponent
+    UserFormComponent,
+    GamedetailsComponent
   ],
   imports: [
     BrowserModule,

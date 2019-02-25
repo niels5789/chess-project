@@ -5,6 +5,7 @@ import com.example.ChessProject.Model.Player.Player;
 import com.example.ChessProject.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -57,17 +58,15 @@ public class PlayerController {
 
     @ResponseBody
     @PutMapping("/checkplayer/{username}/{password}")
-    public Player checkPlayer(@PathVariable("username") String username,
-                              @PathVariable("password") String password) {
+    public ResponseEntity<Player> checkPlayer(@PathVariable("username") String username,
+                                             @PathVariable("password") String password) {
         Player player = new Player(username, password);
         if (playerRepository.findByUsername(username) == null) {
             playerRepository.save(player);
-            return player;
+            return ResponseEntity.ok(player);
 
-        } else {
-//            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-
-               }
-        return player = new Player();
+        }
+        Player pl = new Player();
+        return ResponseEntity.badRequest().build();
     }
 }

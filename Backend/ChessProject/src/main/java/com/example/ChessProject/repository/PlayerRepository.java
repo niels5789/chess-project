@@ -17,7 +17,4 @@ public interface PlayerRepository extends JpaRepository<Player, Integer> {
     Player findByUsername(String username);
     Player findByUsernameAndPassword(String username, String password);
 
-    @Modifying
-    @Query(value = "SELECT * FROM player p, game_player gp  WHERE gp.game_id = :game_id", nativeQuery = true)
-    Set<Player> findListByUsername(@Param("game_id") int game_id);
 }

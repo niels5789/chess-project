@@ -101,7 +101,7 @@ export class ChessboardComponent implements OnInit {
 
 
   getCurrentPosition() {
-    this.chessBoardService.findAll().subscribe(
+    this.chessBoardService.findAll(this.storage.getStoredUser()).subscribe(
       tilelist => {
         this.tilelist = tilelist;
       },
@@ -135,7 +135,7 @@ export class ChessboardComponent implements OnInit {
   }
 
   getPromotion(promotion: string) {
-    this.chessBoardService.piecePromotion(promotion).subscribe(
+    this.chessBoardService.piecePromotion(this.storage.getStoredUser(), promotion).subscribe(
       tilelist => {
         this.tilelist = tilelist;
       },

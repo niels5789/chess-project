@@ -1,6 +1,9 @@
 package com.example.ChessProject.controller;
 
+import com.example.ChessProject.Model.Game.Game;
+import com.example.ChessProject.Model.Player.Player;
 import com.example.ChessProject.Model.Tile.Tile;
+import com.example.ChessProject.repository.GameRepository;
 import com.example.ChessProject.repository.TileRepository;
 import com.example.ChessProject.service.gameMechanics.GameMechanics;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,8 @@ public class BoardController {
     GameMechanics gm;
     @Autowired
     TileRepository tileRepository;
+    @Autowired
+    GameRepository gameRepository;
 
 
     @ResponseBody
@@ -54,8 +59,9 @@ public class BoardController {
     }
 
     @ResponseBody
-    @GetMapping("/promotion/{piece}")
-    public List<Tile> promote(@PathVariable(value = "piece") String piece){
-        return gm.promotePawn(piece);
+    @PostMapping("/promotion/{piece}")
+    public List<Tile> promote(@RequestBody Player player, @PathVariable(value = "piece") String piece){
+        Game g = gameRepository.findLastGamePlayer(player.getId());
+        return gm.promotePawn(g.getId(), piece);
     }
 }

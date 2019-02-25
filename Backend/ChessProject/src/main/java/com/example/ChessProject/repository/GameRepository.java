@@ -14,7 +14,10 @@ import java.util.Set;
 @Repository
 public interface GameRepository extends JpaRepository<Game, Integer> {
 
-
-    @Query(value = "SELECT g.id, g.current_board_position, g.is_finished, g.move_count, g.game_history_id FROM game g, player_game pg WHERE pg.player_id = :playerid ORDER BY ID DESC LIMIT 1", nativeQuery = true)
+    List<Game> findByPlayer(Player player);
+    @Query(value = "SELECT * FROM game g WHERE player_id = :playerid ORDER BY id DESC LIMIT 1", nativeQuery = true)
     Game findLastGamePlayer(@Param("playerid") Integer playerid);
+
+    @Query(value = "SELECT * FROM game g WHERE player_id = :playerid ORDER BY id DESC LIMIT 5", nativeQuery = true)
+    List<Game> findLastFiveGames(@Param("playerid") Integer playerid);
 }
