@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Tile} from '../../Tile';
 import {ChessBoardService} from '../chessboard.service';
-import {$, element} from 'protractor';
 import {Player} from '../../Player';
 import {LocalStorageService} from '../local-storage.service';
 import {LoginService} from '../login.service';
-import {RouterLink} from '@angular/router';
-import {Message} from '@angular/compiler/src/i18n/i18n_ast';
-import {MessageBundle} from '@angular/compiler';
 import {Game} from '../../Game';
 import {GameHistory} from '../../GameHistory';
 
@@ -98,7 +94,7 @@ export class ChessboardComponent implements OnInit {
           err => {
             this.firstClick = -11;
             this.secondClick = -22;
-            this.errorMessage = 'Invalid move';
+            this.errorMessage = 'Not your turn';
             console.log(err);
           }
         );
@@ -132,7 +128,6 @@ export class ChessboardComponent implements OnInit {
   }
 
   resetBoard() {
-
 
     this.chessBoardService.returnNewBoard(this.storage.getStoredUser()).subscribe(
       game => {
