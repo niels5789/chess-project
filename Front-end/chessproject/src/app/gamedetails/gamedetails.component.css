@@ -1,13 +1,13 @@
 .chessboard {
-  width: 250px;
-  height: 250px;
-  margin: 20px;
-  border: 20px solid #333;
+  width: 210px;
+  height: 210px;
+  margin: 0px;
+  border: 0px solid #333;
 }
 .black {
   float: left;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   background-color: #999;
   font-size:20px;
   text-align:center;
