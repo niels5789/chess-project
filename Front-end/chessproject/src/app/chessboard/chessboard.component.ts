@@ -78,30 +78,32 @@ export class ChessboardComponent implements OnInit {
 
   onclick(thisClick: number) {
     this.errorMessage = '';
+    if (this.firstClick === -11) {
       if (this.tilelist[thisClick - 1].color !== 3 ) {
         this.firstClick = thisClick - 1;
-      } else if (this.secondClick === -22) {
-        if (this.firstClick === (thisClick - 1) || this.tilelist[this.firstClick].color === this.tilelist[thisClick - 1].color) {
-          this.firstClick = thisClick - 1;
-        } else {
-          this.secondClick = thisClick - 1;
-          this.chessBoardService.saveTile(this.storage.getStoredUser(), this.firstClick, this.secondClick).subscribe(
-            tilelist => {
-              this.tilelist = tilelist;
-              this.errorMessage = '';
-              this.firstClick = -11;
-              this.secondClick = -22;
-              this.getGameHistory(this.lastgame);
-            },
-            err => {
-              this.firstClick = -11;
-              this.secondClick = -22;
-              this.errorMessage = 'Invalid move';
-              console.log(err);
-            }
-          );
-        }
       }
+    } else if (this.secondClick === -22) {
+      if (this.firstClick === (thisClick - 1) || this.tilelist[this.firstClick].color === this.tilelist[thisClick - 1].color) {
+        this.firstClick = thisClick - 1;
+      } else {
+        this.secondClick = thisClick - 1;
+        this.chessBoardService.saveTile(this.storage.getStoredUser(), this.firstClick, this.secondClick).subscribe(
+          tilelist => {
+            this.tilelist = tilelist;
+            this.errorMessage = '';
+            this.firstClick = -11;
+            this.secondClick = -22;
+            this.getGameHistory(this.lastgame);
+          },
+          err => {
+            this.firstClick = -11;
+            this.secondClick = -22;
+            this.errorMessage = 'Invalid move';
+            console.log(err);
+          }
+        );
+      }
+    }
   }
 
 
@@ -148,6 +150,7 @@ export class ChessboardComponent implements OnInit {
     this.chessBoardService.piecePromotion(this.storage.getStoredUser(), promotion).subscribe(
       tilelist => {
         this.tilelist = tilelist;
+        this.getGameHistory(this.lastgame);
       },
       err => {
         console.log(err);

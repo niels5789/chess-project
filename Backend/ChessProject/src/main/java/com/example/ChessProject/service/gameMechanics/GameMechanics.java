@@ -579,6 +579,14 @@ public class GameMechanics {
                 String str = gameController.changeTilelistIntoString(promoteList);
                 g.setCurrentBoardPosition(str);
                 gameRepository.save(g);
+                int movecount = g.getMoveCount();
+                String color = "";
+                if (promoteList.get(i).getColor() == 0) {
+                    color = "WHITE";
+                } else if(promoteList.get(i).getColor() == 1) {
+                    color = "BLACK";
+                }
+                gameHistoryRepository.save(new GameHistory(movecount, str, color, "PAWN", piece, g));
             }
         }
 
@@ -591,6 +599,14 @@ public class GameMechanics {
                 String str = gameController.changeTilelistIntoString(promoteList);
                 g.setCurrentBoardPosition(str);
                 gameRepository.save(g);
+                int movecount = g.getMoveCount();
+                String color = "";
+                if (promoteList.get(i).getColor() == 0) {
+                    color = "WHITE";
+                } else if(promoteList.get(i).getColor() == 1) {
+                    color = "BLACK";
+                }
+                gameHistoryRepository.save(new GameHistory(movecount, str, color, "Pawn", piece, g));
             }
         }
 
