@@ -4,10 +4,12 @@ C:\Users\D13ZLL\Documents\Projecten\chess-project\chess-project\Backend\ChessPro
 C:\Users\D13ZLL\Documents\Projecten\chess-project\chess-project\Backend\ChessProject\src\main\java\com\example\ChessProject\ChessProjectApplication.java
 C:\Users\D13ZLL\Documents\Projecten\chess-project\chess-project\Backend\ChessProject\src\main\java\com\example\ChessProject\repository\GameRepository.java
 C:\Users\D13ZLL\Documents\Projecten\chess-project\chess-project\Backend\ChessProject\src\main\java\com\example\ChessProject\exception\ResourceNotFoundException.java
+C:\Users\D13ZLL\Documents\Projecten\chess-project\chess-project\Backend\ChessProject\src\main\java\com\example\ChessProject\repository\GameHistoryRepository.java
 C:\Users\D13ZLL\Documents\Projecten\chess-project\chess-project\Backend\ChessProject\src\main\java\com\example\ChessProject\controller\PlayerController.java
 C:\Users\D13ZLL\Documents\Projecten\chess-project\chess-project\Backend\ChessProject\src\main\java\com\example\ChessProject\Model\Player\Player.java
 C:\Users\D13ZLL\Documents\Projecten\chess-project\chess-project\Backend\ChessProject\src\main\java\com\example\ChessProject\Model\Game\Game.java
 C:\Users\D13ZLL\Documents\Projecten\chess-project\chess-project\Backend\ChessProject\src\main\java\com\example\ChessProject\controller\BoardController.java
+C:\Users\D13ZLL\Documents\Projecten\chess-project\chess-project\Backend\ChessProject\src\main\java\com\example\ChessProject\controller\GameHistoryController.java
 C:\Users\D13ZLL\Documents\Projecten\chess-project\chess-project\Backend\ChessProject\src\main\java\com\example\ChessProject\Model\Tile\Tile.java
 C:\Users\D13ZLL\Documents\Projecten\chess-project\chess-project\Backend\ChessProject\src\main\java\com\example\ChessProject\service\gameMechanics\GameMechanics.java
 C:\Users\D13ZLL\Documents\Projecten\chess-project\chess-project\Backend\ChessProject\src\main\java\com\example\ChessProject\repository\PlayerRepository.java
