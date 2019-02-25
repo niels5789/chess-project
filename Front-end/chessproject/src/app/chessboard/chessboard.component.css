@@ -39,3 +39,8 @@
   color: white;
   font-size: 40px;
 }
+
+.button-box {
+  text-align:center;
+  /*margin-top:0px;*/
+}
