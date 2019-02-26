@@ -13,4 +13,7 @@ public interface GameHistoryRepository extends JpaRepository<GameHistory, Intege
 
     @Query(value = "SELECT * FROM game_history gh WHERE gh.game_id = :gameid ORDER BY id DESC", nativeQuery = true)
     List<GameHistory> findHistoryFromGame(@Param("gameid") Integer gameid);
+
+    @Query(value = "SELECT * FROM game_history gh WHERE gh.game_id = :gameid AND count_place = :movecount", nativeQuery = true)
+    GameHistory findHistoryWhereGameAndCountPlaceAreMatched(@Param("gameid") Integer gameid, @Param("movecount") Integer movecount);
 }
