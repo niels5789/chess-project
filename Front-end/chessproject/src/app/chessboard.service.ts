@@ -4,7 +4,6 @@ import {Observable, of} from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import {Tile} from '../Tile';
 import {Player} from '../Player';
-import {any} from 'codelyzer/util/function';
 import {Game} from '../Game';
 import {GameHistory} from '../GameHistory';
 

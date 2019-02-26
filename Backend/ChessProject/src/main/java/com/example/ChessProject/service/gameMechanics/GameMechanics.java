@@ -574,7 +574,7 @@ public class GameMechanics {
             if(promoteList.get(i).getName().equals("Pawn")){
                 promoteList.get(i).setName(piece);
                 int count = g.getMoveCount();
-                count++;
+//                count++;
                 g.setMoveCount(count);
                 String str = gameController.changeTilelistIntoString(promoteList);
                 g.setCurrentBoardPosition(str);
@@ -594,7 +594,7 @@ public class GameMechanics {
             if(promoteList.get(i).getName().equals("Pawn")){
                 promoteList.get(i).setName(piece);
                 int count = g.getMoveCount();
-                count++;
+//                count++;
                 g.setMoveCount(count);
                 String str = gameController.changeTilelistIntoString(promoteList);
                 g.setCurrentBoardPosition(str);

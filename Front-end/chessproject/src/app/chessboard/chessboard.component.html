@@ -1,84 +1,4 @@
 <div class="LoggedIn"> You are now playing as:   {{player.playerName}}</div>
-<!--<div class="column">-->
-  <!--<table border="1">-->
-    <!--<tr>-->
-      <!--<th style="font-weight: bold"> Inlognaam: </th>-->
-      <!--<th> Playernaam:  </th>-->
-    <!--</tr>-->
-    <!--<tr>-->
-      <!--<th style="font-weight: normal"> {{player.username}}</th>-->
-      <!--<th><input placeholder="{{player.playerName}}" value="{{player.playerName}}" #playername /> </th>-->
-    <!--</tr>-->
-  <!--</table>-->
-  <!--<div><button class="btn" (click)="changePlayerName(playername.value)">Change settings</button> </div>-->
-  <!--<br>-->
-  <!--<br>-->
-  <!--<br>-->
-  <!--<div>-->
-    <!--<button class="btn" routerLink="">Ga terug naar de inlogpagina</button>-->
-  <!--</div>-->
-  <!--<table class="table">-->
-    <!--<tr>-->
-      <!--<th>-->
-        <!--Hoeveelste zet:-->
-      <!--</th>-->
-      <!--<th>-->
-      <!--van plek:-->
-      <!--</th>-->
-      <!--<th>-->
-      <!--naar plek:-->
-      <!--</th>-->
-      <!--<th>-->
-        <!--Door:-->
-      <!--</th>-->
-    <!--</tr>-->
-    <!--<tr *ngFor="let gamehistory of gamehistorylist">-->
-      <!--<th>-->
-        <!--{{gamehistory.countPlace}}-->
-      <!--</th>-->
-      <!--<th>-->
-        <!--{{gamehistory.van}}-->
-      <!--</th>-->
-      <!--<th>-->
-        <!--{{gamehistory.naar}}-->
-      <!--</th>-->
-      <!--<th>-->
-        <!--{{gamehistory.vanColor}}-->
-      <!--</th>-->
-    <!--</tr>-->
-
-
-  <!--</table>-->
-
-<!--</div>-->
-<!--<div class="column">-->
-  <!--<div>-->
-    <!--<h3 style="text-align: center;">U speelt nu het potje: {{lastgame.id}}</h3>-->
-  <!--</div>-->
-  <!--<div class="chessboard">-->
-    <!--<button [id]="'button' + tile.id" (click)="onclick(tile.id)"-->
-            <!--*ngFor="let tile of tilelist" [innerHTML]="getPicture(tile.id)" ngClass="{{colorPicker()}}">-->
-    <!--</button>-->
-  <!--</div>-->
-<!--</div>-->
-
-<!--<table class="table table-dark">-->
-  <!--<tr>-->
-    <!--<th style="font-weight: bold"> Inlognaam: {{player.username}}</th>-->
-
-    <!--<th>-->
-      <!--<div class="button-box col-xs-12">-->
-        <!--<input  placeholder="{{player.playerName}}" value="{{player.playerName}}" #playername />-->
-        <!--<button class="btn btn-secondary"  (click)="changePlayerName(playername.value)">Set name</button>-->
-      <!--</div>-->
-    <!--</th>-->
-  <!--</tr>-->
-
-
-
-
-
-<!--</table>-->
 
 <div class="container">
 
@@ -88,15 +8,22 @@
     <div class="col-xs-4">
       <br>
       <br>
-      <div class="button-box col-xs-12">
-        <input  placeholder="{{player.playerName}}" value="{{player.playerName}}" #playername />
-        <button class="btn btn-secondary"  (click)="changePlayerName(playername.value)">Set name</button>
-      </div>
+        <div class="button-box">
+          <div class="col-lg-6">
+          <input type="text" class="form-control" placeholder="{{player.playerName}}" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{player.playerName}}" #playername>
+          </div>
+          <div class="col-lg-6">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary btn-block" type="button" id="button-addon2" (click)="changePlayerName(playername.value)">Set name</button>
+          </div>
+          </div>
+        </div>
 
       <br>
       <br>
+      <br>
 
-      <div >
+      <div>
         <button class="btn btn-primary btn-block" (click)="resetBoard()">Start new spelletje!</button>
       </div>
 
@@ -108,17 +35,27 @@
         <button class="btn btn-primary btn-block" routerLink="">Ga terug naar de inlogpagina</button>
       </div>
 
-      <div>
-        <div [hidden]="">
-          <button class="btn btn-secondary btn-block" (click)="getPromotion(promotion.value)">getPromotion</button>
-          <label for="promotion"></label><select class="form-control btn-block" id="promotion" name="promotion" #promotion>
-          <option value="Queen">Queen</option>
-          <option value="Bishop">Bishop</option>
-          <option value="Rook">Rook</option>
-          <option value="Knight">Knight</option>
-        </select>
+      <br>
+
+      <!--<div [hidden]="">-->
+      <div class="button-box">
+
+         <!--<label for="promotion"></label>-->
+        <div class="col-xs-6">
+         <select class="form-control" id="promotion" name="promotion" #promotion>
+           <option value="Queen">Queen</option>
+           <option value="Bishop">Bishop</option>
+           <option value="Rook">Rook</option>
+           <option value="Knight">Knight</option>
+         </select>
         </div>
+      <button class="btn btn-secondary col-xs-6" (click)="getPromotion(promotion.value)">getPromotion</button>
       </div>
+
+      <br>
+      <br>
+      <br>
+            
       <div class="row">
       <table class="table" style="border-collapse: collapse;">
         <tr>
@@ -155,7 +92,6 @@
 
     </div>
     </div>
-
 
 
     <div class="col-xs-8">
