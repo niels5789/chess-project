@@ -5,105 +5,104 @@
 
     <div class="col-md-4">
       <div class="container-fluid">
-      <br>
-      <br>
+        <br>
+        <br>
         <div class="button-box">
           <div class="col-xs-6">
-          <input type="text" class="form-control" placeholder="{{player.playerName}}" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{player.playerName}}" #playername>
+            <input type="text" class="form-control" placeholder="{{player.playerName}}" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{player.playerName}}" #playername>
           </div>
           <div class="col-xs-6">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary btn-block" type="button" id="button-addon2" (click)="changePlayerName(playername.value)">Set name</button>
-          </div>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary btn-block" type="button" id="button-addon2" (click)="changePlayerName(playername.value)">Set name</button>
+            </div>
           </div>
         </div>
+        <br>
+        <br>
+        <br>
 
-      <br>
-      <br>
-      <br>
-
-      <div>
-        <button class="btn btn-primary btn-block" (click)="resetBoard()">Start new spelletje!</button>
-      </div>
-
-      <div>
-        <button class="btn btn-primary btn-block" routerLink="/gamedetails">Ga naar gameDetails</button>
-      </div>
-
-      <div>
-        <button class="btn btn-primary btn-block" routerLink="">Ga terug naar de inlogpagina</button>
-      </div>
-
-      <br>
-
-      <!--<div [hidden]="">-->
-      <div class="container-fluid">
-         <!--<label for="promotion"></label>-->
-        <div class="col-xs-6">
-             <select class="form-control" id="promotion" name="promotion" #promotion>
-               <option value="Queen">Queen</option>
-               <option value="Bishop">Bishop</option>
-               <option value="Rook">Rook</option>
-               <option value="Knight">Knight</option>
-             </select>
+        <div>
+          <button class="btn btn-primary btn-block" (click)="resetBoard()">Start new spelletje!</button>
         </div>
-      <button class="btn btn-secondary col-xs-6" (click)="getPromotion(promotion.value)">getPromotion</button>
+
+        <div>
+          <button class="btn btn-primary btn-block" routerLink="/gamedetails">Ga naar gameDetails</button>
+        </div>
+
+        <div>
+          <button class="btn btn-primary btn-block" routerLink="">Ga terug naar de inlogpagina</button>
+        </div>
+
+        <br>
+
+        <!--<div [hidden]="">-->
+        <div class="container-fluid">
+          <!--<label for="promotion"></label>-->
+          <div class="col-xs-6">
+            <select class="form-control" id="promotion" name="promotion" #promotion>
+              <option value="Queen">Queen</option>
+              <option value="Bishop">Bishop</option>
+              <option value="Rook">Rook</option>
+              <option value="Knight">Knight</option>
+            </select>
+          </div>
+          <button class="btn btn-secondary col-xs-6" (click)="getPromotion(promotion.value)">getPromotion</button>
+        </div>
+
+        <br>
+        <br>
+        <br>
+
+        <div class="row">
+          <table class="table" style="border-collapse: collapse;">
+            <tr>
+              <th>
+                Hoeveelste zet:
+              </th>
+              <th>
+                van plek:
+              </th>
+              <th>
+                naar plek:
+              </th>
+              <th>
+                Door:
+              </th>
+            </tr>
+            <tr *ngFor="let gamehistory of gamehistorylist">
+              <th>
+                {{gamehistory.countPlace}}
+              </th>
+              <th>
+                {{gamehistory.van}}
+              </th>
+              <th>
+                {{gamehistory.naar}}
+              </th>
+              <th>
+                {{gamehistory.vanColor}}
+              </th>
+            </tr>
+
+
+          </table>
+        </div>
       </div>
-
-      <br>
-      <br>
-      <br>
-            
-      <div class="row">
-      <table class="table" style="border-collapse: collapse;">
-        <tr>
-          <th>
-            Hoeveelste zet:
-          </th>
-          <th>
-            van plek:
-          </th>
-          <th>
-            naar plek:
-          </th>
-          <th>
-            Door:
-          </th>
-        </tr>
-        <tr *ngFor="let gamehistory of gamehistorylist">
-          <th>
-            {{gamehistory.countPlace}}
-          </th>
-          <th>
-            {{gamehistory.van}}
-          </th>
-          <th>
-            {{gamehistory.naar}}
-          </th>
-          <th>
-            {{gamehistory.vanColor}}
-          </th>
-        </tr>
-
-
-      </table>
-      </div>
-    </div>
     </div>
 
 
     <div class="col-md-8">
       <div class="container-fluid">
-      <div>
-      <h3 style="">U speelt nu het potje: {{lastgame.id}}</h3>
+        <div>
+          <h3 style="">U speelt nu het potje: {{lastgame.id}}</h3>
+        </div>
+        <div class="chessboard">
+          <button [id]="'button' + tile.id" (click)="onclick(tile.id)"
+                  *ngFor="let tile of tilelist" [innerHTML]="getPicture(tile.id)" ngClass="{{colorPicker()}}">
+          </button>
+          <div [innerHTML]="errorMessage" style="width: 30%; float: bottom;" class="alert alert-warning" role="alert"></div>
+        </div>
       </div>
-      <div class="chessboard">
-        <button [id]="'button' + tile.id" (click)="onclick(tile.id)"
-                *ngFor="let tile of tilelist" [innerHTML]="getPicture(tile.id)" ngClass="{{colorPicker()}}">
-        </button>
-        <div [innerHTML]="errorMessage" style="width: 30%; float: bottom;" class="alert alert-warning" role="alert"></div>
-      </div>
-    </div>
     </div>
   </div>
 </div>
