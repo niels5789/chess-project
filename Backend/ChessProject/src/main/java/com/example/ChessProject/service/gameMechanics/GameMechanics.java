@@ -13,6 +13,7 @@ import com.example.ChessProject.repository.TileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +28,6 @@ public class GameMechanics {
     GameRepository gameRepository;
     @Autowired
     GameHistoryRepository gameHistoryRepository;
-    @Autowired
-    GameController getGameController;
 
     private int turnCounter = 1;
 
@@ -44,7 +43,6 @@ public class GameMechanics {
     }
 
     public List<Tile> makeMoveIfLegal(int idvan, int idnaar, int gameid, List<Tile> tileList){
-//        List<Tile> tileList = tileRepository.findAll();
 
         boolean validMove = false;
 
@@ -57,7 +55,77 @@ public class GameMechanics {
 //      make the move
         if (validMove && !putSelfInCheck) {makeMove(idvan, idnaar, tileList, gameid);}
 
+        gameStatusCheck(idvan, idnaar, tileList, gameid);
+
         return tileRepository.findAll();
+    }
+
+    private void gameStatusCheck(int idvan, int idnaar, List<Tile> tileList, int gameId) {
+        int playerColor = tileList.get(idvan).getColor();
+        int opponentColor =  playerColor == 0 ? 1 : 0;
+        boolean opponentInCheck = false;
+        boolean opponentHasValidFollowupMove = false;
+        int idKing = -33;
+        Game g = gameRepository.findById(gameId).get();
+
+        List<Tile> playerList = new ArrayList<>();
+        List<Tile> opponentList = new ArrayList<>();
+        for(Tile tile: tileList){
+            if(tile.getColor() == playerColor) playerList.add(tile);
+            else if(tile.getColor() == opponentColor) opponentList.add(tile);
+        }
+
+        for(int i = 0; i < tileList.size(); i++) {
+            if (tileList.get(i).getName().equals("King") && tileList.get(i).getColor() == opponentColor) {
+                idKing = i;
+                break;
+            }
+        }
+
+        OUTERLOOP: for(Tile tile: opponentList){
+            for(int i = 0; i < tileList.size(); i++){
+                if(isValidMove(tile.getId(), i , tileList)){
+                    if(!selfCheck(tile.getId(),i,tileList)){
+                        opponentHasValidFollowupMove = true;
+                        break OUTERLOOP;
+                    }
+                }
+            }
+        }
+
+        if(!opponentHasValidFollowupMove){
+
+            g.setFinished(true);
+
+//          Opponent in check?
+            for (Tile tile : playerList){
+                if (isValidMove(tile.getId(), idKing, tileList)) {
+                    opponentInCheck = true;
+                    break;
+                }
+            }
+
+            if(opponentInCheck){
+
+                String winner = playerColor == 0 ? "White won" : "Black won";
+                g.setGameStatus(winner);
+                //Ophalen game
+                //Aanpassen Game object(), vervolgens opslaan
+                //aanpassen gamehistory, opslaan
+
+            } else{
+                //set game status as draw
+                g.setGameStatus("draw");
+            }
+
+            g.setCurrentBoardPosition(gameController.changeTilelistIntoString(tileList));
+            gameRepository.save(g);
+
+            String van = convertXCo(idvan, tileList) + "" + tileList.get(idvan).getyCo();
+            String naar = convertXCo(idnaar, tileList) + "" + tileList.get(idnaar).getyCo();
+
+            gameHistoryRepository.save(new GameHistory(g.getMoveCount(),  g.getCurrentBoardPosition(), playerColor == 0 ? "WHITE" : "BLACK", g.getGameStatus(), g.getGameStatus(), g));
+        }
     }
 
     private boolean selfCheck(int idvan, int idnaar, List<Tile> tileList) {
@@ -117,32 +185,10 @@ public class GameMechanics {
     }
 
     private void makeMove(int idvan, int idnaar, List<Tile> tileList, int gameid) {
-        String xVan= "";
-        switch(tileList.get(idvan).getxCo()) {
-            case 1:{xVan = "A"; break;}
-            case 2: {xVan = "B"; break;}
-            case 3: {xVan = "C"; break;}
-            case 4: {xVan = "D"; break;}
-            case 5: {xVan = "E"; break;}
-            case 6: {xVan = "F"; break;}
-            case 7: {xVan = "G"; break;}
-            case 8: {xVan = "H"; break;}
-        }
-        String xNaar= "";
-        switch(tileList.get(idnaar).getxCo()) {
-            case 1:{xNaar = "A"; break;}
-            case 2: {xNaar = "B"; break;}
-            case 3: {xNaar = "C"; break;}
-            case 4: {xNaar = "D"; break;}
-            case 5: {xNaar = "E"; break;}
-            case 6: {xNaar = "F"; break;}
-            case 7: {xNaar = "G"; break;}
-            case 8: {xNaar = "H"; break;}
-        }
 
+        String van = convertXCo(idvan, tileList) + "" + tileList.get(idvan).getyCo();
+        String naar = convertXCo(idnaar, tileList) + "" + tileList.get(idnaar).getyCo();
 
-        String van = xVan + "" + tileList.get(idvan).getyCo();
-        String naar = xNaar + "" + tileList.get(idnaar).getyCo();
         String color = "EMPTY";
 
         if(tileList.get(idvan).getColor() == 0) {
@@ -170,6 +216,45 @@ public class GameMechanics {
         g.setMoveCount(++count);
         gameRepository.save(g);
         gameHistoryRepository.save(new GameHistory(count,  g.getCurrentBoardPosition(), color, van, naar, g));
+    }
+
+    private String convertXCo(int idvan, List<Tile> tileList) {
+        String tempX = "";
+        switch (tileList.get(idvan).getxCo()) {
+            case 1: {
+                tempX = "A";
+                break;
+            }
+            case 2: {
+                tempX = "B";
+                break;
+            }
+            case 3: {
+                tempX = "C";
+                break;
+            }
+            case 4: {
+                tempX = "D";
+                break;
+            }
+            case 5: {
+                tempX = "E";
+                break;
+            }
+            case 6: {
+                tempX = "F";
+                break;
+            }
+            case 7: {
+                tempX = "G";
+                break;
+            }
+            case 8: {
+                tempX = "H";
+                break;
+            }
+        }
+        return tempX;
     }
 
     private boolean isValidMove(int idvan, int idnaar, List<Tile> tileList) {

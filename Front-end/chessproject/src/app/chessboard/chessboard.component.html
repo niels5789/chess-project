@@ -1,18 +1,17 @@
 <div class="LoggedIn"> You are now playing as:   {{player.playerName}}</div>
 
-<div class="container">
-
+<div class="container-fluid">
   <div class="row">
 
-
-    <div class="col-xs-4">
+    <div class="col-md-4">
+      <div class="container-fluid">
       <br>
       <br>
         <div class="button-box">
-          <div class="col-lg-6">
+          <div class="col-xs-6">
           <input type="text" class="form-control" placeholder="{{player.playerName}}" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{player.playerName}}" #playername>
           </div>
-          <div class="col-lg-6">
+          <div class="col-xs-6">
           <div class="input-group-append">
             <button class="btn btn-outline-secondary btn-block" type="button" id="button-addon2" (click)="changePlayerName(playername.value)">Set name</button>
           </div>
@@ -38,16 +37,15 @@
       <br>
 
       <!--<div [hidden]="">-->
-      <div class="button-box">
-
+      <div class="container-fluid">
          <!--<label for="promotion"></label>-->
         <div class="col-xs-6">
-         <select class="form-control" id="promotion" name="promotion" #promotion>
-           <option value="Queen">Queen</option>
-           <option value="Bishop">Bishop</option>
-           <option value="Rook">Rook</option>
-           <option value="Knight">Knight</option>
-         </select>
+             <select class="form-control" id="promotion" name="promotion" #promotion>
+               <option value="Queen">Queen</option>
+               <option value="Bishop">Bishop</option>
+               <option value="Rook">Rook</option>
+               <option value="Knight">Knight</option>
+             </select>
         </div>
       <button class="btn btn-secondary col-xs-6" (click)="getPromotion(promotion.value)">getPromotion</button>
       </div>
@@ -89,12 +87,13 @@
 
 
       </table>
-
+      </div>
     </div>
     </div>
 
 
-    <div class="col-xs-8">
+    <div class="col-md-8">
+      <div class="container-fluid">
       <div>
       <h3 style="">U speelt nu het potje: {{lastgame.id}}</h3>
       </div>
@@ -104,6 +103,7 @@
         </button>
         <div [innerHTML]="errorMessage" style="width: 30%; float: bottom;" class="alert alert-warning" role="alert"></div>
       </div>
+    </div>
     </div>
   </div>
 </div>
