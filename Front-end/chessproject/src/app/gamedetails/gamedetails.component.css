@@ -15,6 +15,17 @@
   vertical-align:middle;
 
 }
+.white {
+  float: left;
+  width: 25px;
+  height: 25px;
+  background-color: #999;
+  font-size:20px;
+  text-align:center;
+  display: table-cell;
+  vertical-align:middle;
+
+}
 .col-25 {
   float: left;
   width: 10%;
@@ -45,5 +56,16 @@
   text-align: center;
   background-color: #3e40af;
   color: #020202;
+
+}
+.btn.een {
+  float: left;
+  margin-left: -100px;
+  margin-top: auto;
+}
+.btn.twee {
+  float: left;
+  margin-left: -100px;
+
 
 }

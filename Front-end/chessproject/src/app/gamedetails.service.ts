@@ -29,4 +29,11 @@ export class GamedetailsService {
     };
     return this.http.put<any>(`http://localhost:8080/stringintotilelist/${gameid}`, httpOptions);
   }
+
+  getTileListGameHistory(game: number, tilelistmovecount: number): Observable<Tile[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+    };
+    return this.http.put<any>(`http://localhost:8080/gettilelistwithgameandmove/${tilelistmovecount}/${game}`, httpOptions);
+  }
 }

@@ -1,35 +1,3 @@
-<!--<h1 class="h1" > Last five games</h1>-->
-<!--<table id="fivegames" xmlns="http://www.w3.org/1999/html">-->
-  <!--<tr>-->
-    <!--<th>-->
-      <!--GameID:-->
-    <!--</th>-->
-    <!--<th *ngFor="let game of gamelist" >-->
-      <!--{{game.id}}-->
-    <!--</th>-->
-  <!--</tr>-->
-  <!--<tr>-->
-    <!--<th>-->
-      <!--Aantal zetten uitgevoerd-->
-    <!--</th>-->
-    <!--<th *ngFor="let game of gamelist" >-->
-      <!--{{game.moveCount}}-->
-    <!--</th>-->
-  <!--</tr>-->
-  <!--<tr>-->
-    <!--<th>-->
-      <!--HuidigeStand-->
-    <!--</th>-->
-      <!--<th *ngFor="let game of gamelist; let i = index;" class="chessboard">-->
-        <!--<div class="black"  *ngFor="let tile of tiletilelist1" [innerHTML]="getPicture(i, tile.id)"> </div>-->
-      <!--</th>-->
-
-  <!--</tr>-->
-
-<!--</table>-->
-<!--<div class="btn">-->
-  <!--<button class="btn" routerLink="/chessboard">Terugkeren naar potje</button>-->
-<!--</div>-->
 <h1 class="h1" > Last five games</h1>
 <table class="table" xmlns="http://www.w3.org/1999/html">
   <tr>
@@ -50,10 +18,15 @@
     <th>
       {{game.moveCount}}
     </th>
-    <th >
+    <th>
+      <div><button (click)="setHistoryGameMin(game.id, i)" class="btn een">Vorige</button> </div>
       <div class="chessboard">
-        <div class="black"  *ngFor="let tile of tiletilelist1" [innerHTML]="getPicture(i, tile.id)"> </div>
+        <div>
+          <div ngClass="{{colorPicker()}}"  *ngFor="let tile of tiletilelist1" [innerHTML]="getPicture(i, tile.id)"> </div>
+        </div>
       </div>
+      <div><button (click)="setHistoryGamePlus(game.id, i)" class="btn twee">Volgende</button> </div>
+
     </th>
   </tr>
 </table>

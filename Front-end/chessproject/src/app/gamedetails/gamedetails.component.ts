@@ -15,10 +15,15 @@ export class GamedetailsComponent implements OnInit {
 
   gamelist: Game[];
   tiletilelist1: Tile[];
+  tilelist1MoveCount: number;
   tiletilelist2: Tile[];
+  tilelist2MoveCount: number;
   tiletilelist3: Tile[];
+  tilelist3MoveCount: number;
   tiletilelist4: Tile[];
+  tilelist4MoveCount: number;
   tiletilelist5: Tile[];
+  tilelist5MoveCount: number;
 
   count: number;
   private x: number;
@@ -26,6 +31,8 @@ export class GamedetailsComponent implements OnInit {
   private nextChar: string;
   private colorPiece: number;
   private piecename: string;
+  private color = 'white';
+  private tileCounter = 0;
 
   constructor(private gamedetailsService: GamedetailsService, private storage: LocalStorageService) {
   }
@@ -85,9 +92,27 @@ export class GamedetailsComponent implements OnInit {
         console.log(err);
       }
     );
+
+    this.tilelist1MoveCount = this.gamelist[0].moveCount;
+    this.tilelist2MoveCount = this.gamelist[1].moveCount;
+    this.tilelist3MoveCount = this.gamelist[2].moveCount;
+    this.tilelist4MoveCount = this.gamelist[3].moveCount;
+    this.tilelist5MoveCount = this.gamelist[4].moveCount;
   }
 
+  colorPicker() {
 
+    if (this.tileCounter % 8 !== 0) {
+      if (this.color === 'white') {
+        this.color = 'black';
+      } else {
+        this.color = 'white';
+      }
+    }
+    this.tileCounter++;
+
+    return this.color;
+  }
   getPicture(gamenumber: number, tileid: number) {
 
     if (gamenumber === 0) {
@@ -280,5 +305,90 @@ export class GamedetailsComponent implements OnInit {
     }
 
 
+  }
+
+  setHistoryGameMin(gameid: number, index: number) {
+    if (index === 0) {
+      this.tilelist1MoveCount -= 1;
+      this.gamedetailsService.getTileListGameHistory(gameid, this.tilelist1MoveCount).subscribe(
+        tilelist => {
+          this.tiletilelist1 = tilelist;
+        }
+      );
+    }
+    if (index === 1) {
+      this.tilelist2MoveCount -= 1;
+      this.gamedetailsService.getTileListGameHistory(gameid, this.tilelist2MoveCount).subscribe(
+        tilelist => {
+          this.tiletilelist2 = tilelist;
+        }
+      );
+    }
+    if (index === 2) {
+      this.tilelist3MoveCount -= 1;
+      this.gamedetailsService.getTileListGameHistory(gameid, this.tilelist3MoveCount).subscribe(
+        tilelist => {
+          this.tiletilelist3 = tilelist;
+        }
+      );
+    }
+    if (index === 3) {
+      this.tilelist4MoveCount -= 1;
+      this.gamedetailsService.getTileListGameHistory(gameid, this.tilelist4MoveCount).subscribe(
+        tilelist => {
+          this.tiletilelist4 = tilelist;
+        }
+      );
+    }
+    if (index === 4) {
+      this.tilelist5MoveCount -= 1;
+      this.gamedetailsService.getTileListGameHistory(gameid, this.tilelist5MoveCount).subscribe(
+        tilelist => {
+          this.tiletilelist5 = tilelist;
+        }
+      );
+    }
+  }
+  setHistoryGamePlus(gameid: number, index: number) {
+    if (index === 0) {
+      this.tilelist1MoveCount += 1;
+      this.gamedetailsService.getTileListGameHistory(gameid, this.tilelist1MoveCount).subscribe(
+        tilelist => {
+          this.tiletilelist1 = tilelist;
+        }
+      );
+    }
+    if (index === 1) {
+      this.tilelist2MoveCount += 1;
+      this.gamedetailsService.getTileListGameHistory(gameid, this.tilelist2MoveCount).subscribe(
+        tilelist => {
+          this.tiletilelist2 = tilelist;
+        }
+      );
+    }
+    if (index === 2) {
+      this.tilelist3MoveCount += 1;
+      this.gamedetailsService.getTileListGameHistory(gameid, this.tilelist3MoveCount).subscribe(
+        tilelist => {
+          this.tiletilelist3 = tilelist;
+        }
+      );
+    }
+    if (index === 3) {
+      this.tilelist4MoveCount += 1;
+      this.gamedetailsService.getTileListGameHistory(gameid, this.tilelist4MoveCount).subscribe(
+        tilelist => {
+          this.tiletilelist4 = tilelist;
+        }
+      );
+    }
+    if (index === 4) {
+      this.tilelist5MoveCount += 1;
+      this.gamedetailsService.getTileListGameHistory(gameid, this.tilelist5MoveCount).subscribe(
+        tilelist => {
+          this.tiletilelist5 = tilelist;
+        }
+      );
+    }
   }
 }
