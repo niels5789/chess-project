@@ -15,6 +15,7 @@ public class Game implements Serializable {
     private int id;
     int moveCount;
     boolean isFinished;
+    String gameStatus;
     @Column(length = 500)
     String currentBoardPosition;
 
@@ -34,6 +35,7 @@ public class Game implements Serializable {
         this.isFinished = isFinished;
         this.currentBoardPosition = currentBoardPosition;
         this.player = player;
+        this.gameStatus = "Active";
     }
 
     public int getId() {
@@ -71,6 +73,14 @@ public class Game implements Serializable {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public String getGameStatus() {
+        return gameStatus;
+    }
+
+    public void setGameStatus(String gameStatus) {
+        this.gameStatus = gameStatus;
     }
 }
 

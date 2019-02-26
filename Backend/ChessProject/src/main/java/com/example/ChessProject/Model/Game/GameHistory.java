@@ -26,6 +26,7 @@ public class GameHistory implements Serializable {
     String vanColor;
     String van;
     String naar;
+    String gameStatus;
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
@@ -42,6 +43,7 @@ public class GameHistory implements Serializable {
         this.van = van;
         this.naar = naar;
         this.game = game;
+        this.gameStatus = "Active";
     }
 
     public int getId() {
@@ -95,5 +97,13 @@ public class GameHistory implements Serializable {
 
     public void setNaar(String naar) {
         this.naar = naar;
+    }
+
+    public String getGameStatus() {
+        return gameStatus;
+    }
+
+    public void setGameStatus(String gameStatus) {
+        this.gameStatus = gameStatus;
     }
 }
