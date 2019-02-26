@@ -43,7 +43,7 @@ public class GameController {
 
     Game g = gameRepository.findLastGamePlayer(player.getId());
     List<Tile> tempList = changeStringIntoList(g.getCurrentBoardPosition());
-    if( !tempList.get(idvan).getName().equals("") && tempList.get(idvan).getColor() != gm.getTurnCounter() % 2 && tempList.get(idvan).getColor() != tempList.get(idnaar).getColor() && idvan != idnaar){
+    if( !tempList.get(idvan).getName().equals("") && tempList.get(idvan).getColor() == gameRepository.findLastGamePlayer(player.getId()).getMoveCount() % 2 && tempList.get(idvan).getColor() != tempList.get(idnaar).getColor() && idvan != idnaar){
         tempList = gm.makeMoveIfLegal(idvan, idnaar, g.getId(), tempList);
         
     } else {
@@ -137,12 +137,10 @@ public class GameController {
         for (int x = 0; x < strb.length(); x++) {
             Character nextCharFake = strb.charAt(x);
             String nextStringReal = nextCharFake.toString();
-            System.out.println("Dit is x: " + x);
             if (nextStringReal.equals("|")) {
                 tilelist.get(y).setName(nameVariabele);
                 tilelist.get(y).setColor(colorVariabele);
                 y++;
-                System.out.println("Dit is y: " + y);
                 continue;
             }
             int z = y + 1;
@@ -190,7 +188,6 @@ public class GameController {
                 continue;
             }
         }
-        System.out.println("Dit is het einde");
         return tilelist;
     }
 }
