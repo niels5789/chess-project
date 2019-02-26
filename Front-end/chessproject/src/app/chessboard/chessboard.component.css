@@ -1,16 +1,11 @@
-
-
 .chessboard {
   width: 450px;
   height: 450px;
-  margin: 20px;
   border: 25px solid #333;
+  vertical-align: middle;
+  horiz-align: center;
 }
-.column {
-  float: left;
-  width: 30%;
-  margin: 50px;
-}
+
 .black {
   float: left;
   width: 50px;
@@ -20,9 +15,8 @@
   text-align:center;
   display: table-cell;
   vertical-align:middle;
-
-
 }
+
 .white {
   float: left;
   width: 50px;
@@ -33,6 +27,7 @@
   display: table-cell;
   vertical-align:middle;
 }
+
 .LoggedIn {
   text-align: center;
   background-color: #549E8B;
@@ -42,5 +37,10 @@
 
 .button-box {
   text-align:center;
-  /*margin-top:0px;*/
+}
+
+.column {
+  float: left;
+  width: 30%;
+  margin: 50px;
 }
