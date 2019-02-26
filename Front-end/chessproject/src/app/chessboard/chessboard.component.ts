@@ -133,7 +133,6 @@ export class ChessboardComponent implements OnInit {
       game => {
         this.lastgame = game;
         this.getCurrentPosition();
-        window.location.reload();
       },
       err => {
         console.log(err);
@@ -155,7 +154,7 @@ export class ChessboardComponent implements OnInit {
 
   colorPicker() {
 
-    if (this.tileCounter % 8 !== 0) {
+    if (this.tileCounter  % 8  !== 0) {
       if (this.color === 'white') {
         this.color = 'black';
       } else {
