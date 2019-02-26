@@ -73,6 +73,7 @@ export class ChessboardComponent implements OnInit {
   }
 
   onclick(thisClick: number) {
+    this.lastgame.gameStatus
     this.errorMessage = '';
     if (this.firstClick === -11) {
       if (this.tilelist[thisClick - 1].color !== 3 ) {

@@ -1,8 +1,9 @@
 export class Game {
 
-  id:number;
+  id: number;
   moveCount: number;
   isFinished: boolean;
+  gameStatus: string;
 
 }
 
