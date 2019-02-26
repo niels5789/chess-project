@@ -184,7 +184,6 @@ export class ChessboardComponent implements OnInit {
       }
     );
   }
-
 }
 
 

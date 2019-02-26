@@ -1,84 +1,4 @@
 <div class="LoggedIn"> You are now playing as:   {{player.playerName}}</div>
-<!--<div class="column">-->
-  <!--<table border="1">-->
-    <!--<tr>-->
-      <!--<th style="font-weight: bold"> Inlognaam: </th>-->
-      <!--<th> Playernaam:  </th>-->
-    <!--</tr>-->
-    <!--<tr>-->
-      <!--<th style="font-weight: normal"> {{player.username}}</th>-->
-      <!--<th><input placeholder="{{player.playerName}}" value="{{player.playerName}}" #playername /> </th>-->
-    <!--</tr>-->
-  <!--</table>-->
-  <!--<div><button class="btn" (click)="changePlayerName(playername.value)">Change settings</button> </div>-->
-  <!--<br>-->
-  <!--<br>-->
-  <!--<br>-->
-  <!--<div>-->
-    <!--<button class="btn" routerLink="">Ga terug naar de inlogpagina</button>-->
-  <!--</div>-->
-  <!--<table class="table">-->
-    <!--<tr>-->
-      <!--<th>-->
-        <!--Hoeveelste zet:-->
-      <!--</th>-->
-      <!--<th>-->
-      <!--van plek:-->
-      <!--</th>-->
-      <!--<th>-->
-      <!--naar plek:-->
-      <!--</th>-->
-      <!--<th>-->
-        <!--Door:-->
-      <!--</th>-->
-    <!--</tr>-->
-    <!--<tr *ngFor="let gamehistory of gamehistorylist">-->
-      <!--<th>-->
-        <!--{{gamehistory.countPlace}}-->
-      <!--</th>-->
-      <!--<th>-->
-        <!--{{gamehistory.van}}-->
-      <!--</th>-->
-      <!--<th>-->
-        <!--{{gamehistory.naar}}-->
-      <!--</th>-->
-      <!--<th>-->
-        <!--{{gamehistory.vanColor}}-->
-      <!--</th>-->
-    <!--</tr>-->
-
-
-  <!--</table>-->
-
-<!--</div>-->
-<!--<div class="column">-->
-  <!--<div>-->
-    <!--<h3 style="text-align: center;">U speelt nu het potje: {{lastgame.id}}</h3>-->
-  <!--</div>-->
-  <!--<div class="chessboard">-->
-    <!--<button [id]="'button' + tile.id" (click)="onclick(tile.id)"-->
-            <!--*ngFor="let tile of tilelist" [innerHTML]="getPicture(tile.id)" ngClass="{{colorPicker()}}">-->
-    <!--</button>-->
-  <!--</div>-->
-<!--</div>-->
-
-<!--<table class="table table-dark">-->
-  <!--<tr>-->
-    <!--<th style="font-weight: bold"> Inlognaam: {{player.username}}</th>-->
-
-    <!--<th>-->
-      <!--<div class="button-box col-xs-12">-->
-        <!--<input  placeholder="{{player.playerName}}" value="{{player.playerName}}" #playername />-->
-        <!--<button class="btn btn-secondary"  (click)="changePlayerName(playername.value)">Set name</button>-->
-      <!--</div>-->
-    <!--</th>-->
-  <!--</tr>-->
-
-
-
-
-
-<!--</table>-->
 
 <div class="container">
 
@@ -94,7 +14,7 @@
           </div>
           <div class="col-lg-6">
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="changePlayerName(playername.value)">Set name</button>
+            <button class="btn btn-outline-secondary btn-block" type="button" id="button-addon2" (click)="changePlayerName(playername.value)">Set name</button>
           </div>
           </div>
         </div>
@@ -115,6 +35,8 @@
         <button class="btn btn-primary btn-block" routerLink="">Ga terug naar de inlogpagina</button>
       </div>
 
+      <br>
+
       <!--<div [hidden]="">-->
       <div class="button-box">
 
@@ -129,24 +51,11 @@
         </div>
       <button class="btn btn-secondary col-xs-6" (click)="getPromotion(promotion.value)">getPromotion</button>
       </div>
+
       <br>
-
-      <!--<div class="btn-group" role="group" aria-label="Button group with nested dropdown">-->
-        <!--<button type="button" class="btn btn-secondary">1</button>-->
-        <!--<button type="button" class="btn btn-secondary">2</button>-->
-
-        <!--<div class="btn-group" role="group">-->
-          <!--<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-            <!--Dropdown-->
-          <!--</button>-->
-          <!--<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">-->
-            <!--<a class="dropdown-item" href="#">Dropdown link</a>-->
-            <!--<a class="dropdown-item" href="#">Dropdown link</a>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-
-
+      <br>
+      <br>
+            
       <div class="row">
       <table class="table" style="border-collapse: collapse;">
         <tr>
@@ -183,7 +92,6 @@
 
     </div>
     </div>
-
 
 
     <div class="col-xs-8">
