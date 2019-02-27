@@ -17,7 +17,7 @@ export class ChessboardComponent implements OnInit {
   tilelist: Tile[];
   gamehistorylist: GameHistory[];
   lastgame: Game;
-  private firstClick = -11;
+  private firstClick = -44;
   private secondClick = -22;
   player: Player;
   errorMessage = '';
@@ -73,9 +73,9 @@ export class ChessboardComponent implements OnInit {
   }
 
   onclick(thisClick: number) {
-    this.lastgame.gameStatus
+
     this.errorMessage = '';
-    if (this.firstClick === -11) {
+    if (this.firstClick === -44) {
       if (this.tilelist[thisClick - 1].color !== 3 ) {
         this.firstClick = thisClick - 1;
       }
@@ -88,12 +88,12 @@ export class ChessboardComponent implements OnInit {
           tilelist => {
             this.tilelist = tilelist;
             this.errorMessage = '';
-            this.firstClick = -11;
+            this.firstClick = -44;
             this.secondClick = -22;
             this.getGameHistory(this.lastgame);
           },
           err => {
-            this.firstClick = -11;
+            this.firstClick = -44;
             this.secondClick = -22;
             this.errorMessage = 'Not your turn';
             console.log(err);
