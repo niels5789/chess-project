@@ -1,8 +1,22 @@
 <div class="LoggedIn"> You are now playing as:   {{player.playerName}}</div>
 <div class="container-fluid">
-  <div class="row">
+  <div class="row row fluid">
 
-    <div class="col-md-4">
+    <div class="col-md-6 col-md-push-6">
+      <div class="container-fluid">
+        <div>
+          <h3 style="">Game id: {{lastgame.id}}</h3>
+        </div>
+        <div class="chessboard">
+          <button [id]="'button' + tile.id" (click)="onclick(tile.id)"
+                  *ngFor="let tile of tilelist" [innerHTML]="getPicture(tile.id)" ngClass="{{colorPicker()}}">
+          </button>
+          <div [innerHTML]="errorMessage" style="width: 30%; float: bottom;" class="alert alert-warning" role="alert"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-md-pull-6">
       <div class="container-fluid">
         <br>
         <br>
@@ -16,6 +30,7 @@
             </div>
           </div>
         </div>
+
         <br>
         <br>
         <br>
@@ -52,7 +67,7 @@
         <br>
         <br>
 
-        <div class="row">
+        <div class="row row-fluid">
           <table class="table" style="border-collapse: collapse;">
             <tr>
               <th>
@@ -82,26 +97,7 @@
                 {{gamehistory.vanColor}}
               </th>
             </tr>
-
-
           </table>
         </div>
       </div>
     </div>
-
-
-    <div class="col-md-8">
-      <div class="container-fluid">
-        <div>
-          <h3 style="">Game-id: {{lastgame.id}}</h3>
-        </div>
-        <div class="chessboard">
-          <button [id]="'button' + tile.id" (click)="onclick(tile.id)"
-                  *ngFor="let tile of tilelist" [innerHTML]="getPicture(tile.id)" ngClass="{{colorPicker()}}">
-          </button>
-          <div [innerHTML]="errorMessage" style="width: 30%; float: bottom;" class="alert alert-warning" role="alert"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

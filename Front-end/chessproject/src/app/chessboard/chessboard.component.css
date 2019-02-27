@@ -29,14 +29,14 @@
 }
 
 .LoggedIn {
-  text-align: center;
+  text-align: left;
   background-color: #549E8B;
   color: white;
   font-size: 40px;
 }
 
 .button-box {
-  text-align:center;
+  text-align:left;
 }
 
 .column {

@@ -53,15 +53,17 @@ public class GameMechanics {
         boolean putSelfInCheck = selfCheck(idvan, idnaar, tileList);
 
 //      make the move
-        if (validMove && !putSelfInCheck) {makeMove(idvan, idnaar, tileList, gameid);}
+        if (validMove && !putSelfInCheck) {
+            makeMove(idvan, idnaar, tileList, gameid);
+            gameStatusCheck(idnaar, tileList, gameid);
+        }
 
-        gameStatusCheck(idvan, idnaar, tileList, gameid);
 
         return tileRepository.findAll();
     }
 
-    private void gameStatusCheck(int idvan, int idnaar, List<Tile> tileList, int gameId) {
-        int playerColor = tileList.get(idvan).getColor();
+    private void gameStatusCheck(int idnaar, List<Tile> tileList, int gameId) {
+        int playerColor = tileList.get(idnaar).getColor();
         int opponentColor =  playerColor == 0 ? 1 : 0;
         boolean opponentInCheck = false;
         boolean opponentHasValidFollowupMove = false;
@@ -82,10 +84,16 @@ public class GameMechanics {
             }
         }
 
-        OUTERLOOP: for(Tile tile: opponentList){
+        List<Tile> newOpponentList = new ArrayList<>();
+        for(Tile tile: tileList){
+            if(tile.getColor() == opponentColor) newOpponentList.add(tile);
+        }
+        System.out.println("color opponent: " + opponentColor);
+        System.out.println("oppponent list: " + opponentList);
+        OUTERLOOP: for(Tile tile: newOpponentList){
             for(int i = 0; i < tileList.size(); i++){
-                if(isValidMove(tile.getId()-1, i , tileList)){
-                    if(!selfCheck(tile.getId()-1,i,tileList)){
+                if(isValidMove(tile.getId() - 1 , i, tileList)){
+                    if(!selfCheck(tile.getId() - 1 , i, tileList)){
                         opponentHasValidFollowupMove = true;
                         break OUTERLOOP;
                     }
@@ -93,13 +101,17 @@ public class GameMechanics {
             }
         }
 
+        System.out.println(" opponent  has valid move: " + opponentHasValidFollowupMove);
+
         if(!opponentHasValidFollowupMove){
 
             g.setFinished(true);
 
 //          Opponent in check?
             for (Tile tile : playerList){
-                if (isValidMove(tile.getId()-1, idKing, tileList)) {
+
+                if (isValidMove(tile.getId() - 1 , idKing, tileList)) {
+
                     opponentInCheck = true;
                     break;
                 }
@@ -109,22 +121,17 @@ public class GameMechanics {
 
                 String winner = playerColor == 0 ? "White won" : "Black won";
                 g.setGameStatus(winner);
-                //Ophalen game
-                //Aanpassen Game object(), vervolgens opslaan
-                //aanpassen gamehistory, opslaan
+
 
             } else{
-                //set game status as draw
                 g.setGameStatus("draw");
             }
 
             g.setCurrentBoardPosition(gameController.changeTilelistIntoString(tileList));
             gameRepository.save(g);
 
-            String van = convertXCo(idvan, tileList) + "" + tileList.get(idvan).getyCo();
-            String naar = convertXCo(idnaar, tileList) + "" + tileList.get(idnaar).getyCo();
-
             gameHistoryRepository.save(new GameHistory(g.getMoveCount(),  g.getCurrentBoardPosition(), playerColor == 0 ? "WHITE" : "BLACK", "CHECKMATE", "BY", g));
+
         }
     }
 
@@ -263,6 +270,7 @@ public class GameMechanics {
 
         boolean validMove = false;
 
+        //change still nessisary?
         if( idvan != idnaar && (tileList.get(idvan).getColor() != tileList.get(idnaar).getColor() || tileList.get(idnaar).getName().equals(""))) {
 
 
