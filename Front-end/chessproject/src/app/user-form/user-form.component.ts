@@ -13,6 +13,7 @@ export class UserFormComponent implements OnInit {
 
   errorMessage = '';
   error: string;
+  alertmessage = false;
 
 
   constructor(public fb: FormBuilder, private loginService: LoginService) {
@@ -24,6 +25,7 @@ export class UserFormComponent implements OnInit {
   });
 
   ngOnInit() {
+    this.alertmessage = false;
   }
   public savePlayer(event) {
 
@@ -34,13 +36,19 @@ export class UserFormComponent implements OnInit {
 
     this.loginService.savePlayer(username, password).subscribe(
       test => {
+        this.alertmessage = true;
         this.errorMessage = 'Uw account is aangemaakt';
       },
 
       err => {
+        this.alertmessage = true;
         this.errorMessage = 'Het is helaas niet gelukt om een account aan te maken. Probeer het nog eens';
       }
     );
 
+  }
+
+  resetFlags() {
+    this.alertmessage = false;
   }
 }

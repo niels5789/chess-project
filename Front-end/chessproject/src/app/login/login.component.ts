@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   player: Player;
   loggedInCorrect = false;
   loggedInIncorrect = false;
+  register = false;
 
   constructor(private loginService: LoginService, private storage: LocalStorageService) { }
 
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
         if (result.id > 0) {
           this.loggedInCorrect = true;
           this.storage.storeUser(result);
+          this.player = this.storage.getStoredUser();
         } else {
           this.loggedInIncorrect = true;
         }
@@ -34,8 +36,10 @@ export class LoginComponent implements OnInit {
     );
   }
 
+
   resetFlags() {
     this.loggedInIncorrect = false;
     this.loggedInCorrect = false;
+    this.register = false;
   }
 }
