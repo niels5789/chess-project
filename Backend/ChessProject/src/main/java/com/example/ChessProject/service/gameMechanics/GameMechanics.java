@@ -92,13 +92,8 @@ public class GameMechanics {
         System.out.println("oppponent list: " + opponentList);
         OUTERLOOP: for(Tile tile: newOpponentList){
             for(int i = 0; i < tileList.size(); i++){
-                if(tile.getId() == 50 && i == 18){
-                    System.out.println("niks");
-                };
                 if(isValidMove(tile.getId() - 1 , i, tileList)){
                     if(!selfCheck(tile.getId() - 1 , i, tileList)){
-
-
                         opponentHasValidFollowupMove = true;
                         break OUTERLOOP;
                     }
@@ -114,7 +109,9 @@ public class GameMechanics {
 
 //          Opponent in check?
             for (Tile tile : playerList){
+
                 if (isValidMove(tile.getId() - 1 , idKing, tileList)) {
+
                     opponentInCheck = true;
                     break;
                 }
@@ -133,7 +130,8 @@ public class GameMechanics {
             g.setCurrentBoardPosition(gameController.changeTilelistIntoString(tileList));
             gameRepository.save(g);
 
-            gameHistoryRepository.save(new GameHistory(g.getMoveCount(),  g.getCurrentBoardPosition(), playerColor == 0 ? "WHITE" : "BLACK", "Check Mate", "By", g));
+            gameHistoryRepository.save(new GameHistory(g.getMoveCount(),  g.getCurrentBoardPosition(), playerColor == 0 ? "WHITE" : "BLACK", "CHECKMATE", "BY", g));
+
         }
     }
 
