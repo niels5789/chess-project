@@ -84,8 +84,8 @@ public class GameMechanics {
 
         OUTERLOOP: for(Tile tile: opponentList){
             for(int i = 0; i < tileList.size(); i++){
-                if(isValidMove(tile.getId(), i , tileList)){
-                    if(!selfCheck(tile.getId(),i,tileList)){
+                if(isValidMove(tile.getId()-1, i , tileList)){
+                    if(!selfCheck(tile.getId()-1,i,tileList)){
                         opponentHasValidFollowupMove = true;
                         break OUTERLOOP;
                     }
@@ -99,7 +99,7 @@ public class GameMechanics {
 
 //          Opponent in check?
             for (Tile tile : playerList){
-                if (isValidMove(tile.getId(), idKing, tileList)) {
+                if (isValidMove(tile.getId()-1, idKing, tileList)) {
                     opponentInCheck = true;
                     break;
                 }
@@ -124,7 +124,7 @@ public class GameMechanics {
             String van = convertXCo(idvan, tileList) + "" + tileList.get(idvan).getyCo();
             String naar = convertXCo(idnaar, tileList) + "" + tileList.get(idnaar).getyCo();
 
-            gameHistoryRepository.save(new GameHistory(g.getMoveCount(),  g.getCurrentBoardPosition(), playerColor == 0 ? "WHITE" : "BLACK", g.getGameStatus(), g.getGameStatus(), g));
+            gameHistoryRepository.save(new GameHistory(g.getMoveCount(),  g.getCurrentBoardPosition(), playerColor == 0 ? "WHITE" : "BLACK", "CHECKMATE", "BY", g));
         }
     }
 

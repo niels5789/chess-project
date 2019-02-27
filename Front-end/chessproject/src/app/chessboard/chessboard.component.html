@@ -1,5 +1,4 @@
 <div class="LoggedIn"> You are now playing as:   {{player.playerName}}</div>
-
 <div class="container-fluid">
   <div class="row">
 
@@ -94,7 +93,7 @@
     <div class="col-md-8">
       <div class="container-fluid">
         <div>
-          <h3 style="">U speelt nu het potje: {{lastgame.id}}</h3>
+          <h3 style="">Game-id: {{lastgame.id}}</h3>
         </div>
         <div class="chessboard">
           <button [id]="'button' + tile.id" (click)="onclick(tile.id)"

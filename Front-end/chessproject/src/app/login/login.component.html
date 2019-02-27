@@ -1,20 +1,40 @@
-<div class="singinbox" [hidden]="loggedInCorrect || loggedInIncorrect">
-  <form class="form-signin" style="" xmlns="http://www.w3.org/1999/html">
-    <br>
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Gebruikersnaam" required autofocus #username>
 
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Wachtwoord" required #password>
+<div class="jumbotron overlay">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 offset-sm-3">
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="validateUser(username.value, password.value)">Login bij  </button>
-    <button class="btn btn-lg btn-primary btn-block" routerLink="aanmelden" type="submit">Registeren</button>
-  </form>
-</div>
-<div [hidden]="!loggedInCorrect">
-  <button class="btn btn-lg btn-primary btn-block" type="submit" routerLink="chessboard"> Continue </button>
-</div>
-<div [hidden]="!loggedInIncorrect">
-  <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="resetFlags()"> Incorrect login go back </button>
-</div>
+
+        <div class="form-group" [hidden]="loggedInCorrect || loggedInIncorrect || register">
+          <h2>Login bij CHESS online</h2>
+          <form class="form-signin" style="" xmlns="http://www.w3.org/1999/html">
+            <br>
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Gebruikersnaam" required autofocus #username>
+
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Wachtwoord" required #password>
+            <br>
+            <button class="btn btn-primary" type="submit" (click)="validateUser(username.value, password.value)">Login bij  </button>
+
+            <button class="btn btn-link"  (click)="register = true" type="submit">Of registreer</button>
+          </form>
+        </div>
+        <div [hidden]="!loggedInCorrect">
+          <button class="btn btn-lg btn-primary btn-block" type="submit" routerLink="chessboard"> Continue </button>
+        </div>
+        <div [hidden]="!loggedInIncorrect">
+          <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="resetFlags()"> Incorrect login go back </button> <br>
+        </div>
+        <div [hidden]="!register">
+          <app-user-form> </app-user-form><br>
+          <div>
+            <button class="btn" (click)="resetFlags()"> Ga terug naar inlogpagina</button>
+          </div> <br> <br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
