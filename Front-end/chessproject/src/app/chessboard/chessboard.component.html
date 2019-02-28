@@ -64,40 +64,44 @@
         </div>
 
         <br>
-        <br>
-        <br>
 
-        <div class="row row-fluid">
-          <table class="table" style="border-collapse: collapse;">
-            <tr>
-              <th>
-                Hoeveelste zet:
-              </th>
-              <th>
-                van plek:
-              </th>
-              <th>
-                naar plek:
-              </th>
-              <th>
-                Door:
-              </th>
-            </tr>
-            <tr *ngFor="let gamehistory of gamehistorylist">
-              <th>
-                {{gamehistory.countPlace}}
-              </th>
-              <th>
-                {{gamehistory.van}}
-              </th>
-              <th>
-                {{gamehistory.naar}}
-              </th>
-              <th>
-                {{gamehistory.vanColor}}
-              </th>
-            </tr>
-          </table>
+        <h4>Move List</h4>
+        <div class="last-move-scroll" data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+          <!--<h4 id="fat">Last Moves</h4>-->
+          <div class="row row-fluid">
+            <table class="table" style="border-collapse: collapse;">
+              <tr>
+                <th>
+                  Hoeveelste zet:
+                </th>
+                <th>
+                  van plek:
+                </th>
+                <th>
+                  naar plek:
+                </th>
+                <th>
+                  Door:
+                </th>
+              </tr>
+              <tr *ngFor="let gamehistory of gamehistorylist">
+                <th>
+                  {{gamehistory.countPlace}}
+                </th>
+                <th>
+                  {{gamehistory.van}}
+                </th>
+                <th>
+                  {{gamehistory.naar}}
+                </th>
+                <th>
+                  {{gamehistory.vanColor}}
+                </th>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</div>

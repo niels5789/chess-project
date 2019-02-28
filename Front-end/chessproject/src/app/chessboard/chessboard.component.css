@@ -44,3 +44,27 @@
   width: 30%;
   margin: 50px;
 }
+
+.last-move-scroll {
+   position: relative;
+   height: 200px;
+   margin-top: .5rem;
+   overflow: auto;
+ }
+
+.last-move-scroll {
+  position: relative;
+  height: 200px;
+  margin-top: .5rem;
+  overflow: auto;
+}
+
+.row{
+  width: 95%;
+  /*margin-left: 10px;*/
+  align-items: center;
+}
+
+th {
+  text-align: center;
+}
