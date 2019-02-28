@@ -6,6 +6,7 @@ import {LocalStorageService} from '../local-storage.service';
 import {LoginService} from '../login.service';
 import {Game} from '../../Game';
 import {GameHistory} from '../../GameHistory';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-chessboard',
@@ -25,13 +26,14 @@ export class ChessboardComponent implements OnInit {
   private tileCounter = 0;
 
 
-  constructor(private chessBoardService: ChessBoardService, private loginService: LoginService, private storage: LocalStorageService) {
+  constructor(private chessBoardService: ChessBoardService,
+              private loginService: LoginService,
+              private storage: LocalStorageService) {
   }
 
   ngOnInit() {
     this.player = this.storage.getStoredUser();
     this.getLastGame();
-
 
   }
 
@@ -183,6 +185,10 @@ export class ChessboardComponent implements OnInit {
         this.gamehistorylist = gamehistory;
       }
     );
+  }
+
+  logout() {
+    this.storage.logOutUser();
   }
 }
 

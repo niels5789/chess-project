@@ -4,6 +4,7 @@ import {GamedetailsService} from '../gamedetails.service';
 import {LocalStorageService} from '../local-storage.service';
 import {Tile} from '../../Tile';
 import {ChessBoardService} from '../chessboard.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-gamedetails',
@@ -29,16 +30,12 @@ export class GamedetailsComponent implements OnInit {
   tileCounter = 0;
   stringid: number;
 
-  constructor(private gamedetailsService: GamedetailsService, private storage: LocalStorageService) {
+  constructor(private gamedetailsService: GamedetailsService,
+              private storage: LocalStorageService) {
   }
 
   ngOnInit() {
-    // this.gamelist = null;
-    // this.tiletilelist1 = null;
-    // this.tiletilelist2 = null;
-    // this.tiletilelist3 = null;
-    // this.tiletilelist4 = null;
-    // this.tiletilelist5 = null;
+
 
     this.gamedetailsService.getGamesPlayer(this.storage.getStoredUser()).subscribe(
       gamelist => {

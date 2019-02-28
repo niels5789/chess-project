@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {LocalStorageService} from './local-storage.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -9,11 +11,14 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
 
 
-  constructor() {
+  constructor(private router: Router, private storage: LocalStorageService) {
 
   }
 
   ngOnInit() {
+    if (this.storage.getStoredUser() == null) {
+      this.router.navigateByUrl('');
+    }
   }
 
 }
