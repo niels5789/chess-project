@@ -47,7 +47,7 @@ public class GameMechanics {
         boolean validMove = false;
 
 //      check if the move is legal
-        validMove = isValidMove(idvan, idnaar, tileList);
+        validMove = isValidMove(idvan, idnaar, tileList, gameid);
 
 //      check if move will cause check
         boolean putSelfInCheck = selfCheck(idvan, idnaar, tileList);
@@ -88,11 +88,10 @@ public class GameMechanics {
         for(Tile tile: tileList){
             if(tile.getColor() == opponentColor) newOpponentList.add(tile);
         }
-        System.out.println("color opponent: " + opponentColor);
-        System.out.println("oppponent list: " + opponentList);
+
         OUTERLOOP: for(Tile tile: newOpponentList){
             for(int i = 0; i < tileList.size(); i++){
-                if(isValidMove(tile.getId() - 1 , i, tileList)){
+                if(isValidMove(tile.getId() - 1 , i, tileList, -42)){
                     if(!selfCheck(tile.getId() - 1 , i, tileList)){
                         opponentHasValidFollowupMove = true;
                         break OUTERLOOP;
@@ -101,8 +100,6 @@ public class GameMechanics {
             }
         }
 
-        System.out.println(" opponent  has valid move: " + opponentHasValidFollowupMove);
-
         if(!opponentHasValidFollowupMove){
 
             g.setFinished(true);
@@ -110,7 +107,7 @@ public class GameMechanics {
 //          Opponent in check?
             for (Tile tile : playerList){
 
-                if (isValidMove(tile.getId() - 1 , idKing, tileList)) {
+                if (isValidMove(tile.getId() - 1 , idKing, tileList, -42)) {
 
                     opponentInCheck = true;
                     break;
@@ -184,7 +181,7 @@ public class GameMechanics {
 
 //        for all opponents tiles check for legal move to king tile
         for(Tile tile: newOpponentList){
-                if (isValidMove((tile.getId()-1), idKing, newList)) {
+                if (isValidMove((tile.getId()-1), idKing, newList, 42)) {
                    return true;}
         }
 
@@ -264,7 +261,7 @@ public class GameMechanics {
         return tempX;
     }
 
-    private boolean isValidMove(int idvan, int idnaar, List<Tile> tileList) {
+    private boolean isValidMove(int idvan, int idnaar, List<Tile> tileList, int gameid) {
 
         int x1, y1, x2, y2;
 
@@ -285,7 +282,7 @@ public class GameMechanics {
 
             switch (Piece) {
                 case "Pawn":
-                    validMove = validPawnMove(x1, y1, x2, y2, idvan, idnaar, tileList);
+                    validMove = validPawnMove(x1, y1, x2, y2, idvan, idnaar, tileList, gameid);
                     break;
                 case "Rook":
                     validMove = validRookMove(x1, y1, x2, y2, idvan, idnaar, tileList);
@@ -629,9 +626,12 @@ public class GameMechanics {
         return valid;
     }
 
-    private boolean validPawnMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> tilelist) {
+    private boolean validPawnMove(int x1, int y1, int x2, int y2, int idvan, int idnaar, List<Tile> tilelist, int gameid) {
         boolean valid = false;
         int color = tilelist.get(idvan).getColor();
+        int opponentColor = color == 0 ? 1 : 0;
+        List<GameHistory> historyList = gameHistoryRepository.findHistoryFromGame(gameid);
+        int lastTurnIndex = historyList.size() - 1;
 
 
         if(tilelist.get(idnaar).getName().equals("")) {
@@ -647,7 +647,34 @@ public class GameMechanics {
                 valid = true;
             }
 
-//            if (color == 0 && (x2 == x1 -1 || x2 == x1 + 1)&& y2 == y1 + 2) {}
+//            en-passant slaan!!!
+            if(lastTurnIndex >= 0) {
+                GameHistory lastTurnHistory = historyList.get(lastTurnIndex);
+                String lastTurnString = lastTurnHistory.getBoardPosition();
+                List<Tile> lastTurnList = gameController.changeStringIntoList(lastTurnString);
+
+                if (color == 0 && (x2 == x1 - 1 || x2 == x1 + 1) && y1 == 5 && y2 == 6) {
+                    if (tilelist.get(idnaar - 8).getColor() == opponentColor && tilelist.get(idnaar - 8).getName().equals("Pawn")) {
+                        if (lastTurnList.get(idnaar - 8).getName().equals("") && lastTurnList.get(idnaar + 8).getName().equals("Pawn") && tilelist.get(idnaar + 8).getName().equals("")) {
+                            valid = true;
+                            tilelist.get(idnaar - 8).setName("");
+                            tilelist.get(idnaar - 8).setColor(3);
+                        }
+                    }
+                }
+
+                if (color == 1 && (x2 == x1 - 1 || x2 == x1 + 1) && y1 == 4 && y2 == 3) {
+                    if (tilelist.get(idnaar + 8).getColor() == opponentColor && tilelist.get(idnaar + 8).getName().equals("Pawn")) {
+                        if (lastTurnList.get(idnaar + 8).getName().equals("") && lastTurnList.get(idnaar - 8).getName().equals("Pawn") && tilelist.get(idnaar - 8).getName().equals("")) {
+                            valid = true;
+                            tilelist.get(idnaar + 8).setName("");
+                            tilelist.get(idnaar + 8).setColor(3);
+                        }
+                    }
+                }
+            }
+
+            // TileList moet nu opgeslagen worden! NIES VERGETEN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         } else { // taking enemy piece
             if (color == 0 && ((y2 == y1 + 1)&&( x2 == x1 - 1|| x2 == x1 + 1 )) || color == 1 && ((y2 == y1 - 1) && ( x2 == x1 - 1|| x2 == x1 + 1 ))){
