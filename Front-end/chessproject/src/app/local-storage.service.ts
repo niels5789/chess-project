@@ -18,4 +18,8 @@ export class LocalStorageService {
     return this.storage.get('signedInPlayer');
   }
 
+  public logOutUser() {
+     localStorage.removeItem('signedInPlayer');
+  }
+
 }

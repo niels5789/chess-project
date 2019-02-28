@@ -60,7 +60,7 @@ public class PlayerController {
     @PutMapping("/checkplayer/{username}/{password}")
     public ResponseEntity<Player> checkPlayer(@PathVariable("username") String username,
                                              @PathVariable("password") String password) {
-        Player player = new Player(username, password);
+        Player player = new Player(username, password, username);
         if (playerRepository.findByUsername(username) == null) {
             playerRepository.save(player);
 

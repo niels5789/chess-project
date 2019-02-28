@@ -6,6 +6,7 @@
 
 
         <div class="form-group" [hidden]="loggedInCorrect || loggedInIncorrect || register">
+          <br>
           <h2>Login bij CHESS online</h2>
           <form class="form-signin" style="" xmlns="http://www.w3.org/1999/html">
             <br>
@@ -21,10 +22,14 @@
           </form>
         </div>
         <div [hidden]="!loggedInCorrect">
-          <button class="btn btn-lg btn-primary btn-block" type="submit" routerLink="chessboard"> Continue </button>
+          <h2 class="h2"> Welkom {{firstName}} </h2>
+          <br>
+          <button type="button" class="btn btn-lg btn-primary btn-block" routerLink="/chessboard">Ga nu door naar uw laatste schaakspel</button>
+          <br><br>
         </div>
         <div [hidden]="!loggedInIncorrect">
-          <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="resetFlags()"> Incorrect login go back </button> <br>
+          <h3>Tijdens het inloggen is er iets fout gegaan</h3>
+          <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="resetFlags()"> Probeer het nogmaals </button> <br>
         </div>
         <div [hidden]="!register">
           <app-user-form> </app-user-form><br>

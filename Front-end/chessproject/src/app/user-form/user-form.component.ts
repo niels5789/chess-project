@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {LoginService} from '../login.service';
 import {Player} from '../../Player';
+import sha1 from 'sha1';
 
 @Component({
   selector: 'app-user-form',
@@ -34,7 +35,7 @@ export class UserFormComponent implements OnInit {
 
     this.errorMessage = '';
 
-    this.loginService.savePlayer(username, password).subscribe(
+    this.loginService.savePlayer(username, sha1(password)).subscribe(
       test => {
         this.alertmessage = true;
         this.errorMessage = 'Uw account is aangemaakt';
