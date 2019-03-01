@@ -30,7 +30,7 @@
 
 .LoggedIn {
   text-align: left;
-  background-color: #549E8B;
+  background-color: #274257;
   color: white;
   font-size: 40px;
 }
@@ -67,4 +67,42 @@
 
 th {
   text-align: center;
+}
+
+.table-fixed tbody {
+  height: 200px;
+  overflow-y: auto;
+  width: 100%;
+}
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed tr,
+.table-fixed td,
+.table-fixed th {
+  display: block;
+}
+.table-fixed tr:after {
+  content: "";
+  display: block;
+  visibility: hidden;
+  clear: both;
+  text-align: center;
+}
+.table-fixed tbody td,
+.table-fixed thead > tr > th {
+  float: left;
+  text-align: center;
+}
+
+.table > thead > tr > th,
+.table > thead > tr > td {
+  font-size: .9em;
+  font-weight: 400;
+  border-bottom: 0;
+  letter-spacing: 1px;
+  vertical-align: top;
+  padding: 8px;
+  background: #7EB5D6;
+  text-transform: uppercase;
+  color: #ffffff;
 }

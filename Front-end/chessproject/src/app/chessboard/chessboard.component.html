@@ -1,5 +1,3 @@
-
-
 <div class="LoggedIn"> You are now playing as:   {{player.playerName}}</div>
 <div class="container-fluid">
   <div class="row row fluid">
@@ -67,41 +65,54 @@
         <br>
 
         <h4>Move List</h4>
-        <div class="last-move-scroll" data-spy="scroll" data-target="#navbar-example2" data-offset="0">
-          <!--<h4 id="fat">Last Moves</h4>-->
-          <div class="row row-fluid">
-            <table class="table" style="border-collapse: collapse;">
-              <tr>
-                <th>
-                  Hoeveelste zet:
-                </th>
-                <th>
-                  van plek:
-                </th>
-                <th>
-                  naar plek:
-                </th>
-                <th>
-                  Door:
-                </th>
-              </tr>
-              <tr *ngFor="let gamehistory of gamehistorylist">
-                <th>
-                  {{gamehistory.countPlace}}
-                </th>
-                <th>
-                  {{gamehistory.van}}
-                </th>
-                <th>
-                  {{gamehistory.naar}}
-                </th>
-                <th>
-                  {{gamehistory.vanColor}}
-                </th>
-              </tr>
-            </table>
-          </div>
-        </div>
+        <table class="table table-fixed">
+          <thead>
+          <tr>
+            <th class="col-xs-1">
+              zet
+            </th>
+            <th class="col-xs-5">
+              van
+            </th>
+            <th class="col-xs-3">
+              naar
+            </th>
+            <th class="col-xs-3">
+              door
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let gamehistory of gamehistorylist">
+            <td class="col-xs-1">
+              {{gamehistory.countPlace}}
+            </td>
+            <td class="col-xs-5">
+              {{gamehistory.van}}
+            </td>
+            <td class="col-xs-3">
+              {{gamehistory.naar}}
+            </td>
+            <td class="col-xs-3">
+              {{gamehistory.vanColor}}
+            </td>
+          </tr>
+          <!--<tr>-->
+            <!--<td class="col-xs-1">1</td>-->
+            <!--<td class="col-xs-5">George Washington</td>-->
+            <!--<td class="col-xs-3">two</td>-->
+            <!--<td class="col-xs-3">1789-1797</td>-->
+          <!--</tr>-->
+          <!--<tr>-->
+            <!--<td class="col-xs-1">2</td>-->
+            <!--<td class="col-xs-5">John Adams</td>-->
+            <!--<td class="col-xs-3">one</td>-->
+            <!--<td class="col-xs-3">1797-1801</td>-->
+          <!--</tr>-->
+          </tbody>
+        </table>
+
+
       </div>
     </div>
   </div>
