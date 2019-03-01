@@ -14,6 +14,7 @@ export class UserFormComponent implements OnInit {
 
   errorMessage = '';
   error: string;
+  goodMessage = '';
   alertmessage = false;
 
 
@@ -37,12 +38,12 @@ export class UserFormComponent implements OnInit {
 
     this.loginService.savePlayer(username, sha1(password)).subscribe(
       test => {
-        this.alertmessage = true;
-        this.errorMessage = 'Uw account is aangemaakt';
+        this.errorMessage = '';
+        this.goodMessage = 'Uw account is aangemaakt';
       },
 
       err => {
-        this.alertmessage = true;
+        this.goodMessage = '';
         this.errorMessage = 'Het is helaas niet gelukt om een account aan te maken. Probeer het nog eens';
       }
     );

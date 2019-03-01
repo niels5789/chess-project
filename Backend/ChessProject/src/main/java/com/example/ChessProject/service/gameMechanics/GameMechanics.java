@@ -137,8 +137,7 @@ public class GameMechanics {
         List<Tile> newOpponentList = new ArrayList<>();
         int idKing = -11;
 
-//        create clone list
-        for(Tile tile: tileList){
+        for(Tile tile: tileList){ /*create clone list*/
             newList.add(tile.clone());
         }
 
@@ -153,30 +152,19 @@ public class GameMechanics {
             }
         }
 
-//        make move
+//        make hypothetical move
         String tempName = newList.get(idvan).getName();
         int tempColor = newList.get(idvan).getColor();
-
         newList.get(idnaar).setName(tempName);
         newList.get(idnaar).setColor(tempColor);
-
         newList.get(idvan).setName("");
 
-
-        for(int i = 0; i < newList.size(); i++) {
-//            make tile list of enemy pieces
-            if (!newList.get(i).getName().equals("") && newList.get(i).getColor() == opponentColor) {
-                newOpponentList.add(newList.get(i));
-            }
+        for(int i = 0; i < newList.size(); i++) { /*make tile list of enemy pieces*/
+            if (!newList.get(i).getName().equals("") && newList.get(i).getColor() == opponentColor) { newOpponentList.add(newList.get(i)); }
         }
 
-        for(int i = 0; i < newList.size(); i++) {
-
-//            find player king id
-            if(newList.get(i).getName().equals("King") && newList.get(i).getColor() == playerColor){
-                idKing = i;
-                break;
-            }
+        for(int i = 0; i < newList.size(); i++) { /*find player king id*/
+            if(newList.get(i).getName().equals("King") && newList.get(i).getColor() == playerColor){ idKing = i; break;}
         }
 
 //        for all opponents tiles check for legal move to king tile
@@ -262,23 +250,13 @@ public class GameMechanics {
     }
 
     private boolean isValidMove(int idvan, int idnaar, List<Tile> tileList, int gameid) {
-
         int x1, y1, x2, y2;
-
         boolean validMove = false;
 
-        //change still nessisary?
         if( idvan != idnaar && (tileList.get(idvan).getColor() != tileList.get(idnaar).getColor() || tileList.get(idnaar).getName().equals(""))) {
 
-
-            // get coordinates
-            x1 = getX(idvan, tileList);
-            y1 = getY(idvan, tileList);
-            x2 = getX(idnaar, tileList);
-            y2 = getY(idnaar, tileList);
-
+            x1 = getX(idvan, tileList); y1 = getY(idvan, tileList); x2 = getX(idnaar, tileList); y2 = getY(idnaar, tileList);
             String Piece = tileList.get(idvan).getName();
-
 
             switch (Piece) {
                 case "Pawn":
@@ -647,7 +625,7 @@ public class GameMechanics {
                 valid = true;
             }
 
-//            en-passant slaan!!!
+//            en-passant slaan
             if(lastTurnIndex >= 0) {
                 GameHistory lastTurnHistory = historyList.get(lastTurnIndex);
                 String lastTurnString = lastTurnHistory.getBoardPosition();
@@ -674,15 +652,11 @@ public class GameMechanics {
                 }
             }
 
-            // TileList moet nu opgeslagen worden! NIES VERGETEN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-        } else { // taking enemy piece
+        } else { // slaan
             if (color == 0 && ((y2 == y1 + 1)&&( x2 == x1 - 1|| x2 == x1 + 1 )) || color == 1 && ((y2 == y1 - 1) && ( x2 == x1 - 1|| x2 == x1 + 1 ))){
                 valid = true;
             }
         }
-
-
         return valid;
     }
 

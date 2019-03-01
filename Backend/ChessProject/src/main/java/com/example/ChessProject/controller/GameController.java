@@ -39,11 +39,13 @@ public class GameController {
 
     @ResponseBody
     @PutMapping("/game/{idvan}/{idnaar}")
-    public ResponseEntity<List<Tile>> changeBoard( @RequestBody Player player, @PathVariable(value = "idvan") int idvan, @PathVariable(value = "idnaar") int idnaar) throws Exception {
+    public ResponseEntity<List<Tile>> changeBoard( @RequestBody Player player, @PathVariable(value = "idvan")
+            int idvan, @PathVariable(value = "idnaar") int idnaar) throws Exception {
 
     Game g = gameRepository.findLastGamePlayer(player.getId());
     List<Tile> tempList = changeStringIntoList(g.getCurrentBoardPosition());
-    if( !tempList.get(idvan).getName().equals("") && tempList.get(idvan).getColor() == gameRepository.findLastGamePlayer(player.getId()).getMoveCount() % 2 && tempList.get(idvan).getColor() != tempList.get(idnaar).getColor() && idvan != idnaar){
+    if( !tempList.get(idvan).getName().equals("") && tempList.get(idvan).getColor() == gameRepository.findLastGamePlayer(player.getId()).getMoveCount() % 2
+            && tempList.get(idvan).getColor() != tempList.get(idnaar).getColor() && idvan != idnaar){
         tempList = gm.makeMoveIfLegal(idvan, idnaar, g.getId(), tempList);
         
     } else {

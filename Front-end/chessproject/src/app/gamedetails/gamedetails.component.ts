@@ -13,7 +13,6 @@ import {Router} from '@angular/router';
   providers: [GamedetailsService]
 })
 export class GamedetailsComponent implements OnInit {
-
   gamelist: Game[];
   tiletilelist1: Tile[];
   tilelist1MoveCount: number;
@@ -29,6 +28,8 @@ export class GamedetailsComponent implements OnInit {
   private color = 'white';
   tileCounter = 0;
   stringid: number;
+
+  //@Input() gebruiken met component
 
   constructor(private gamedetailsService: GamedetailsService,
               private storage: LocalStorageService) {
