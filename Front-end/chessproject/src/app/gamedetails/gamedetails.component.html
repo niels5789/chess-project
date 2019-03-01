@@ -1,4 +1,4 @@
-<h1 class="h1" > Last five games</h1>
+<h1 class="h1" > GAMEHISTORY</h1>
 <table class="table" xmlns="http://www.w3.org/1999/html">
   <tr>
     <th>
@@ -14,25 +14,27 @@
     </th>
 
     <th>
-      <div class="column">
-        <div class="chessboard">
-          <div>
-            <div *ngFor="let tile of tiletilelist1" [innerHTML]="getPicture(i, tile.id)" ngClass="{{colorPicker()}}"> </div>
-          </div>
-        </div>
-      </div>
-      <div class="column">
-        <button (click)="setHistoryGameMin(game.id, i)" class="btn" style="float: left;">Vorige</button>
-        <input  id="myInput" type="text"   class="form-control" style="float: left; text-align: center; width: 4.2%;" placeholder="{{returnCount(i)}}"/>
-        <button (click)="setHistoryGamePlus(game.id, i)" class="btn" style="float: left;"> Volgende</button>
+      <app-gamehistorydetails [gameidInput]="game"></app-gamehistorydetails>
+      <!--<div class="column">-->
+        <!--<div class="chessboard">-->
+          <!--<div>-->
+            <!--<div *ngFor="let tile of tiletilelist1" [innerHTML]="getPicture(i, tile.id)" ngClass="{{colorPicker()}}"> </div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="column">-->
+        <!--<button (click)="setHistoryGameMin(game.id, i)" class="btn" style="float: left;">Vorige</button>-->
+        <!--<input  id="myInput" type="text"   class="form-control" style="float: left; text-align: center; width: 4.2%;" placeholder="{{returnCount(i)}}"/>-->
+        <!--<button (click)="setHistoryGamePlus(game.id, i)" class="btn" style="float: left;"> Volgende</button>-->
 
-      </div>
+      <!--</div>-->
     </th>
   </tr>
 </table>
 <div class="btn">
   <button class="btn" routerLink="/chessboard">Terugkeren naar potje</button>
 </div>
+
 
 
 

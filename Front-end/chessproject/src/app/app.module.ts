@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LocalStorageService} from './local-storage.service';
 import {StorageServiceModule} from 'ngx-webstorage-service';
 import { GamedetailsComponent } from './gamedetails/gamedetails.component';
+import { GamehistorydetailsComponent } from './gamehistorydetails/gamehistorydetails.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { GamedetailsComponent } from './gamedetails/gamedetails.component';
     ChessboardComponent,
     LoginComponent,
     UserFormComponent,
-    GamedetailsComponent
+    GamedetailsComponent,
+    GamehistorydetailsComponent
   ],
   imports: [
     BrowserModule,

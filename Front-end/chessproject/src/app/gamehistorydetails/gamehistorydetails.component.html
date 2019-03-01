@@ -1,0 +1,13 @@
+<div class="column">
+  <div class="chessboard">
+    <div>
+      <div *ngFor="let tile of tileList" [innerHTML]="getPicture(tile.id)" ngClass="{{colorPicker()}}"> </div>
+    </div>
+  </div>
+</div>
+<div class="column">
+  <button (click)="setHistoryGameMin()" class="btn" style="float: left;">Vorige</button>
+  <input  id="myInput" type="text"   class="form-control" style="float: left; text-align: center; width: 4.2%;" placeholder="{{tilelistmovecount}}"/>
+  <button (click)="setHistoryGamePlus()" class="btn" style="float: left;"> Volgende</button>
+
+</div>

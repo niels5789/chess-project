@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Tile} from '../../Tile';
 import {ChessBoardService} from '../chessboard.service';
 import {Player} from '../../Player';
@@ -24,6 +24,8 @@ export class ChessboardComponent implements OnInit {
   errorMessage = '';
   private color = 'white';
   private tileCounter = 0;
+
+
 
 
   constructor(private chessBoardService: ChessBoardService,

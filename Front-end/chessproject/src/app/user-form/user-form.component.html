@@ -1,7 +1,8 @@
 <h3>Meld je hier aan voor ChessOnline</h3>
 
 <div class="form-group">
-  <div type="text"  [innerHTML]="errorMessage" class="text" style="color: red" role="alert"></div>
+  <div type="text"  [innerHTML]="errorMessage" class="text" style="color: red; font-size: 20px;" role="alert"></div>
+  <div type="text"  [innerHTML]="goodMessage" class="text" style="color: green;  font-size: 20px;" role="alert"></div>
   <form [formGroup]="userForm" (ngSubmit)="savePlayer($event)">
 
   <label> Gebruikersnaam:</label>
