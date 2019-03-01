@@ -34,7 +34,9 @@ public class GameController {
     @ResponseBody
     @PostMapping("/getgamesplayer")
     public List<Game> getGamesPlayer(@RequestBody Player player) {
-        return gameRepository.findLastFiveGames(player.getId());
+
+        return gameRepository.findAllGamesOrdered(player.getId());
+//        return gameRepository.findLastFiveGames(player.getId());
     }
 
     @ResponseBody

@@ -29,7 +29,7 @@ export class GamedetailsComponent implements OnInit {
   tileCounter = 0;
   stringid: number;
 
-  //@Input() gebruiken met component
+
 
   constructor(private gamedetailsService: GamedetailsService,
               private storage: LocalStorageService) {

@@ -21,5 +21,8 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
     @Query(value = "SELECT * FROM game g WHERE player_id = :playerid ORDER BY id DESC LIMIT 5", nativeQuery = true)
     List<Game> findLastFiveGames(@Param("playerid") Integer playerid);
 
+    @Query(value = "SELECT * FROM game g WHERE player_id = :playerid ORDER BY id DESC LIMIT 10", nativeQuery = true)
+    List<Game> findAllGamesOrdered(@Param("playerid") Integer playerid);
+
 
 }
